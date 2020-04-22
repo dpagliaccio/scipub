@@ -1,0 +1,24 @@
+Package: scipub
+Title: Summarize Data For Scientific Publication
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "David",
+           family = "Pagliaccio",
+           role = c("aut", "cre"),
+           email = "david.pagliaccio@gmail.com",
+           comment = c(ORCID = "0000-0002-1214-1965"))
+Description: This package contains functions for summarizing data
+    for scientific publication. This includes making a "Table 1"
+    to summarize demographics across groups, correlation tables
+    with significance indicated by stars, and extracting formatted
+    statistical summarizes from simple tests for in-text notation.
+    The package also includes functions for Winsorizing data based
+    on a Z-statistic cutoff.  
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.0
+Depends:
+	tidyverse,
+	stats
