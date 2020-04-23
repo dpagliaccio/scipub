@@ -282,7 +282,7 @@ FullTable1 <- function(data, strata, vars = NULL,
     dplyr::summarise_all(sum) %>%
     dplyr::select_if(function(sum) sum > 0)
   missingness <- ifelse(ncol(missing_n) > 0,
-                         paste0(missingness %>%
+                         paste0(missing_n %>%
                                   stringr::str_c("N=", ., " missing ", colnames(.), ". "), collapse = "")
                          , "")
 
