@@ -93,8 +93,8 @@ apastat <- function(test, roundN=2, es=TRUE, ci=TRUE, var=NULL) {
                                   ifelse(coef(tmp)[varx, "Pr(>|t|)"] < .01, sub(format(round(coef(tmp)[varx, "Pr(>|t|)"], 3), nsmall = 3), pattern = "0.", replacement = "=."),
                                          sub(format(round(coef(tmp)[varx, "Pr(>|t|)"], 2), nsmall = 2), pattern = "0.", replacement = "=."))),
                     ifelse(es == TRUE & (class(test) == "lm") & length(test$xlevels[[var]]) == 2,
-                           paste0(", d=", format(round((coef(tmp)[varx, "t value"] * (table(test$model[var])[1]  + table(test$model[var])[2]) / (sqrt((table(test$model[var])[1] * table(test$model[var])[2])) * sqrt(test$df.residual))), roundN), roundN),
-                                  "")))
+                           paste0(", d=", format(round((coef(tmp)[varx, "t value"] * (table(test$model[var])[1]  + table(test$model[var])[2]) / (sqrt((table(test$model[var])[1] * table(test$model[var])[2])) * sqrt(test$df.residual))), roundN), roundN)),
+                                  ""))
     }
 
 
