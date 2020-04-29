@@ -114,7 +114,7 @@ FullTable1 <- function(data, strata, vars = NULL,
 
 
   # create sub-function
-  # datafile = data_edit;groupvar = strata;outcome = "Sex"
+  # datafile = data_edit;groupvar = strata;outcome = "Age"
   grouptests <- function(datafile, groupvar, outcome, ...) {
     x <- datafile[[groupvar]]
     y <- datafile[[outcome]]
