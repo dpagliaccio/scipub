@@ -163,7 +163,7 @@ correltable <- function(data, vars=NULL, var_names=vars,
 
     #if 2 level factors - do t-test
     if (!is_empty(factortwo) & !is_empty(numvars)) {
-     tmpt <- mapply(function(n, f) paste0("t=",format(round(t.test(get(n) ~ get(f), data = orig)$statistic, round_n), round_n)), rep(numvars,length(factortwo)), rep(factortwo,length(numvars)))
+     tmpt <- mapply(function(n, f) paste0("t=",format(round(t.test(get(n) ~ get(f), data = orig,na.action = na.omit)$statistic, round_n), round_n)), rep(numvars,length(factortwo)), rep(factortwo,length(numvars)))
      tmpp <- mapply(function(n, f) t.test(get(n) ~ get(f), data = orig)$p.value, rep(numvars,length(factortwo)), rep(factortwo,length(numvars)))
      tmat <- matrix(paste(tmpt, ifelse(tmpp < .001,
                                 "***",
@@ -184,7 +184,7 @@ correltable <- function(data, vars=NULL, var_names=vars,
 
     #if 3+ level factors - do aov
     if (!is_empty(factormore) & !is_empty(numvars)) {
-      fmat <- mapply(function(n, f) paste0("F=",format(round(summary(aov(get(n) ~ get(f), data = orig))[[1]]$'F value'[1], round_n), round_n)), rep(numvars,length(factormore)), rep(factormore,length(numvars)))
+      fmat <- mapply(function(n, f) paste0("F=",format(round(summary(aov(get(n) ~ get(f), data = orig,na.action = na.omit))[[1]]$'F value'[1], round_n), round_n)), rep(numvars,length(factormore)), rep(factormore,length(numvars)))
       fmatp <- mapply(function(n, f) summary(aov(get(n) ~ get(f), data = orig))[[1]]$'Pr(>F)'[1], rep(numvars,length(factormore)), rep(factormore,length(numvars)))
       fmat <- matrix(paste(fmat, ifelse(fmatp < .001,
                                         "***",
@@ -205,7 +205,7 @@ correltable <- function(data, vars=NULL, var_names=vars,
     # if more than one factor var, test chi2
      if (length(factorvars)>1) {
        chix <- mapply(function(n1, n2) paste0("\u03C7", "2=",format(round(chisq.test(orig[[n1]], orig[[n2]])$statistic, round_n), round_n)), factorvars, rev(factorvars))
-       chip <- mapply(function(n1, n2) chisq.test(orig[[n1]], orig[[n2]])$p.value, factorvars, rev(factorvars))
+       chip <- mapply(function(n1, n2) chisq.test(orig[[n1]], orig[[n2]],na)$p.value, factorvars, rev(factorvars))
        chix <- matrix(paste(chix, ifelse(chip < .001,
                                          "***",
                                          ifelse(chip < .01,
