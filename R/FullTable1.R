@@ -12,7 +12,8 @@
 #'  partial eta-squared, Odds Ratio, Cramer's V depending on the test.
 #' Requires `tidyverse` and `stats` libraries.
 #' @param data The input dataset (will be converted to tibble).
-#' @param strata The grouping variable of interest (converted to factor).
+#' @param strata The grouping variable of interest (converted to factor),
+#'  if NULL will make one column table.
 #' @param vars A list of variables to summarize, e.g. c("Age","sex","WASI").
 #' @param var_names An optional list to rename the variable colnames in the
 #' output table, e.g. c("Age (years)","Sex","IQ"). Must match `vars` in length.
@@ -28,6 +29,8 @@
 #' significance of group differences.
 #' Options: "col"=separate column (default), "name"= append to variable nam,
 #' "stat"= append to group difference statistic, "none" for no stars.
+#' @param html Format as html in viewer or not (default=F, print in console),
+#'  needs library(htmlTable) installed.
 #' @return Output Table 1
 #' @import tidyverse
 #' @import stats
@@ -37,30 +40,52 @@
 #'   filter(cut == "Ideal" | cut == "Good") %>%
 #'   filter(color == "D" | color == "J") %>%
 #'   FullTable1(data = ., vars = c("cut", "depth", "price"), strata = "color")
+#' diamonds %>%
+#'   filter(cut == "Ideal" | cut == "Good") %>%
+#'   filter(color == "D" | color == "G" | color == "J") %>%
+#'   FullTable1(data = ., vars = c("cut", "depth", "price"), strata = "color", stars ="name", p_col=F, html=T)
+#' diamonds %>%
+#'   filter(cut == "Ideal" | cut == "Good") %>%
+#'   FullTable1(data = ., vars = c("cut", "depth", "price"), html=T)
 #'
 #'
 #' #
 #' #
-#' # # TO DO
-#' # rename group columns with N= on second line
-#' # formatting output!
 #' # library(tidyverse);library(stats)
+#' strata=NULL; vars = NULL; var_names = vars; factor_vars = NULL; round_n = 2, es_col = c(TRUE, FALSE); p_col = c(TRUE, FALSE); stars = c("col", "name", "stat", "none"); html = c(FALSE, TRUE)
 #' # load("/Users/David/Dropbox (NYSPI)/ABCDdata/Release2.0.1/ABCDstudyNDA/OCD_ABCD_merge.Rda")
-#' # data=ABCD_merge;vars=c("Age","SexF","CBCL_OCD_T","White","nomed","Release");var_names=c("Age","Sex","OCS","Race-White","Unmedicated","Release");factor_vars=c("SexF","White");strata=c("KSADS_P_OCD_ever");round_n=2;es=TRUE;p=TRUE;stars="col"
-#' # data=ABCD_merge;vars=c("Age","SexF","CBCL_OCD_T","White","nomed","Release");var_names=c("Age","Sex","OCS","Race-White","Unmedicated","Release");factor_vars=c("SexF","White");strata=c("CBCL_item_worries");round_n=2;es=TRUE;p=TRUE;stars="col"
+#' # data=ABCD_merge;vars=c("Age","SexF","CBCL_OCD_T","White","nomed","Release");var_names=c("Age","Sex","OCS","Race-White","Unmedicated","Release");factor_vars=c("SexF","White");strata=c("KSADS_P_OCD_ever");round_n=2;es=TRUE;p=TRUE;stars="col";html=T
+#' # data=ABCD_merge;vars=c("Age","SexF","CBCL_OCD_T","White","nomed","Release");var_names=c("Age","Sex","OCS","Race-White","Unmedicated","Release");factor_vars=c("SexF","White");strata=c("CBCL_item_worries");round_n=2;es=TRUE;p=TRUE;stars="col";html=T
 #' # data=ABCD_merge;vars=c("Age");strata="CBCL_item_worries"
 #' # FullTable1(data = ABCD_merge,vars=c("Age","SexF","CBCL_OCD_T"),strata="CBCL_item_worries")
 #' # add format(x,round_n) if numeric/needed?
 #' data=alldata_winsor;   vars=c("Age","Sex","FSIQ","income","EstimatedTotalIntraCranialVol","YBOCS_Total_V0");  factor_vars=c("Sex"); strata = c("Study")
 #' var_names = vars; factor_vars = NULL; round_n = 2; es_col = c(TRUE, FALSE); p_col = c(TRUE, FALSE); stars = c("col", "name", "stat", "none")
-#' FullTable1(data=alldata_winsor,   vars=c("Age","Sex","FSIQ","income","EstimatedTotalIntraCranialVol","YBOCS_Total_V0"),  factor_vars=c("Sex"), strata = c("Study"))
-FullTable1 <- function(data, strata, vars = NULL,
+#' FullTable1(data=alldata_winsor,   vars=c("Age","Sex","FSIQ","income","EstimatedTotalIntraCranialVol","YBOCS_Total_V0"),  factor_vars=c("Sex"), strata = c("Study"), html=F)
+#' diamonds %>% filter(cut == "Ideal" | cut == "Good") %>% filter(color == "D" | color == "J") %>% FullTable1(data = ., vars = c("cut", "depth", "price"), strata = "color", html=T)
+#' diamonds %>% filter(cut == "Ideal" | cut == "Good") %>% filter(color == "D" | color == "J") %>% FullTable1(data = ., vars = c("cut", "depth", "price"), html=T)
+
+
+FullTable1 <- function(data, strata=NULL, vars = NULL,
                        var_names = vars, factor_vars = NULL,
                        round_n = 2, es_col = c(TRUE, FALSE), p_col = c(TRUE, FALSE),
-                       stars = c("col", "name", "stat", "none")) {
+                       stars = c("col", "name", "stat", "none"), html = c(FALSE, TRUE)) {
 
   # set df to tibble
   data <- dplyr::as_tibble(data)
+
+  # if null strata
+  if (is.null(strata)) {
+    es_col = FALSE
+    p_col = FALSE
+    stars = "none"
+    strata <- "onecol"
+    data$onecol <- "Sample"
+    data$onecol <- as.factor(data$onecol)
+    }
+
+
+
 
   # if vars is missing, use all except strata
   if (is.null(vars)) {
@@ -103,27 +128,29 @@ FullTable1 <- function(data, strata, vars = NULL,
   factor_vars <- names(data_edit %>% dplyr::select_if(is.factor) %>% dplyr::select(-c(all_of(strata))))
 
   # drop any missing strata
-  if (sum(is.na(data[[strata]])) > 0) {
-    warning(paste0("N=", sum(is.na(data[[strata]])), " missing/NA in grouping variable: ", strata), call. = F)
-    data_edit <- data_edit %>% tidyr::drop_na(all_of(strata))
+  if (strata != "onecol") {
+    if (sum(is.na(data[[strata]])) > 0) {
+      warning(paste0("N=", sum(is.na(data[[strata]])), " missing/NA in grouping variable: ", strata), call. = F)
+      data_edit <- data_edit %>% tidyr::drop_na(all_of(strata))
+    }
   }
-
   # check if all one type of variable
   type <- case_when(length(factor_vars) == 0 ~ "numeric", length(factor_vars) == length(vars) ~ "factor", TRUE ~ "mixed")
+
+
 
 
 
   # create sub-function
   # datafile = data_edit;groupvar = strata;outcome = "Age"
   grouptests <- function(datafile, groupvar, outcome, ...) {
-    x <- datafile[[groupvar]]
-    y <- datafile[[outcome]]
-    # set group names with N
-    grplvl <- stringr::str_c(levels(datafile[[groupvar]]), " (N=", (datafile %>%
-                                                                      dplyr::group_by_at(groupvar) %>%
-                                                                      dplyr::select(all_of(groupvar)) %>%
-                                                                      tally())$n, ")", sep = "")
-
+      y <- datafile[[outcome]]
+      x <- datafile[[groupvar]]
+      # set group names with N
+      grplvl <- stringr::str_c(levels(datafile[[groupvar]]), " (N=", (datafile %>%
+                                                                        dplyr::group_by_at(groupvar) %>%
+                                                                        dplyr::select(all_of(groupvar)) %>%
+                                                                        tally())$n, ")", sep = "")
 
 
     tableout <- c("Variable", grplvl, "Stat", "p", "sig", "es") %>%
@@ -174,10 +201,12 @@ FullTable1 <- function(data, strata, vars = NULL,
 
       # IF FACTOR
     } else {
-      p <- chisq.test(y, x)$p.value
-      testtype <- ifelse(type == "mixed", paste0("\u03C7", "2="), "")
-      tableout$Stat <- paste0(testtype, format(round(chisq.test(y, x)$statistic, round_n), nsmall = round_n), sep = "")
 
+      if (groupvar != "onecol") {
+       p <- chisq.test(y, x)$p.value
+       testtype <- ifelse(type == "mixed", paste0("\u03C7", "2="), "")
+       tableout$Stat <- paste0(testtype, format(round(chisq.test(y, x)$statistic, round_n), nsmall = round_n), sep = "")
+      }
 
       # IF 2 LEVEL
       if (length(levels(y)) == 2) {
@@ -203,7 +232,7 @@ FullTable1 <- function(data, strata, vars = NULL,
         if (length(levels(x)) == 2) {
           estype <- ifelse(type == "mixed", "OR=", "")
           tableout$es <- paste0(estype, format(round(stats::fisher.test(x, y)$estimate, round_n), nsmall = round_n))
-        } else {
+        } else if (length(levels(x)) > 2) {
           # calculate effect size - cramer v
           estype <- ifelse(type == "mixed", "V=", "")
           tableout$es <- paste0(estype, format(round(sqrt((chisq.test(y, x)$statistic) / (sum(complete.cases(cbind(y, x))) * chisq.test(y, x)$parameter)), round_n), nsmall = round_n))
@@ -226,9 +255,6 @@ FullTable1 <- function(data, strata, vars = NULL,
           spread("CBCL_item_worries","col") %>%
           select(-c(all_of(outcome)))
 
-
-
-
         # calculate effect size - cramer v
         estype <- ifelse(type == "mixed", "V=", "")
         tableout$es <- paste0(estype, format(round(sqrt((chisq.test(y, x)$statistic) / (sum(complete.cases(cbind(y, x))) * chisq.test(y, x)$parameter)), round_n), nsmall = round_n))
@@ -237,10 +263,12 @@ FullTable1 <- function(data, strata, vars = NULL,
     }
 
     # set p for all test types
-    tableout$sig <- ifelse(p < .001, "***", ifelse(p < .01, "**", ifelse(p < .05, "*", "")))
-    tableout$p <- ifelse(p < .001, "<.001",
-                         ifelse(p < .01, sub(format(round(p, 3), nsmall = 3), pattern = "0.", replacement = "."),
-                                 sub(format(round(p,2), nsmall = 2), pattern = "0.", replacement = ".")))
+    if (groupvar != "onecol") {
+     tableout$sig <- ifelse(p < .001, "***", ifelse(p < .01, "**", ifelse(p < .05, "*", "")))
+     tableout$p <- ifelse(p < .001, "<.001",
+                           ifelse(p < .01, sub(format(round(p, 3), nsmall = 3), pattern = "0.", replacement = "."),
+                                   sub(format(round(p,2), nsmall = 2), pattern = "0.", replacement = ".")))
+    }
 
     return(tableout)
   }
@@ -264,6 +292,10 @@ FullTable1 <- function(data, strata, vars = NULL,
   # remove p if not requested
   if (!p_col[1]) {
     finaltable <- finaltable %>% dplyr::select(-c(p))
+  }
+  # remove p if not requested
+  if (strata == "onecol") {
+    finaltable <- finaltable %>% dplyr::select(-c(Stat))
   }
 
   if (stars[1] == "name") {
@@ -292,8 +324,18 @@ FullTable1 <- function(data, strata, vars = NULL,
     ifelse(sum(is.na(data[[strata]])) > 0, paste0("N=", sum(is.na(data[[strata]]))
                                                   ," excluded for missing group variable. "), ""),
     missingness,
-    "*p<.05, **p<.01, ***p<.001")
+    ifelse(strata == "onecol","","*p<.05, **p<.01, ***p<.001"))
 
+  # check if htmlTable installed
+  if (html[1] == T & !"htmlTable" %in% rownames(installed.packages())) {
+    warning("library(htmlTable) is needed for HTML format output, please install and try again")
+    html <- FALSE
+  }
 
-  return(list(noquote(finaltable), caption))
+  if (html[1] == T) {
+    return(print(htmlTable::htmlTable(finaltable, useViewer=T, rnames = FALSE, caption=caption, pos.caption="bottom")))
+  } else {
+    return(list(noquote(as.data.frame(finaltable,row.names = NULL)), caption))
+  }
+
 }
