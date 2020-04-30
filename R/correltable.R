@@ -303,7 +303,7 @@ correltable <- function(data, vars=NULL, var_names=vars,
 
 
   # check if htmlTable installed
-  if (html[1] == T & !"htmlTable" %in% rownames(installed.packages())) {
+  if (html[1] == T & !requireNamespace("htmlTable", quietly = TRUE)) {
     warning("library(htmlTable) is needed for HTML format output, please install and try again")
     html <- FALSE
   }
