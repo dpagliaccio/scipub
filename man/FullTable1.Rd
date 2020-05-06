@@ -65,10 +65,41 @@ partial eta-squared, Odds Ratio, Cramer's V depending on the test.
 Requires \code{tidyverse} and \code{stats} libraries.
 }
 \examples{
+<<<<<<< HEAD
   FullTable1(data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good") & (diamonds$color == "D" |   diamonds$color == "J"), ],
    vars = c("cut", "depth", "price"), strata = "color")
   FullTable1(data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good") & (diamonds$color == "D" | diamonds$color == "G" |  diamonds$color == "J"), ],
    vars = c("cut", "depth", "price"), strata = "color", stars ="name", p_col=FALSE, html=TRUE)
   FullTable1(data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good"), ],
    vars = c("cut", "depth", "price"), html=TRUE)
+=======
+diamonds \%>\%
+  filter(cut == "Ideal" | cut == "Good") \%>\%
+  filter(color == "D" | color == "J") \%>\%
+  FullTable1(data = ., vars = c("cut", "depth", "price"), strata = "color")
+diamonds \%>\%
+  filter(cut == "Ideal" | cut == "Good") \%>\%
+  filter(color == "D" | color == "G" | color == "J") \%>\%
+  FullTable1(data = ., vars = c("cut", "depth", "price"), strata = "color", stars ="name", p_col=F, html=T)
+diamonds \%>\%
+  filter(cut == "Ideal" | cut == "Good") \%>\%
+  FullTable1(data = ., vars = c("cut", "depth", "price"), html=T)
+
+
+#
+#
+# library(tidyverse);library(stats)
+strata=NULL; vars = NULL; var_names = vars; factor_vars = NULL; round_n = 2, es_col = c(TRUE, FALSE); p_col = c(TRUE, FALSE); stars = c("col", "name", "stat", "none"); html = c(FALSE, TRUE)
+# load("/Users/David/Dropbox (NYSPI)/ABCDdata/Release2.0.1/ABCDstudyNDA/OCD_ABCD_merge.Rda")
+# data=ABCD_merge;vars=c("Age","SexF","CBCL_OCD_T","White","nomed","Release");var_names=c("Age","Sex","OCS","Race-White","Unmedicated","Release");factor_vars=c("SexF","White");strata=c("KSADS_P_OCD_ever");round_n=2;es=TRUE;p=TRUE;stars="col";html=T
+# data=ABCD_merge;vars=c("Age","SexF","CBCL_OCD_T","White","nomed","Release");var_names=c("Age","Sex","OCS","Race-White","Unmedicated","Release");factor_vars=c("SexF","White");strata=c("CBCL_item_worries");round_n=2;es=TRUE;p=TRUE;stars="col";html=T
+# data=ABCD_merge;vars=c("Age");strata="CBCL_item_worries"
+# FullTable1(data = ABCD_merge,vars=c("Age","SexF","CBCL_OCD_T"),strata="CBCL_item_worries")
+# add format(x,round_n) if numeric/needed?
+data=alldata_winsor;   vars=c("Age","Sex","FSIQ","income","EstimatedTotalIntraCranialVol","YBOCS_Total_V0");  factor_vars=c("Sex"); strata = c("Study")
+var_names = vars; factor_vars = NULL; round_n = 2; es_col = c(TRUE, FALSE); p_col = c(TRUE, FALSE); stars = c("col", "name", "stat", "none")
+FullTable1(data=alldata_winsor,   vars=c("Age","Sex","FSIQ","income","EstimatedTotalIntraCranialVol","YBOCS_Total_V0"),  factor_vars=c("Sex"), strata = c("Study"), html=F)
+diamonds \%>\% filter(cut == "Ideal" | cut == "Good") \%>\% filter(color == "D" | color == "J") \%>\% FullTable1(data = ., vars = c("cut", "depth", "price"), strata = "color", html=T)
+diamonds \%>\% filter(cut == "Ideal" | cut == "Good") \%>\% filter(color == "D" | color == "J") \%>\% FullTable1(data = ., vars = c("cut", "depth", "price"), html=T)
+>>>>>>> d610a440547e813385cf39238680c43df9e3e862
 }
