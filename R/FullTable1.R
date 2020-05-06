@@ -66,7 +66,7 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
     strata <- "onecol"
     data$onecol <- "Sample"
     data$onecol <- as.factor(data$onecol)
-    }
+  }
 
 
 
@@ -129,13 +129,13 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
   # datafile = data_edit;groupvar = strata;outcome = "Age"
   grouptests <- function(datafile, groupvar, outcome, ...) {
     perc <- NULL
-      y <- datafile[[outcome]]
-      x <- datafile[[groupvar]]
-      # set group names with N
-      grplvl <- stringr::str_c(levels(datafile[[groupvar]]), " (N=", (datafile %>%
-                                                                        dplyr::group_by_at(groupvar) %>%
-                                                                        dplyr::select(tidyselect::all_of(groupvar)) %>%
-                                                                        dplyr::tally())$n, ")", sep = "")
+    y <- datafile[[outcome]]
+    x <- datafile[[groupvar]]
+    # set group names with N
+    grplvl <- stringr::str_c(levels(datafile[[groupvar]]), " (N=", (datafile %>%
+                                                                      dplyr::group_by_at(groupvar) %>%
+                                                                      dplyr::select(tidyselect::all_of(groupvar)) %>%
+                                                                      dplyr::tally())$n, ")", sep = "")
 
 
     tableout <- c("Variable", grplvl, "Stat", "p", "sig", "es") %>%
@@ -165,10 +165,10 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
         # calculate effect size - cohens d
         estype <- ifelse(type == "mixed", "d=", "")
         tableout$es <- paste0(estype, format(round((datafile %>%
-                                               dplyr::group_by_at(groupvar) %>%
-                                               dplyr::select_at(outcome) %>%
-                                               dplyr::summarise_all(list(mean = mean, sd = stats::sd), na.rm = TRUE) %>%
-                                               dplyr::mutate(d = (mean[2] - mean[1]) / (sqrt((sd[2]^2 + sd[1]^2) / 2))))[[1, "d"]], round_n), nsmall = round_n))
+                                                      dplyr::group_by_at(groupvar) %>%
+                                                      dplyr::select_at(outcome) %>%
+                                                      dplyr::summarise_all(list(mean = mean, sd = stats::sd), na.rm = TRUE) %>%
+                                                      dplyr::mutate(d = (mean[2] - mean[1]) / (sqrt((sd[2]^2 + sd[1]^2) / 2))))[[1, "d"]], round_n), nsmall = round_n))
         # IF MORE THAN 2 LEVELS
       } else if (length(levels(x)) > 2) {
         testtype <- ifelse(type == "mixed", "F=", "")
@@ -188,9 +188,9 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
     } else {
 
       if (groupvar != "onecol") {
-       p <- stats::chisq.test(y, x)$p.value
-       testtype <- ifelse(type == "mixed", paste0("\u03C7", "2="), "")
-       tableout$Stat <- paste0(testtype, format(round(stats::chisq.test(y, x)$statistic, round_n), nsmall = round_n), sep = "")
+        p <- stats::chisq.test(y, x)$p.value
+        testtype <- ifelse(type == "mixed", paste0("\u03C7", "2="), "")
+        tableout$Stat <- paste0(testtype, format(round(stats::chisq.test(y, x)$statistic, round_n), nsmall = round_n), sep = "")
       }
 
       # IF 2 LEVEL
@@ -249,10 +249,10 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
 
     # set p for all test types
     if (groupvar != "onecol") {
-     tableout$sig <- ifelse(p < .001, "***", ifelse(p < .01, "**", ifelse(p < .05, "*", "")))
-     tableout$p <- ifelse(p < .001, "<.001",
+      tableout$sig <- ifelse(p < .001, "***", ifelse(p < .01, "**", ifelse(p < .05, "*", "")))
+      tableout$p <- ifelse(p < .001, "<.001",
                            ifelse(p < .01, sub(format(round(p, 3), nsmall = 3), pattern = "0.", replacement = "."),
-                                   sub(format(round(p,2), nsmall = 2), pattern = "0.", replacement = ".")))
+                                  sub(format(round(p,2), nsmall = 2), pattern = "0.", replacement = ".")))
     }
 
     return(tableout)
@@ -299,8 +299,8 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
     dplyr::summarise_all(sum) %>%
     dplyr::select_if(function(sum) sum > 0)
   missingness <- ifelse(ncol(missing_n) > 0,
-                         paste0(stringr::str_c("N=", missing_n, " missing ", colnames(missing_n), ". "), collapse = "")
-                         , "")
+                        paste0(stringr::str_c("N=", missing_n, " missing ", colnames(missing_n), ". "), collapse = "")
+                        , "")
 
 
   caption <- paste0(
