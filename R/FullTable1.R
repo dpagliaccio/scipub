@@ -41,12 +41,32 @@
 #' @import 	tidyselect
 #' @export
 #' @examples
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 67503dc3c4d50df205c17f314d15b4e747486d20
 #'   FullTable1(data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good") & (diamonds$color == "D" |   diamonds$color == "J"), ],
 #'    vars = c("cut", "depth", "price"), strata = "color")
 #'   FullTable1(data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good") & (diamonds$color == "D" | diamonds$color == "G" |  diamonds$color == "J"), ],
 #'    vars = c("cut", "depth", "price"), strata = "color", stars ="name", p_col=FALSE, html=TRUE)
 #'   FullTable1(data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good"), ],
 #'    vars = c("cut", "depth", "price"), html=TRUE)
+<<<<<<< HEAD
+=======
+=======
+#' diamonds %>%
+#'   filter(cut == "Ideal" | cut == "Good") %>%
+#'   filter(color == "D" | color == "J") %>%
+#'   FullTable1(data = ., vars = c("cut", "depth", "price"), strata = "color")
+#' diamonds %>%
+#'   filter(cut == "Ideal" | cut == "Good") %>%
+#'   filter(color == "D" | color == "G" | color == "J") %>%
+#'   FullTable1(data = ., vars = c("cut", "depth", "price"), strata = "color", stars ="name", p_col=F, html=T)
+#' diamonds %>%
+#'   filter(cut == "Ideal" | cut == "Good") %>%
+#'   FullTable1(data = ., vars = c("cut", "depth", "price"), html=T)
+>>>>>>> d610a440547e813385cf39238680c43df9e3e862
+>>>>>>> 67503dc3c4d50df205c17f314d15b4e747486d20
 
 FullTable1 <- function(data, strata=NULL, vars = NULL,
                        var_names = vars, factor_vars = NULL,
@@ -139,8 +159,18 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
 
 
     tableout <- c("Variable", grplvl, "Stat", "p", "sig", "es") %>%
+<<<<<<< HEAD
       purrr::map_dfc(stats::setNames, object = list(character())) %>%
       tibble::add_row()
+=======
+<<<<<<< HEAD
+      purrr::map_dfc(stats::setNames, object = list(character())) %>%
+      tibble::add_row()
+=======
+      purrr::map_dfc(setNames, object = list(character())) %>%
+      tibble:::add_row()
+>>>>>>> d610a440547e813385cf39238680c43df9e3e862
+>>>>>>> 67503dc3c4d50df205c17f314d15b4e747486d20
 
     # IF NUMERIC
     if (is.numeric(y)) {

@@ -29,6 +29,12 @@ Imports:
 	stringr,
 	tibble,
 	tidyr,
+<<<<<<< HEAD
 	tidyselect
+=======
+	tidyselect,
+	stats,
+	tidyverse (>= 1.3.0)
+>>>>>>> 67503dc3c4d50df205c17f314d15b4e747486d20
 Suggests:
     htmlTable
