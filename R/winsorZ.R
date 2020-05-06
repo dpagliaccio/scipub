@@ -19,7 +19,7 @@
 #' diamonds %>% mutate_if(is.double, list( ~winsorZ(.)))
 #' }
 
-winsorZ <- function(x, zbound=3) {
+winsorZ <- function(x, zbound = 3) {
   x <- as.numeric(as.character(x)) # convert to numeric just in case
   z <- scale(x) # gives z-scores for vector x
   x[!is.na(z) & z > zbound] <- max(x[!is.na(z) & z <= zbound])

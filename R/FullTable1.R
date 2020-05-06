@@ -24,12 +24,12 @@
 #' @param round_n The number of decimal places to round output to (default=2).
 #' @param es_col Include a column for effect size
 #' of group difference? (default=T).
-#' @param p_col Include a column for p-value of group difference? (default=T).
+#' @param p_col Include a column for p-value of group difference? (default=TRUE).
 #' @param stars Where to include stars indicating
 #' significance of group differences.
 #' Options: "col"=separate column (default), "name"= append to variable name,
 #' "stat"= append to group difference statistic, "none" for no stars.
-#' @param html Format as html in viewer or not (default=F, print in console),
+#' @param html Format as html in viewer or not (default=FALSE, print in console),
 #'  needs library(htmlTable) installed.
 #' @return Output Table 1
 #' @import 	dplyr
@@ -103,9 +103,9 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
     data_edit <- data_edit %>% dplyr::mutate_if(is.ordered, factor, ordered = FALSE)
   }
   # convert any remaining variables with only 2 distinct options to factor & warn
-  if (ncol(data_edit %>% dplyr::select_if(function(col) is.factor(col) == F & dplyr::n_distinct(col, na.rm = T) == 2)) > 0) {
-    warning(paste0("Variables with only two distinct values converted to factor: ", stringr::str_c(names(data_edit %>% dplyr::select_if(function(col) is.factor(col) == F & dplyr::n_distinct(col, na.rm = T) == 2)), sep = " ", collapse = ",")), call. = F)
-    data_edit <- data_edit %>% dplyr::mutate_if(function(col) is.factor(col) == F & dplyr::n_distinct(col, na.rm = T) == 2, factor)
+  if (ncol(data_edit %>% dplyr::select_if(function(col) is.factor(col) == F & dplyr::n_distinct(col, na.rm = TRUE) == 2)) > 0) {
+    warning(paste0("Variables with only two distinct values converted to factor: ", stringr::str_c(names(data_edit %>% dplyr::select_if(function(col) is.factor(col) == F & dplyr::n_distinct(col, na.rm = TRUE) == 2)), sep = " ", collapse = ",")), call. = F)
+    data_edit <- data_edit %>% dplyr::mutate_if(function(col) is.factor(col) == F & dplyr::n_distinct(col, na.rm = TRUE) == 2, factor)
   }
 
   # get list of factors
@@ -293,7 +293,8 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
   }
 
   if (stars[1] == "name") {
-    finaltable <- finaltable %>% tidyr::unite(Variable, Variable, sig, sep = " ")
+    finaltable <- finaltable %>%
+      tidyr::unite(Variable, Variable, sig, sep = " ")
   } else if (stars[1] == "stat") {
     finaltable <- finaltable %>% tidyr::unite(Stat, Stat, sig, sep = " ")
   } else if (stars[1] == "none") {
@@ -308,14 +309,16 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
     dplyr::summarise_all(sum) %>%
     dplyr::select_if(function(sum) sum > 0)
   missingness <- ifelse(ncol(missing_n) > 0,
-      paste0(stringr::str_c("N=", missing_n, " missing ", colnames(missing_n), ". "),
+      paste0(stringr::str_c("N=", missing_n,
+                            " missing ", colnames(missing_n), ". "),
              collapse = "")
                         , "")
 
 
   caption <- paste0(
     "Note. ",
-    ifelse(sum(is.na(data[[strata]])) > 0, paste0("N=", sum(is.na(data[[strata]]))
+    ifelse(sum(is.na(data[[strata]])) > 0,
+           paste0("N=", sum(is.na(data[[strata]]))
         , " excluded for missing group variable. "), ""),
     missingness,
     ifelse(strata == "onecol", "", "*p<.05, **p<.01, ***p<.001"))
@@ -328,8 +331,10 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
   }
 
   if (html[1] == T) {
-    return(print(htmlTable::htmlTable(finaltable, useViewer = T, rnames = FALSE,
-                                      caption = caption, pos.caption = "bottom")))
+    return(print(htmlTable::htmlTable(finaltable,
+                                      useViewer = TRUE, rnames = FALSE,
+                                      caption = caption,
+                                      pos.caption = "bottom")))
   } else {
     return(list(table = noquote(as.data.frame(finaltable, row.names = NULL)),
                 caption = caption))

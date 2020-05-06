@@ -159,7 +159,7 @@ correltable <- function(data, vars=NULL, var_names=vars,
     if (!is.null(factorvars)) {
 
       #merge from rmat above
-      mergemat <- as.data.frame(rmat, row.names = varsall,stringsAsFactors = F)
+      mergemat <- as.data.frame(rmat, row.names = varsall,stringsAsFactors = FALSE)
       colnames(mergemat) <- varsall
 
 
@@ -177,7 +177,7 @@ correltable <- function(data, vars=NULL, var_names=vars,
                                                         "*",
                                                         ""))), sep = ""),
                        ncol = length(numvars), nrow = length(factortwo))
-        mergetmat <- as.data.frame(tmat, row.names = factortwo,stringsAsFactors = F)
+        mergetmat <- as.data.frame(tmat, row.names = factortwo,stringsAsFactors = FALSE)
         colnames(mergetmat) <- numvars
 
         mergemat[factortwo,numvars] <- mergetmat[factortwo,numvars]
@@ -199,7 +199,7 @@ correltable <- function(data, vars=NULL, var_names=vars,
                                                         "*",
                                                         ""))), sep = ""),
                        ncol = length(numvars), nrow = length(factormore))
-        mergefmat <- as.data.frame(fmat, row.names = factormore,stringsAsFactors = F)
+        mergefmat <- as.data.frame(fmat, row.names = factormore,stringsAsFactors = FALSE)
         colnames(mergefmat) <- numvars
 
         mergemat[factormore,numvars] <- mergefmat[factormore,numvars]
@@ -223,7 +223,7 @@ correltable <- function(data, vars=NULL, var_names=vars,
                        ncol = length(factorvars), nrow = length(factorvars))
 
 
-        mergechi <- as.data.frame(chix, row.names = factorvars,stringsAsFactors = F)
+        mergechi <- as.data.frame(chix, row.names = factorvars,stringsAsFactors = FALSE)
         colnames(mergechi) <- factorvars
 
         mergemat[factorvars,rev(factorvars)] <- mergechi
@@ -315,7 +315,8 @@ correltable <- function(data, vars=NULL, var_names=vars,
     }
 
     if (html[1] == T) {
-      return(print(htmlTable::htmlTable(rmat, useViewer=T, caption=caption, pos.caption="bottom")))
+      return(print(htmlTable::htmlTable(rmat,
+                    useViewer=T, caption=caption, pos.caption="bottom")))
     } else {
       return(list(table=noquote(rmat), caption=caption))
     }
