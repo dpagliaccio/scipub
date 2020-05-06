@@ -114,18 +114,6 @@ correltable <- function(data, vars = NULL, var_names = vars,
     f <- x %>%
       dplyr::select_if(purrr::negate(is.numeric)) %>%
       dplyr::mutate_if(purrr::negate(is.numeric), factor, ordered = FALSE)
-    if (ncol(x %>% select_if(is.numeric)) != ncol(x)) {
-      warning(paste0("Converting non-numeric columns to factor: ", stringr::str_c(colnames(x %>% select_if(purrr::negate(is.numeric))), sep = " ", collapse = ",")), call. = F)
-
-      numvars <- names(x %>% select_if(is.numeric))
-      factorvars <- names(x %>% select_if(purrr::negate(is.numeric)))
-
-      orig <- x %>%
-        dplyr::mutate_if(purrr::negate(is.numeric), factor, ordered = FALSE) %>%
-        dplyr::mutate_if(purrr::negate(is.numeric), forcats::fct_relevel)
-      f <- x %>%
-        dplyr::select_if(purrr::negate(is.numeric)) %>%
-        dplyr::mutate_if(purrr::negate(is.numeric), factor, ordered = FALSE)
 
       factortwo <- names(f %>% dplyr::select_if(function(col) dplyr::n_distinct(col) == 2))
       factormore <- names(f %>% dplyr::select_if(function(col) dplyr::n_distinct(col) > 2))
@@ -340,17 +328,17 @@ correltable <- function(data, vars = NULL, var_names = vars,
 
 
     # check if htmlTable installed
-    if (html[1] == T & !requireNamespace("htmlTable", quietly = TRUE)) {
+    if (html[1] == TRUE & !requireNamespace("htmlTable", quietly = TRUE)) {
       warning("library(htmlTable) is needed for HTML format output, please install and try again")
       html <- FALSE
     }
 
-    if (html[1] == T) {
+    if (html[1] == TRUE) {
       return(print(htmlTable::htmlTable(rmat,
-        useViewer = T, caption = caption, pos.caption = "bottom"
+        useViewer = TRUE, caption = caption, pos.caption = "bottom"
       )))
     } else {
       return(list(table = noquote(rmat), caption = caption))
     }
   }
-}
+
