@@ -33,8 +33,8 @@ The output is intended to be included as
 in-text parenthetical statistics in publication.
 }
 \examples{
-apastat(stats::cor.test(diamonds$depth,diamonds$price))
-apastat(stats::t.test(depth~cut,data = diamonds[diamonds$cut=="Ideal" | diamonds$cut=="Good", ]))
-apastat(stats::lm(data=diamonds[diamonds$cut=="Ideal" | diamonds$cut=="Good", ], depth~cut + price))
-apastat(stats::lm(data=diamonds[diamonds$cut=="Ideal" | diamonds$cut=="Good", ], depth~cut + price),var="cut")
+apastat(stats::cor.test(diamonds$depth, diamonds$price))
+apastat(stats::t.test(depth ~ cut, data = diamonds[diamonds$cut == "Ideal" | diamonds$cut == "Good", ]))
+apastat(stats::lm(data = diamonds[diamonds$cut == "Ideal" | diamonds$cut == "Good", ], depth ~ cut + price))
+apastat(stats::lm(data = diamonds[diamonds$cut == "Ideal" | diamonds$cut == "Good", ], depth ~ cut + price), var = "cut")
 }

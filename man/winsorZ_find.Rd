@@ -26,6 +26,7 @@ Z-score outliers (outliers=1, non-outliers=0).
 \examples{
 summary(winsorZ_find(diamonds$depth))
 \dontrun{
-diamonds \%>\% mutate_at(c("depth","price"), list(out = ~winsorZ_find(.)))
+diamonds \%>\% mutate_at(c("depth", "price"), list(out = ~ winsorZ_find(.)))
 }
+
 }

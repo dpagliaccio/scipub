@@ -14,11 +14,13 @@
 #' @examples
 #' winsorZ(diamonds$depth)
 #' \dontrun{
-#' diamonds %>% dplyr::select(c(depth,price)) %>% map(winsorZ)
-#' diamonds %>% mutate_at(c("depth","price"), list( ~winsorZ(.)))
-#' diamonds %>% mutate_if(is.double, list( ~winsorZ(.)))
+#' diamonds %>%
+#'   dplyr::select(c(depth, price)) %>%
+#'   map(winsorZ)
+#' diamonds %>% mutate_at(c("depth", "price"), list(~ winsorZ(.)))
+#' diamonds %>% mutate_if(is.double, list(~ winsorZ(.)))
 #' }
-
+#'
 winsorZ <- function(x, zbound = 3) {
   x <- as.numeric(as.character(x)) # convert to numeric just in case
   z <- scale(x) # gives z-scores for vector x

@@ -16,7 +16,8 @@ SI1, VS2, VS1, VVS2, VVS1, IF (best))}
 \item{x}{length in mm (0--10.74)}
 \item{y}{width in mm (0--58.9)}
 \item{z}{depth in mm (0--31.8)}
-\item{depth}{total depth percentage = z / mean(x, y) = 2 * z / (x + y) (43--79)}
+\item{depth}{total depth percentage = z
+/ mean(x, y) = 2 * z / (x + y) (43--79)}
 \item{table}{width of top of diamond relative to widest point (43--95)}
 }
 }
