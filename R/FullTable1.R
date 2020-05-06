@@ -142,6 +142,7 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
       purrr::map_dfc(stats::setNames, object = list(character())) %>%
       tibble::add_row()
 
+
     # IF NUMERIC
     if (is.numeric(y)) {
       tableout$Variable <- var_names[which(vars == outcome)]
