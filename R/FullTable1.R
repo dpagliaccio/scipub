@@ -5,7 +5,7 @@
 #' and other variables (`vars`) split by a grouping variable (`strata`)
 #' from an input dataset (`data`).
 #' Continuous variables will be summarized as mean (SD)
-#' and tested across groups using t-test or anova (for 3+ level `strata`).
+#' and tested across groups using t-test or ANOVA (for 3+ level `strata`).
 #' Categorical variables will be summarized as N (%)
 #' and tested across groups as chi-squared.
 #' Effect sizes for group differences will be calculated as Cohen's d,
@@ -27,7 +27,7 @@
 #' @param p_col Include a column for p-value of group difference? (default=T).
 #' @param stars Where to include stars indicating
 #' significance of group differences.
-#' Options: "col"=separate column (default), "name"= append to variable nam,
+#' Options: "col"=separate column (default), "name"= append to variable name,
 #' "stat"= append to group difference statistic, "none" for no stars.
 #' @param html Format as html in viewer or not (default=F, print in console),
 #'  needs library(htmlTable) installed.
@@ -60,9 +60,9 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
 
   # if null strata
   if (is.null(strata)) {
-    es_col = FALSE
-    p_col = FALSE
-    stars = "none"
+    es_col <- FALSE
+    p_col <- FALSE
+    stars <- "none"
     strata <- "onecol"
     data$onecol <- "Sample"
     data$onecol <- as.factor(data$onecol)
@@ -126,7 +126,6 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
 
 
   # create sub-function
-  # datafile = data_edit;groupvar = strata;outcome = "Age"
   grouptests <- function(datafile, groupvar, outcome, ...) {
     perc <- NULL
     y <- datafile[[outcome]]
@@ -179,7 +178,9 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
 
         # calculate effect size - cohens d
         estype <- ifelse(type == "mixed", paste0("\u03B7", "2="), "")
-        tableout$es <- paste0(estype, format(round(((stats::anova(stats::aov(y~x))[1, 2] / sum(stats::anova(stats::aov(y~x))[,2]))), round_n),nsmall = round_n))
+        tableout$es <- paste0(estype,
+                              format(round(((stats::anova(stats::aov(y~x))[1, 2] / sum(stats::anova(stats::aov(y~x))[, 2]))), round_n),
+                                     nsmall = round_n))
       }
 
 
@@ -191,7 +192,9 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
       if (groupvar != "onecol") {
         p <- stats::chisq.test(y, x)$p.value
         testtype <- ifelse(type == "mixed", paste0("\u03C7", "2="), "")
-        tableout$Stat <- paste0(testtype, format(round(stats::chisq.test(y, x)$statistic, round_n), nsmall = round_n), sep = "")
+        tableout$Stat <- paste0(testtype,
+                                format(round(stats::chisq.test(y, x)$statistic, round_n),
+                                                 nsmall = round_n), sep = "")
       }
 
       # IF 2 LEVEL
@@ -217,16 +220,19 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
         # calculate effect size - odds ratio
         if (length(levels(x)) == 2) {
           estype <- ifelse(type == "mixed", "OR=", "")
-          tableout$es <- paste0(estype, format(round(stats::fisher.test(x, y)$estimate, round_n), nsmall = round_n))
+          tableout$es <- paste0(estype,
+                                format(round(stats::fisher.test(x, y)$estimate, round_n),
+                                               nsmall = round_n))
         } else if (length(levels(x)) > 2) {
           # calculate effect size - cramer v
           estype <- ifelse(type == "mixed", "V=", "")
-          tableout$es <- paste0(estype, format(round(sqrt((stats::chisq.test(y, x)$statistic) / (sum(stats::complete.cases(cbind(y, x))) * stats::chisq.test(y, x)$parameter)), round_n), nsmall = round_n))
+          tableout$es <- paste0(estype,
+                                format(round(sqrt((stats::chisq.test(y, x)$statistic) / (sum(stats::complete.cases(cbind(y, x))) * stats::chisq.test(y, x)$parameter)), round_n),
+                                       nsmall = round_n))
         }
 
         # IF MORE THAN 2 LEVELS
       } else {
-        ## TO DO - multi line summary n % # tidyr::unite("col",outcome, col, sep = " = ") %>%summarize(V3 = toString(col)) #nest
         tableout[2:(1 + length(levels(y))), grplvl] <- datafile %>%
           tidyr::drop_na(tidyselect::all_of(outcome)) %>%
           dplyr::group_by_at(c(groupvar, outcome)) %>%
@@ -238,12 +244,14 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
           dplyr::mutate_at(c("perc"), round, round_n) %>%
           tidyr::unite("col", n, perc, sep = " (") %>%
           dplyr::mutate(col = stringr::str_c(col, "%)")) %>%
-          tidyr::spread(groupvar,"col") %>%
+          tidyr::spread(groupvar, "col") %>%
           dplyr::select(-c(tidyselect::all_of(outcome)))
 
         # calculate effect size - cramer v
         estype <- ifelse(type == "mixed", "V=", "")
-        tableout$es <- paste0(estype, format(round(sqrt((stats::chisq.test(y, x)$statistic) / (sum(stats::complete.cases(cbind(y, x))) * stats::chisq.test(y, x)$parameter)), round_n), nsmall = round_n))
+        tableout$es <- paste0(estype,
+                              format(round(sqrt((stats::chisq.test(y, x)$statistic) / (sum(stats::complete.cases(cbind(y, x))) * stats::chisq.test(y, x)$parameter)), round_n),
+                                     nsmall = round_n))
 
       }
     }
@@ -253,7 +261,7 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
       tableout$sig <- ifelse(p < .001, "***", ifelse(p < .01, "**", ifelse(p < .05, "*", "")))
       tableout$p <- ifelse(p < .001, "<.001",
                            ifelse(p < .01, sub(format(round(p, 3), nsmall = 3), pattern = "0.", replacement = "."),
-                                  sub(format(round(p,2), nsmall = 2), pattern = "0.", replacement = ".")))
+                                  sub(format(round(p, 2), nsmall = 2), pattern = "0.", replacement = ".")))
     }
 
     return(tableout)
@@ -300,27 +308,31 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
     dplyr::summarise_all(sum) %>%
     dplyr::select_if(function(sum) sum > 0)
   missingness <- ifelse(ncol(missing_n) > 0,
-                        paste0(stringr::str_c("N=", missing_n, " missing ", colnames(missing_n), ". "), collapse = "")
+      paste0(stringr::str_c("N=", missing_n, " missing ", colnames(missing_n), ". "),
+             collapse = "")
                         , "")
 
 
   caption <- paste0(
     "Note. ",
     ifelse(sum(is.na(data[[strata]])) > 0, paste0("N=", sum(is.na(data[[strata]]))
-                                                  ," excluded for missing group variable. "), ""),
+        , " excluded for missing group variable. "), ""),
     missingness,
-    ifelse(strata == "onecol","","*p<.05, **p<.01, ***p<.001"))
+    ifelse(strata == "onecol", "", "*p<.05, **p<.01, ***p<.001"))
 
   # check if htmlTable installed
   if (html[1] == T & !requireNamespace("htmlTable", quietly = TRUE)) {
-    warning("library(htmlTable) is needed for HTML format output, please install and try again")
+    warning("library(htmlTable) is needed for HTML format output,
+            please install and try again")
     html <- FALSE
   }
 
   if (html[1] == T) {
-    return(print(htmlTable::htmlTable(finaltable, useViewer=T, rnames = FALSE, caption=caption, pos.caption="bottom")))
+    return(print(htmlTable::htmlTable(finaltable, useViewer = T, rnames = FALSE,
+                                      caption = caption, pos.caption = "bottom")))
   } else {
-    return(list(table=noquote(as.data.frame(finaltable,row.names = NULL)), caption=caption))
+    return(list(table = noquote(as.data.frame(finaltable, row.names = NULL)),
+                caption = caption))
   }
 
 }

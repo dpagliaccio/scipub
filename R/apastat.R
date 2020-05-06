@@ -5,7 +5,7 @@
 #' This currently will take `stats::t.test`,
 #'  `stats::cor.test`, or `stats::lm` results as input.
 #' The output is intended to be included as
-#'  in-text paranthetical statistics in publication.
+#'  in-text parenthetical statistics in publication.
 #' @param test The `stats::t.test`, `stats::cor.test`,
 #'  or `stats::lm` object to be formatted.
 #' @param roundN The number of decimal places to

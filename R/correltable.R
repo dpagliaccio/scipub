@@ -11,7 +11,7 @@
 #' For formatting, variables can be renamed, numbers can be rounded,
 #'  upper or lower triangle only can be selected (or whole matrix),
 #'   and empty columns/rows can be dropped if using triangles.
-#' For more compact coumns, variable names can be numbered in the
+#' For more compact columns, variable names can be numbered in the
 #'  rows and column names will be corresponding numbers.
 #' If only cross-correlation between two sets of variables is desired
 #'  (no correlations within a set of variables), `vars2` and `var_names` can be used.
@@ -19,7 +19,7 @@
 #' Requires `tidyverse` and `stats` libraries.
 #' @param data The input dataset.
 #' @param vars A list of the names of variables to correlate,
-#'  e.g. c("Age","hght","WASI"), if NULL, all variables in `data` will be used.
+#'  e.g. c("Age","height","WASI"), if NULL, all variables in `data` will be used.
 #' @param var_names An optional list to rename the `vars` colnames
 #'  in the output table, e.g. c("Age (years)","Height (inches)","IQ").
 #'   Must match `vars` in length. If not supplied, `vars` will be printed as is.
@@ -34,7 +34,7 @@
 #'  c("pairwise", "complete"), based on `stats::cor`, default = "pairwise".
 #' @param round_n The number of decimal places to round all output to (default=2).
 #' @param tri Select output formatting c("upper", "lower","all");
-#'  KEEP the upper triangle, lower triange, or all values, defualt ="upper.
+#'  KEEP the upper triangle, lower triangle, or all values, default ="upper.
 #' @param cutempty If keeping only upper/lower triangle with `tri`,
 #'  cut empty row/column, default=FALSE.
 #' @param colnum For more concise column names, number row names and
