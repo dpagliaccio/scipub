@@ -14,10 +14,10 @@
 #' @examples
 #' summary(winsorZ_find(diamonds$depth))
 #' \dontrun{
-#' diamonds %>% mutate_at(c("depth","price"), list(out = ~winsorZ_find(.)))
+#' diamonds %>% mutate_at(c("depth", "price"), list(out = ~ winsorZ_find(.)))
 #' }
-
-winsorZ_find <- function(x, zbound=3) {
+#'
+winsorZ_find <- function(x, zbound = 3) {
   x <- as.numeric(as.character(x)) # convert to numeric just in case
   z <- scale(x) # create z-scores for vector x
   x[!is.na(z) & (z < zbound & z > (-1 * zbound))] <- 0
