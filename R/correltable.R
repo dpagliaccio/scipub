@@ -340,14 +340,14 @@ correltable <- function(data, vars = NULL, var_names = vars,
 
 
     # check if htmlTable installed
-    if (html[1] == T & !requireNamespace("htmlTable", quietly = TRUE)) {
+    if (html[1] == TRUE & !requireNamespace("htmlTable", quietly = TRUE)) {
       warning("library(htmlTable) is needed for HTML format output, please install and try again")
       html <- FALSE
     }
 
-    if (html[1] == T) {
+    if (html[1] == TRUE) {
       return(print(htmlTable::htmlTable(rmat,
-        useViewer = T, caption = caption, pos.caption = "bottom"
+        useViewer = TRUE, caption = caption, pos.caption = "bottom"
       )))
     } else {
       return(list(table = noquote(rmat), caption = caption))
