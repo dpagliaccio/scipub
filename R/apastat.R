@@ -79,7 +79,7 @@ apastat <- function(test, roundN=2, es=TRUE, ci=TRUE, var=NULL) {
                     ", R2=", sub(x = format(round(tmp$r.squared, roundN), roundN), "0.", "."),
                     ", adj. R2=", sub(x = format(round(tmp$adj.r.squared, roundN), roundN), "0.", "."),
                     ", p", ifelse(fp < .001, "<.001",
-                                  ifelse(fp < .01, sub(format(round(p, 3), nsmall = 3), pattern = "0.", replacement = "=."),
+                                  ifelse(fp < .01, sub(format(round(fp, 3), nsmall = 3), pattern = "0.", replacement = "=."),
                                          sub(format(round(fp, 2), nsmall = 2), pattern = "0.", replacement = "=."))))
 
     } else {

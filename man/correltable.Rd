@@ -16,7 +16,8 @@ correltable(
   round_n = 2,
   tri = c("upper", "lower", "all"),
   cutempty = c(FALSE, TRUE),
-  colnum = c(FALSE, TRUE)
+  colnum = c(FALSE, TRUE),
+  html = c(FALSE, TRUE)
 )
 }
 \arguments{
@@ -52,6 +53,9 @@ cut empty row/column, default=FALSE.}
 
 \item{colnum}{For more concise column names, number row names and
 just use corresponding numbers as column names, default=FALSE, if TRUE overrides cutempty.}
+
+\item{html}{Format as html in viewer or not (default=F, print in console),
+needs library(htmlTable) installed.}
 }
 \value{
 Output Table 1
@@ -80,4 +84,5 @@ correltable(data=diamonds, vars= c("carat","depth","price"),var_names= c("Carat"
 correltable(data=diamonds, vars= c("carat","depth","price"),var_names= c("Carat","Depth","Price ($)"),vars2= c("x","y","z"))
 write.table(correltable(data=diamonds),quote = F,sep = "\t")
 write.csv(correltable(data=diamonds))
+correltable(data=diamonds \%>\% filter(cut == "Ideal" | cut == "Good") \%>\% filter(color == "D" | color == "G" |  color == "J"), vars= c("cut","carat","depth","color","price","x","y","z"),var_names= c("cut","Carat","Depth","Color","Price ($)","x","y","z"),cutempty=T, html=T)
 }

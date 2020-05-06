@@ -47,24 +47,6 @@
 #' diamonds %>%
 #'   filter(cut == "Ideal" | cut == "Good") %>%
 #'   FullTable1(data = ., vars = c("cut", "depth", "price"), html=T)
-#'
-#'
-#' #
-#' #
-#' # library(tidyverse);library(stats)
-#' strata=NULL; vars = NULL; var_names = vars; factor_vars = NULL; round_n = 2, es_col = c(TRUE, FALSE); p_col = c(TRUE, FALSE); stars = c("col", "name", "stat", "none"); html = c(FALSE, TRUE)
-#' # load("/Users/David/Dropbox (NYSPI)/ABCDdata/Release2.0.1/ABCDstudyNDA/OCD_ABCD_merge.Rda")
-#' # data=ABCD_merge;vars=c("Age","SexF","CBCL_OCD_T","White","nomed","Release");var_names=c("Age","Sex","OCS","Race-White","Unmedicated","Release");factor_vars=c("SexF","White");strata=c("KSADS_P_OCD_ever");round_n=2;es=TRUE;p=TRUE;stars="col";html=T
-#' # data=ABCD_merge;vars=c("Age","SexF","CBCL_OCD_T","White","nomed","Release");var_names=c("Age","Sex","OCS","Race-White","Unmedicated","Release");factor_vars=c("SexF","White");strata=c("CBCL_item_worries");round_n=2;es=TRUE;p=TRUE;stars="col";html=T
-#' # data=ABCD_merge;vars=c("Age");strata="CBCL_item_worries"
-#' # FullTable1(data = ABCD_merge,vars=c("Age","SexF","CBCL_OCD_T"),strata="CBCL_item_worries")
-#' # add format(x,round_n) if numeric/needed?
-#' data=alldata_winsor;   vars=c("Age","Sex","FSIQ","income","EstimatedTotalIntraCranialVol","YBOCS_Total_V0");  factor_vars=c("Sex"); strata = c("Study")
-#' var_names = vars; factor_vars = NULL; round_n = 2; es_col = c(TRUE, FALSE); p_col = c(TRUE, FALSE); stars = c("col", "name", "stat", "none")
-#' FullTable1(data=alldata_winsor,   vars=c("Age","Sex","FSIQ","income","EstimatedTotalIntraCranialVol","YBOCS_Total_V0"),  factor_vars=c("Sex"), strata = c("Study"), html=F)
-#' diamonds %>% filter(cut == "Ideal" | cut == "Good") %>% filter(color == "D" | color == "J") %>% FullTable1(data = ., vars = c("cut", "depth", "price"), strata = "color", html=T)
-#' diamonds %>% filter(cut == "Ideal" | cut == "Good") %>% filter(color == "D" | color == "J") %>% FullTable1(data = ., vars = c("cut", "depth", "price"), html=T)
-
 
 FullTable1 <- function(data, strata=NULL, vars = NULL,
                        var_names = vars, factor_vars = NULL,
@@ -135,7 +117,7 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
     }
   }
   # check if all one type of variable
-  type <- case_when(length(factor_vars) == 0 ~ "numeric", length(factor_vars) == length(vars) ~ "factor", TRUE ~ "mixed")
+  type <- dplyr::case_when(length(factor_vars) == 0 ~ "numeric", length(factor_vars) == length(vars) ~ "factor", TRUE ~ "mixed")
 
 
 
@@ -154,8 +136,8 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
 
 
     tableout <- c("Variable", grplvl, "Stat", "p", "sig", "es") %>%
-      map_dfc(setNames, object = list(character())) %>%
-      add_row()
+      purrr::map_dfc(setNames, object = list(character())) %>%
+      tibble:::add_row()
 
     # IF NUMERIC
     if (is.numeric(y)) {
@@ -335,7 +317,7 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
   if (html[1] == T) {
     return(print(htmlTable::htmlTable(finaltable, useViewer=T, rnames = FALSE, caption=caption, pos.caption="bottom")))
   } else {
-    return(list(noquote(as.data.frame(finaltable,row.names = NULL)), caption))
+    return(list(table=noquote(as.data.frame(finaltable,row.names = NULL)), caption=caption))
   }
 
 }
