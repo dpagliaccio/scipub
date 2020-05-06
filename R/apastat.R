@@ -29,9 +29,9 @@ apastat <- function(test, roundN=2, es=TRUE, ci=TRUE, var=NULL) {
     # t-test
     if (grepl("t-test", test$method)) {
       out <- paste0("t(", format(round(test$parameter, roundN), roundN), ")=", format(round(test$statistic, roundN), roundN),
-                    ", p", ifelse(p < .001, "<.001",
-                                  ifelse(p < .01, sub(format(round(p, 3), nsmall = 3), pattern = "0.", replacement = "=."),
-                                         sub(format(round(p, 2), nsmall = 2), pattern = "0.", replacement = "=."))),
+                    ", p", ifelse(test$p.value < .001, "<.001",
+                                  ifelse(test$p.value < .01, sub(format(round(test$p.value, 3), nsmall = 3), pattern = "0.", replacement = "=."),
+                                         sub(format(round(test$p.value, 2), nsmall = 2), pattern = "0.", replacement = "=."))),
                     ifelse(es == TRUE,
                            paste0(", d=", format(round((2 * test$statistic) / sqrt(test$parameter), roundN), roundN)),
                            ""))
@@ -44,23 +44,23 @@ apastat <- function(test, roundN=2, es=TRUE, ci=TRUE, var=NULL) {
                     ifelse(ci == TRUE,
                            paste0(", ", 100 * attr(test$conf.int, "conf.level"), "% CI=[", sub(x = format(round(test$conf.int[1], roundN), roundN), "0.", "."), ",", sub(x = format(round(test$conf.int[2], roundN), roundN), "0.", "."), "]"),
                            ""),
-                    ", p", ifelse(p < .001, "<.001",
-                                  ifelse(p < .01, sub(format(round(p, 3), nsmall = 3), pattern = "0.", replacement = "=."),
-                                         sub(format(round(p, 2), nsmall = 2), pattern = "0.", replacement = "=."))))
+                    ", p", ifelse(test$p.value < .001, "<.001",
+                                  ifelse(test$p.value < .01, sub(format(round(test$p.value, 3), nsmall = 3), pattern = "0.", replacement = "=."),
+                                         sub(format(round(test$p.value, 2), nsmall = 2), pattern = "0.", replacement = "=."))))
     }
     if (grepl("Spearman", test$method)) {
       out <- paste0("\u03C1", "=", sub(x = format(round(test$estimate, roundN), roundN), "0.", "."),
                     ", S=", format(round(test$statistic, roundN), roundN),
-                    ", p", ifelse(p < .001, "<.001",
-                                  ifelse(p < .01, sub(format(round(p, 3), nsmall = 3), pattern = "0.", replacement = "=."),
-                                         sub(format(round(p, 2), nsmall = 2), pattern = "0.", replacement = "=."))))
+                    ", p", ifelse(test$p.value < .001, "<.001",
+                                  ifelse(test$p.value < .01, sub(format(round(test$p.value, 3), nsmall = 3), pattern = "0.", replacement = "=."),
+                                         sub(format(round(test$p.value, 2), nsmall = 2), pattern = "0.", replacement = "=."))))
     }
     if (grepl("Kendall", test$method)) {
       out <- paste0("\u03C4", "=", sub(x = format(round(test$estimate, roundN), roundN), "0.", "."),
                     ", z=", format(round(test$statistic, roundN), roundN),
-                    ", p", ifelse(p < .001, "<.001",
-                                  ifelse(p < .01, sub(format(round(p, 3), nsmall = 3), pattern = "0.", replacement = "=."),
-                                         sub(format(round(p, 2), nsmall = 2), pattern = "0.", replacement = "=."))))
+                    ", p", ifelse(test$p.value < .001, "<.001",
+                                  ifelse(test$p.value < .01, sub(format(round(test$p.value, 3), nsmall = 3), pattern = "0.", replacement = "=."),
+                                         sub(format(round(test$p.value, 2), nsmall = 2), pattern = "0.", replacement = "=."))))
     }
   }
 
