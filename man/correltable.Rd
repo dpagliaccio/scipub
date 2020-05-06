@@ -84,10 +84,4 @@ correltable(data=diamonds, vars= c("carat","depth","price"),var_names= c("Carat"
 correltable(data=diamonds, vars= c("carat","depth","price"),var_names= c("Carat","Depth","Price ($)"),vars2= c("x","y","z"))
 correltable(data=diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good") & (diamonds$color == "D" | diamonds$color == "G" |  diamonds$color == "J"), ],
  vars= c("cut","carat","depth","color","price","x","y","z"),var_names= c("cut","Carat","Depth","Color","Price ($)","x","y","z"),cutempty=TRUE, html=TRUE)
-<<<<<<< HEAD
-=======
-write.table(correltable(data=diamonds),quote = F,sep = "\t")
-write.csv(correltable(data=diamonds))
-correltable(data=diamonds \%>\% filter(cut == "Ideal" | cut == "Good") \%>\% filter(color == "D" | color == "G" |  color == "J"), vars= c("cut","carat","depth","color","price","x","y","z"),var_names= c("cut","Carat","Depth","Color","Price ($)","x","y","z"),cutempty=T, html=T)
->>>>>>> 67503dc3c4d50df205c17f314d15b4e747486d20
 }
