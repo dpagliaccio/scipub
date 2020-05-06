@@ -42,7 +42,7 @@ of group difference? (default=T).}
 
 \item{stars}{Where to include stars indicating
 significance of group differences.
-Options: "col"=separate column (default), "name"= append to variable nam,
+Options: "col"=separate column (default), "name"= append to variable name,
 "stat"= append to group difference statistic, "none" for no stars.}
 
 \item{html}{Format as html in viewer or not (default=F, print in console),
@@ -57,7 +57,7 @@ scientific publication. This is intended to summarize demographic
 and other variables (\code{vars}) split by a grouping variable (\code{strata})
 from an input dataset (\code{data}).
 Continuous variables will be summarized as mean (SD)
-and tested across groups using t-test or anova (for 3+ level \code{strata}).
+and tested across groups using t-test or ANOVA (for 3+ level \code{strata}).
 Categorical variables will be summarized as N (\%)
 and tested across groups as chi-squared.
 Effect sizes for group differences will be calculated as Cohen's d,

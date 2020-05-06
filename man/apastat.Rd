@@ -30,7 +30,7 @@ results scientific publication.
 This currently will take \code{stats::t.test},
 \code{stats::cor.test}, or \code{stats::lm} results as input.
 The output is intended to be included as
-in-text paranthetical statistics in publication.
+in-text parenthetical statistics in publication.
 }
 \examples{
 apastat(stats::cor.test(diamonds$depth,diamonds$price))

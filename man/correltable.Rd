@@ -24,7 +24,7 @@ correltable(
 \item{data}{The input dataset.}
 
 \item{vars}{A list of the names of variables to correlate,
-e.g. c("Age","hght","WASI"), if NULL, all variables in \code{data} will be used.}
+e.g. c("Age","height","WASI"), if NULL, all variables in \code{data} will be used.}
 
 \item{var_names}{An optional list to rename the \code{vars} colnames
 in the output table, e.g. c("Age (years)","Height (inches)","IQ").
@@ -46,7 +46,7 @@ c("pairwise", "complete"), based on \code{stats::cor}, default = "pairwise".}
 \item{round_n}{The number of decimal places to round all output to (default=2).}
 
 \item{tri}{Select output formatting c("upper", "lower","all");
-KEEP the upper triangle, lower triange, or all values, defualt ="upper.}
+KEEP the upper triangle, lower triangle, or all values, default ="upper.}
 
 \item{cutempty}{If keeping only upper/lower triangle with \code{tri},
 cut empty row/column, default=FALSE.}
@@ -71,7 +71,7 @@ Stars indicate significance: \verb{*p<.05, **p<.01, ***p<.001}
 For formatting, variables can be renamed, numbers can be rounded,
 upper or lower triangle only can be selected (or whole matrix),
 and empty columns/rows can be dropped if using triangles.
-For more compact coumns, variable names can be numbered in the
+For more compact columns, variable names can be numbered in the
 rows and column names will be corresponding numbers.
 If only cross-correlation between two sets of variables is desired
 (no correlations within a set of variables), \code{vars2} and \code{var_names} can be used.
