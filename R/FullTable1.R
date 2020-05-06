@@ -32,44 +32,28 @@
 #' @param html Format as html in viewer or not (default=F, print in console),
 #'  needs library(htmlTable) installed.
 #' @return Output Table 1
-#' @import tidyverse
-#' @import stats
+#' @import 	dplyr
+#' @import 	purrr
+#' @importFrom 	stats anova aov chisq.test complete.cases fisher.test sd setNames t.test
+#' @import 	stringr
+#' @import 	tibble
+#' @import 	tidyr
+#' @import 	tidyselect
 #' @export
 #' @examples
-#' diamonds %>%
-#'   filter(cut == "Ideal" | cut == "Good") %>%
-#'   filter(color == "D" | color == "J") %>%
-#'   FullTable1(data = ., vars = c("cut", "depth", "price"), strata = "color")
-#' diamonds %>%
-#'   filter(cut == "Ideal" | cut == "Good") %>%
-#'   filter(color == "D" | color == "G" | color == "J") %>%
-#'   FullTable1(data = ., vars = c("cut", "depth", "price"), strata = "color", stars ="name", p_col=F, html=T)
-#' diamonds %>%
-#'   filter(cut == "Ideal" | cut == "Good") %>%
-#'   FullTable1(data = ., vars = c("cut", "depth", "price"), html=T)
-#'
-#'
-#' #
-#' #
-#' # library(tidyverse);library(stats)
-#' strata=NULL; vars = NULL; var_names = vars; factor_vars = NULL; round_n = 2, es_col = c(TRUE, FALSE); p_col = c(TRUE, FALSE); stars = c("col", "name", "stat", "none"); html = c(FALSE, TRUE)
-#' # load("/Users/David/Dropbox (NYSPI)/ABCDdata/Release2.0.1/ABCDstudyNDA/OCD_ABCD_merge.Rda")
-#' # data=ABCD_merge;vars=c("Age","SexF","CBCL_OCD_T","White","nomed","Release");var_names=c("Age","Sex","OCS","Race-White","Unmedicated","Release");factor_vars=c("SexF","White");strata=c("KSADS_P_OCD_ever");round_n=2;es=TRUE;p=TRUE;stars="col";html=T
-#' # data=ABCD_merge;vars=c("Age","SexF","CBCL_OCD_T","White","nomed","Release");var_names=c("Age","Sex","OCS","Race-White","Unmedicated","Release");factor_vars=c("SexF","White");strata=c("CBCL_item_worries");round_n=2;es=TRUE;p=TRUE;stars="col";html=T
-#' # data=ABCD_merge;vars=c("Age");strata="CBCL_item_worries"
-#' # FullTable1(data = ABCD_merge,vars=c("Age","SexF","CBCL_OCD_T"),strata="CBCL_item_worries")
-#' # add format(x,round_n) if numeric/needed?
-#' data=alldata_winsor;   vars=c("Age","Sex","FSIQ","income","EstimatedTotalIntraCranialVol","YBOCS_Total_V0");  factor_vars=c("Sex"); strata = c("Study")
-#' var_names = vars; factor_vars = NULL; round_n = 2; es_col = c(TRUE, FALSE); p_col = c(TRUE, FALSE); stars = c("col", "name", "stat", "none")
-#' FullTable1(data=alldata_winsor,   vars=c("Age","Sex","FSIQ","income","EstimatedTotalIntraCranialVol","YBOCS_Total_V0"),  factor_vars=c("Sex"), strata = c("Study"), html=F)
-#' diamonds %>% filter(cut == "Ideal" | cut == "Good") %>% filter(color == "D" | color == "J") %>% FullTable1(data = ., vars = c("cut", "depth", "price"), strata = "color", html=T)
-#' diamonds %>% filter(cut == "Ideal" | cut == "Good") %>% filter(color == "D" | color == "J") %>% FullTable1(data = ., vars = c("cut", "depth", "price"), html=T)
-
+#'   FullTable1(data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good") & (diamonds$color == "D" |   diamonds$color == "J"), ],
+#'    vars = c("cut", "depth", "price"), strata = "color")
+#'   FullTable1(data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good") & (diamonds$color == "D" | diamonds$color == "G" |  diamonds$color == "J"), ],
+#'    vars = c("cut", "depth", "price"), strata = "color", stars ="name", p_col=FALSE, html=TRUE)
+#'   FullTable1(data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good"), ],
+#'    vars = c("cut", "depth", "price"), html=TRUE)
 
 FullTable1 <- function(data, strata=NULL, vars = NULL,
                        var_names = vars, factor_vars = NULL,
                        round_n = 2, es_col = c(TRUE, FALSE), p_col = c(TRUE, FALSE),
                        stars = c("col", "name", "stat", "none"), html = c(FALSE, TRUE)) {
+
+  es <- p <- Stat <- Variable <- sig <- NULL
 
   # set df to tibble
   data <- dplyr::as_tibble(data)
@@ -99,7 +83,7 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
   }
 
   # subset columns to relevant data
-  data_edit <- data %>% dplyr::select(all_of(c(vars, strata)))
+  data_edit <- data %>% dplyr::select(tidyselect::all_of(c(vars, strata)))
   # convert any listed factors to factor just in case
   data_edit <- data_edit %>% dplyr::mutate_at(.vars = c(factor_vars, strata), .funs = list(factor))
 
@@ -119,23 +103,23 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
     data_edit <- data_edit %>% dplyr::mutate_if(is.ordered, factor, ordered = FALSE)
   }
   # convert any remaining variables with only 2 distinct options to factor & warn
-  if (ncol(data_edit %>% dplyr::select_if(function(col) is.factor(col) == F & n_distinct(col, na.rm = T) == 2)) > 0) {
-    warning(paste0("Variables with only two distinct values converted to factor: ", stringr::str_c(names(data_edit %>% dplyr::select_if(function(col) is.factor(col) == F & n_distinct(col, na.rm = T) == 2)), sep = " ", collapse = ",")), call. = F)
-    data_edit <- data_edit %>% dplyr::mutate_if(function(col) is.factor(col) == F & n_distinct(col, na.rm = T) == 2, factor)
+  if (ncol(data_edit %>% dplyr::select_if(function(col) is.factor(col) == F & dplyr::n_distinct(col, na.rm = T) == 2)) > 0) {
+    warning(paste0("Variables with only two distinct values converted to factor: ", stringr::str_c(names(data_edit %>% dplyr::select_if(function(col) is.factor(col) == F & dplyr::n_distinct(col, na.rm = T) == 2)), sep = " ", collapse = ",")), call. = F)
+    data_edit <- data_edit %>% dplyr::mutate_if(function(col) is.factor(col) == F & dplyr::n_distinct(col, na.rm = T) == 2, factor)
   }
 
   # get list of factors
-  factor_vars <- names(data_edit %>% dplyr::select_if(is.factor) %>% dplyr::select(-c(all_of(strata))))
+  factor_vars <- names(data_edit %>% dplyr::select_if(is.factor) %>% dplyr::select(-c(tidyselect::all_of(strata))))
 
   # drop any missing strata
   if (strata != "onecol") {
     if (sum(is.na(data[[strata]])) > 0) {
       warning(paste0("N=", sum(is.na(data[[strata]])), " missing/NA in grouping variable: ", strata), call. = F)
-      data_edit <- data_edit %>% tidyr::drop_na(all_of(strata))
+      data_edit <- data_edit %>% tidyr::drop_na(tidyselect::all_of(strata))
     }
   }
   # check if all one type of variable
-  type <- case_when(length(factor_vars) == 0 ~ "numeric", length(factor_vars) == length(vars) ~ "factor", TRUE ~ "mixed")
+  type <- dplyr::case_when(length(factor_vars) == 0 ~ "numeric", length(factor_vars) == length(vars) ~ "factor", TRUE ~ "mixed")
 
 
 
@@ -144,18 +128,19 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
   # create sub-function
   # datafile = data_edit;groupvar = strata;outcome = "Age"
   grouptests <- function(datafile, groupvar, outcome, ...) {
+    perc <- NULL
       y <- datafile[[outcome]]
       x <- datafile[[groupvar]]
       # set group names with N
       grplvl <- stringr::str_c(levels(datafile[[groupvar]]), " (N=", (datafile %>%
                                                                         dplyr::group_by_at(groupvar) %>%
-                                                                        dplyr::select(all_of(groupvar)) %>%
-                                                                        tally())$n, ")", sep = "")
+                                                                        dplyr::select(tidyselect::all_of(groupvar)) %>%
+                                                                        dplyr::tally())$n, ")", sep = "")
 
 
     tableout <- c("Variable", grplvl, "Stat", "p", "sig", "es") %>%
-      map_dfc(setNames, object = list(character())) %>%
-      add_row()
+      purrr::map_dfc(stats::setNames, object = list(character())) %>%
+      tibble::add_row()
 
     # IF NUMERIC
     if (is.numeric(y)) {
@@ -165,7 +150,7 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
       tableout[, grplvl] <- as.data.frame(t((datafile %>%
                                                dplyr::group_by_at(groupvar) %>%
                                                dplyr::select_at(outcome) %>%
-                                               dplyr::summarise_all(list(mean = mean, sd = sd), na.rm = TRUE) %>%
+                                               dplyr::summarise_all(list(mean = mean, sd = stats::sd), na.rm = TRUE) %>%
                                                dplyr::mutate_at(c("mean", "sd"), round, round_n) %>%
                                                tidyr::unite("col", mean, sd, sep = " (") %>%
                                                dplyr::mutate(col = stringr::str_c(col, ")")))[2]))
@@ -182,7 +167,7 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
         tableout$es <- paste0(estype, format(round((datafile %>%
                                                dplyr::group_by_at(groupvar) %>%
                                                dplyr::select_at(outcome) %>%
-                                               dplyr::summarise_all(list(mean = mean, sd = sd), na.rm = TRUE) %>%
+                                               dplyr::summarise_all(list(mean = mean, sd = stats::sd), na.rm = TRUE) %>%
                                                dplyr::mutate(d = (mean[2] - mean[1]) / (sqrt((sd[2]^2 + sd[1]^2) / 2))))[[1, "d"]], round_n), nsmall = round_n))
         # IF MORE THAN 2 LEVELS
       } else if (length(levels(x)) > 2) {
@@ -193,7 +178,7 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
 
         # calculate effect size - cohens d
         estype <- ifelse(type == "mixed", paste0("\u03B7", "2="), "")
-        tableout$es <- paste0(estype, format(round(((anova(aov(y~x))[1, 2] / sum(anova(aov(y~x))[,2]))), round_n),nsmall = round_n))
+        tableout$es <- paste0(estype, format(round(((stats::anova(stats::aov(y~x))[1, 2] / sum(stats::anova(stats::aov(y~x))[,2]))), round_n),nsmall = round_n))
       }
 
 
@@ -203,9 +188,9 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
     } else {
 
       if (groupvar != "onecol") {
-       p <- chisq.test(y, x)$p.value
+       p <- stats::chisq.test(y, x)$p.value
        testtype <- ifelse(type == "mixed", paste0("\u03C7", "2="), "")
-       tableout$Stat <- paste0(testtype, format(round(chisq.test(y, x)$statistic, round_n), nsmall = round_n), sep = "")
+       tableout$Stat <- paste0(testtype, format(round(stats::chisq.test(y, x)$statistic, round_n), nsmall = round_n), sep = "")
       }
 
       # IF 2 LEVEL
@@ -214,7 +199,7 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
         tableout$Variable <- paste0(var_names[which(vars == outcome)], " (", lvl2, ")")
         # get N (%)
         tableout[, grplvl] <- as.data.frame(t((datafile %>%
-                                                 tidyr::drop_na(all_of(outcome)) %>%
+                                                 tidyr::drop_na(tidyselect::all_of(outcome)) %>%
                                                  dplyr::group_by_at(c(groupvar, outcome)) %>%
                                                  dplyr::select_at(outcome) %>%
                                                  tally() %>%
@@ -235,14 +220,14 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
         } else if (length(levels(x)) > 2) {
           # calculate effect size - cramer v
           estype <- ifelse(type == "mixed", "V=", "")
-          tableout$es <- paste0(estype, format(round(sqrt((chisq.test(y, x)$statistic) / (sum(complete.cases(cbind(y, x))) * chisq.test(y, x)$parameter)), round_n), nsmall = round_n))
+          tableout$es <- paste0(estype, format(round(sqrt((stats::chisq.test(y, x)$statistic) / (sum(stats::complete.cases(cbind(y, x))) * stats::chisq.test(y, x)$parameter)), round_n), nsmall = round_n))
         }
 
         # IF MORE THAN 2 LEVELS
       } else {
         ## TO DO - multi line summary n % # tidyr::unite("col",outcome, col, sep = " = ") %>%summarize(V3 = toString(col)) #nest
         tableout[2:(1 + length(levels(y))), grplvl] <- datafile %>%
-          tidyr::drop_na(all_of(outcome)) %>%
+          tidyr::drop_na(tidyselect::all_of(outcome)) %>%
           dplyr::group_by_at(c(groupvar, outcome)) %>%
           dplyr::select_at(outcome) %>%
           tally() %>%
@@ -252,12 +237,12 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
           dplyr::mutate_at(c("perc"), round, round_n) %>%
           tidyr::unite("col", n, perc, sep = " (") %>%
           dplyr::mutate(col = stringr::str_c(col, "%)")) %>%
-          spread("CBCL_item_worries","col") %>%
-          select(-c(all_of(outcome)))
+          tidyr::spread(groupvar,"col") %>%
+          dplyr::select(-c(tidyselect::all_of(outcome)))
 
         # calculate effect size - cramer v
         estype <- ifelse(type == "mixed", "V=", "")
-        tableout$es <- paste0(estype, format(round(sqrt((chisq.test(y, x)$statistic) / (sum(complete.cases(cbind(y, x))) * chisq.test(y, x)$parameter)), round_n), nsmall = round_n))
+        tableout$es <- paste0(estype, format(round(sqrt((stats::chisq.test(y, x)$statistic) / (sum(stats::complete.cases(cbind(y, x))) * stats::chisq.test(y, x)$parameter)), round_n), nsmall = round_n))
 
       }
     }
@@ -308,14 +293,13 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
 
   # caption
   missing_n <- data_edit %>%
-    dplyr::select(all_of(vars)) %>%
+    dplyr::select(tidyselect::all_of(vars)) %>%
     purrr::set_names(var_names) %>%
     dplyr::mutate_all(is.na) %>%
     dplyr::summarise_all(sum) %>%
     dplyr::select_if(function(sum) sum > 0)
   missingness <- ifelse(ncol(missing_n) > 0,
-                         paste0(missing_n %>%
-                                  stringr::str_c("N=", ., " missing ", colnames(.), ". "), collapse = "")
+                         paste0(stringr::str_c("N=", missing_n, " missing ", colnames(missing_n), ". "), collapse = "")
                          , "")
 
 
@@ -335,7 +319,7 @@ FullTable1 <- function(data, strata=NULL, vars = NULL,
   if (html[1] == T) {
     return(print(htmlTable::htmlTable(finaltable, useViewer=T, rnames = FALSE, caption=caption, pos.caption="bottom")))
   } else {
-    return(list(noquote(as.data.frame(finaltable,row.names = NULL)), caption))
+    return(list(table=noquote(as.data.frame(finaltable,row.names = NULL)), caption=caption))
   }
 
 }

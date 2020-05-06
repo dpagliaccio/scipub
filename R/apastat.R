@@ -16,12 +16,13 @@
 #' @param var Only for lm object, select name of variable to
 #'  summarize (default=NULL), if NULL, will summarize overall model fit.
 #' @return Output formatted statistics
+#' @importFrom 	stats coef
 #' @export
 #' @examples
 #' apastat(stats::cor.test(diamonds$depth,diamonds$price))
-#' apastat(diamonds %>% filter(cut=="Ideal" | cut=="Good")  %>% stats::t.test(depth~cut,data = .))
-#' apastat(diamonds %>% filter(cut=="Ideal" | cut=="Good")  %>% stats::lm(data=., depth~cut + price))
-#' apastat(diamonds %>% filter(cut=="Ideal" | cut=="Good")  %>% stats::lm(data=., depth~cut + price),var="cut")
+#' apastat(stats::t.test(depth~cut,data = diamonds[diamonds$cut=="Ideal" | diamonds$cut=="Good", ]))
+#' apastat(stats::lm(data=diamonds[diamonds$cut=="Ideal" | diamonds$cut=="Good", ], depth~cut + price))
+#' apastat(stats::lm(data=diamonds[diamonds$cut=="Ideal" | diamonds$cut=="Good", ], depth~cut + price),var="cut")
 
 apastat <- function(test, roundN=2, es=TRUE, ci=TRUE, var=NULL) {
 
@@ -79,7 +80,7 @@ apastat <- function(test, roundN=2, es=TRUE, ci=TRUE, var=NULL) {
                     ", R2=", sub(x = format(round(tmp$r.squared, roundN), roundN), "0.", "."),
                     ", adj. R2=", sub(x = format(round(tmp$adj.r.squared, roundN), roundN), "0.", "."),
                     ", p", ifelse(fp < .001, "<.001",
-                                  ifelse(fp < .01, sub(format(round(p, 3), nsmall = 3), pattern = "0.", replacement = "=."),
+                                  ifelse(fp < .01, sub(format(round(fp, 3), nsmall = 3), pattern = "0.", replacement = "=."),
                                          sub(format(round(fp, 2), nsmall = 2), pattern = "0.", replacement = "=."))))
 
     } else {

@@ -6,20 +6,22 @@
 \usage{
 FullTable1(
   data,
-  strata,
+  strata = NULL,
   vars = NULL,
   var_names = vars,
   factor_vars = NULL,
   round_n = 2,
   es_col = c(TRUE, FALSE),
   p_col = c(TRUE, FALSE),
-  stars = c("col", "name", "stat", "none")
+  stars = c("col", "name", "stat", "none"),
+  html = c(FALSE, TRUE)
 )
 }
 \arguments{
 \item{data}{The input dataset (will be converted to tibble).}
 
-\item{strata}{The grouping variable of interest (converted to factor).}
+\item{strata}{The grouping variable of interest (converted to factor),
+if NULL will make one column table.}
 
 \item{vars}{A list of variables to summarize, e.g. c("Age","sex","WASI").}
 
@@ -42,6 +44,9 @@ of group difference? (default=T).}
 significance of group differences.
 Options: "col"=separate column (default), "name"= append to variable nam,
 "stat"= append to group difference statistic, "none" for no stars.}
+
+\item{html}{Format as html in viewer or not (default=F, print in console),
+needs library(htmlTable) installed.}
 }
 \value{
 Output Table 1
@@ -60,25 +65,10 @@ partial eta-squared, Odds Ratio, Cramer's V depending on the test.
 Requires \code{tidyverse} and \code{stats} libraries.
 }
 \examples{
-diamonds \%>\%
-  filter(cut == "Ideal" | cut == "Good") \%>\%
-  filter(color == "D" | color == "J") \%>\%
-  FullTable1(data = ., vars = c("cut", "depth", "price"), strata = "color")
-
-
-#
-#
-# # TO DO
-# rename group columns with N= on second line
-# formatting output!
-# library(tidyverse);library(stats)
-# load("/Users/David/Dropbox (NYSPI)/ABCDdata/Release2.0.1/ABCDstudyNDA/OCD_ABCD_merge.Rda")
-# data=ABCD_merge;vars=c("Age","SexF","CBCL_OCD_T","White","nomed","Release");var_names=c("Age","Sex","OCS","Race-White","Unmedicated","Release");factor_vars=c("SexF","White");strata=c("KSADS_P_OCD_ever");round_n=2;es=TRUE;p=TRUE;stars="col"
-# data=ABCD_merge;vars=c("Age","SexF","CBCL_OCD_T","White","nomed","Release");var_names=c("Age","Sex","OCS","Race-White","Unmedicated","Release");factor_vars=c("SexF","White");strata=c("CBCL_item_worries");round_n=2;es=TRUE;p=TRUE;stars="col"
-# data=ABCD_merge;vars=c("Age");strata="CBCL_item_worries"
-# FullTable1(data = ABCD_merge,vars=c("Age","SexF","CBCL_OCD_T"),strata="CBCL_item_worries")
-# add format(x,round_n) if numeric/needed?
-data=alldata_winsor;   vars=c("Age","Sex","FSIQ","income","EstimatedTotalIntraCranialVol","YBOCS_Total_V0");  factor_vars=c("Sex"); strata = c("Study")
-var_names = vars; factor_vars = NULL; round_n = 2; es_col = c(TRUE, FALSE); p_col = c(TRUE, FALSE); stars = c("col", "name", "stat", "none")
-FullTable1(data=alldata_winsor,   vars=c("Age","Sex","FSIQ","income","EstimatedTotalIntraCranialVol","YBOCS_Total_V0"),  factor_vars=c("Sex"), strata = c("Study"))
+  FullTable1(data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good") & (diamonds$color == "D" |   diamonds$color == "J"), ],
+   vars = c("cut", "depth", "price"), strata = "color")
+  FullTable1(data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good") & (diamonds$color == "D" | diamonds$color == "G" |  diamonds$color == "J"), ],
+   vars = c("cut", "depth", "price"), strata = "color", stars ="name", p_col=FALSE, html=TRUE)
+  FullTable1(data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good"), ],
+   vars = c("cut", "depth", "price"), html=TRUE)
 }

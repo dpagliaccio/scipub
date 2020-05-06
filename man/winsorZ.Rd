@@ -25,7 +25,9 @@ to flag any Z-score outliers to tally as needed.
 }
 \examples{
 winsorZ(diamonds$depth)
+\dontrun{
 diamonds \%>\% dplyr::select(c(depth,price)) \%>\% map(winsorZ)
 diamonds \%>\% mutate_at(c("depth","price"), list( ~winsorZ(.)))
 diamonds \%>\% mutate_if(is.double, list( ~winsorZ(.)))
+}
 }

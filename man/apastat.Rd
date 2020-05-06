@@ -34,7 +34,7 @@ in-text paranthetical statistics in publication.
 }
 \examples{
 apastat(stats::cor.test(diamonds$depth,diamonds$price))
-apastat(diamonds \%>\% filter(cut=="Ideal" | cut=="Good")  \%>\% stats::t.test(depth~cut,data = .))
-apastat(diamonds \%>\% filter(cut=="Ideal" | cut=="Good")  \%>\% stats::lm(data=., depth~cut + price))
-apastat(diamonds \%>\% filter(cut=="Ideal" | cut=="Good")  \%>\% stats::lm(data=., depth~cut + price),var="cut")
+apastat(stats::t.test(depth~cut,data = diamonds[diamonds$cut=="Ideal" | diamonds$cut=="Good", ]))
+apastat(stats::lm(data=diamonds[diamonds$cut=="Ideal" | diamonds$cut=="Good", ], depth~cut + price))
+apastat(stats::lm(data=diamonds[diamonds$cut=="Ideal" | diamonds$cut=="Good", ], depth~cut + price),var="cut")
 }
