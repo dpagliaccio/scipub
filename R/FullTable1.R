@@ -347,7 +347,7 @@ FullTable1 <- function(data, strata = NULL, vars = NULL,
       ), ""
     ),
     missingness,
-    ifelse(strata == "onecol", "", "*p<.05, **p<.01, ***p<.001")
+    ifelse(strata == "onecol", "", "* p<.05, ** p<.01, *** p<.001")
   )
 
   # check if htmlTable installed

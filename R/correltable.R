@@ -321,7 +321,7 @@ correltable <- function(data, vars = NULL, var_names = vars,
         "",
         paste0(" Group differences for continuous and categorical variables are indicated by t-statistic/ANOVA F and chi-squared, respectively.")
       ),
-      " *p<.05, **p<.01, ***p<.001"
+      " * p<.05, ** p<.01, *** p<.001"
     )
 
 
