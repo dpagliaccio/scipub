@@ -38,14 +38,16 @@ logical class variables will be summarized as categorical by default.}
 \item{es_col}{Include a column for effect size
 of group difference? (default=T).}
 
-\item{p_col}{Include a column for p-value of group difference? (default=TRUE).}
+\item{p_col}{Include a column for p-value of
+group difference? (default=TRUE).}
 
 \item{stars}{Where to include stars indicating
 significance of group differences.
 Options: "col"=separate column (default), "name"= append to variable name,
 "stat"= append to group difference statistic, "none" for no stars.}
 
-\item{html}{Format as html in viewer or not (default=FALSE, print in console),
+\item{html}{Format as html in viewer or not
+(default=FALSE, print in console),
 needs library(htmlTable) installed.}
 }
 \value{
@@ -65,8 +67,17 @@ partial eta-squared, Odds Ratio, Cramer's V depending on the test.
 Requires \code{tidyverse} and \code{stats} libraries.
 }
 \examples{
-FullTable1(data = psydat, vars = c("Age", "Height", "depressT"), strata = "Sex")
-FullTable1(data = psydat, vars = c("Age", "Height", "depressT"), strata = "Sex")
-FullTable1(data = psydat, vars = c("Age", "Sex","Height", "depressT"), var_names = c("Age (months)", "Sex","Height (inches)", "Depression T"), strata = "Income", stars = "name",p_col = FALSE)
-
+FullTable1(
+  data = psydat,
+  vars = c("Age", "Height", "depressT"), strata = "Sex"
+)
+FullTable1(
+  data = psydat,
+  vars = c("Age", "Height", "depressT"), strata = "Sex"
+)
+FullTable1(
+  data = psydat, vars = c("Age", "Sex", "Height", "depressT"),
+  var_names = c("Age (months)", "Sex", "Height (inches)", "Depression T"),
+  strata = "Income", stars = "name", p_col = FALSE
+)
 }

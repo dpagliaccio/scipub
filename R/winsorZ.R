@@ -9,7 +9,7 @@
 #' to flag any Z-score outliers to tally as needed.
 #' @param x The input variable to Winsorize.
 #' @param zbound The Z-score cutoff (default=3, i.e. outliers are Z>3 | Z<-3).
-#' @return Output Winzorized variable
+#' @return Output Winsorized variable
 #' @export
 #' @examples
 #' winsorZ(psydat$iq)
@@ -21,7 +21,8 @@
 #' psydat %>% mutate_if(is.double, list(~ winsorZ(.)))
 #' }
 #'
-winsorZ <- function(x, zbound = 3) {
+winsorZ <- function(x,
+                    zbound = 3) {
   x <- as.numeric(as.character(x)) # convert to numeric just in case
   z <- scale(x) # gives z-scores for vector x
   x[!is.na(z) & z > zbound] <- max(x[!is.na(z) & z <= zbound])

@@ -13,7 +13,7 @@ winsorZ(x, zbound = 3)
 \item{zbound}{The Z-score cutoff (default=3, i.e. outliers are Z>3 | Z<-3).}
 }
 \value{
-Output Winzorized variable
+Output Winsorized variable
 }
 \description{
 The \code{winsorZ} function identifies outliers based on Z-score cutoff

@@ -24,7 +24,8 @@ correltable(
 \item{data}{The input dataset.}
 
 \item{vars}{A list of the names of variables to correlate,
-e.g. c("Age","height","WASI"), if NULL, all variables in \code{data} will be used.}
+e.g. c("Age","height","WASI"),
+if NULL, all variables in \code{data} will be used.}
 
 \item{var_names}{An optional list to rename the \code{vars} colnames
 in the output table, e.g. c("Age (years)","Height (inches)","IQ").
@@ -43,7 +44,8 @@ based on \code{stats::cor}, default = "pearson".}
 \item{use}{Use pairwise.complete.obs or restrict to complete cases
 c("pairwise", "complete"), based on \code{stats::cor}, default = "pairwise".}
 
-\item{round_n}{The number of decimal places to round all output to (default=2).}
+\item{round_n}{The number of decimal places to
+round all output to (default=2).}
 
 \item{tri}{Select output formatting c("upper", "lower","all");
 KEEP the upper triangle, lower triangle, or all values, default ="upper.}
@@ -52,7 +54,8 @@ KEEP the upper triangle, lower triangle, or all values, default ="upper.}
 cut empty row/column, default=FALSE.}
 
 \item{colnum}{For more concise column names, number row names and
-just use corresponding numbers as column names, default=FALSE, if TRUE overrides cutempty.}
+just use corresponding numbers as column names,
+default=FALSE, if TRUE overrides cutempty.}
 
 \item{html}{Format as html in viewer or not (default=F, print in console),
 needs library(htmlTable) installed.}
@@ -74,13 +77,26 @@ and empty columns/rows can be dropped if using triangles.
 For more compact columns, variable names can be numbered in the
 rows and column names will be corresponding numbers.
 If only cross-correlation between two sets of variables is desired
-(no correlations within a set of variables), \code{vars2} and \code{var_names} can be used.
+(no correlations within a set of variables),
+\code{vars2} and \code{var_names} can be used.
 This function will drop any non-numeric variables by default.
 Requires \code{tidyverse} and \code{stats} libraries.
 }
 \examples{
 correltable(data = psydat)
-correltable(data = psydat, vars = c("Age", "Height", "iq"),tri="lower",html=TRUE)
-correltable(data = psydat, vars = c("Age", "Height", "iq"), var_names = c("Age (months)", "Height (inches)", "IQ"), tri = "upper", colnum = TRUE,html=TRUE)
-correltable(data = psydat, vars = c("Age", "Height", "iq"), var_names = c("Age (months)", "Height (inches)", "IQ"), vars2 = c("depressT", "anxT"), var_names2 = c("Depression T", "Anxiety T"),html=TRUE)
+correltable(
+  data = psydat, vars = c("Age", "Height", "iq"),
+  tri = "lower", html = TRUE
+)
+correltable(
+  data = psydat, vars = c("Age", "Height", "iq"),
+  var_names = c("Age (months)", "Height (inches)", "IQ"),
+  tri = "upper", colnum = TRUE, html = TRUE
+)
+correltable(
+  data = psydat, vars = c("Age", "Height", "iq"),
+  var_names = c("Age (months)", "Height (inches)", "IQ"),
+  vars2 = c("depressT", "anxT"),
+  var_names2 = c("Depression T", "Anxiety T"), html = TRUE
+)
 }

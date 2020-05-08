@@ -4,7 +4,7 @@
 \alias{apastat}
 \title{Format simple statistic test results for scientific publication}
 \usage{
-apastat(test, roundN = 2, es = TRUE, ci = TRUE, var = NULL)
+apastat(test, roundN = 2, es = c(TRUE, FALSE), ci = c(TRUE, FALSE), var = NULL)
 }
 \arguments{
 \item{test}{The \code{stats::t.test}, \code{stats::cor.test},
@@ -37,4 +37,5 @@ apastat(stats::cor.test(psydat$Age, psydat$Height))
 apastat(stats::t.test(Height ~ Sex, data = psydat))
 apastat(stats::lm(data = psydat, Height ~ Age + Sex))
 apastat(stats::lm(data = psydat, Height ~ Age + Sex), var = "Age")
+
 }

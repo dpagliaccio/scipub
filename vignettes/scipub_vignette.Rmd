@@ -43,7 +43,7 @@ library(scipub)
 
 The `apastat` function summarizes simple statistical tests to include 
 in the text of an article, typically in a parenthetical. 
-This is built for t-tests, correlations, anova, and regression.
+This is built for t-tests, correlations, ANOVA, and regression.
 Regressions can be summarized by their overall model fit or the
 parameter estimates for one predictor variable.
 Effect sizes are calculated where possible (default: `es=TRUE`). 
@@ -63,7 +63,7 @@ apastat(stats::t.test(Height ~ Sex, data = psydat))
 ```
 
 
-A linear regression model predicting height was highly signficant, with the predictors (age and sex) accounting for about 17% of the variance in height. 
+A linear regression model predicting height was highly significant, with the predictors (age and sex) accounting for about 17% of the variance in height. 
 ```{r}
 apastat(stats::lm(data = psydat, Height ~ Age + Sex))
 ```
@@ -80,8 +80,8 @@ apastat(stats::lm(data = psydat, Height ~ Age + Sex), var = "Age")
 ***
 ## `correltable`
 
-The `correltable` function creates a summary correlation table with astericks to indicate significance. 
-Variables can be renamed as part of the function call. The full matrix or upper/lower triangle can be selected for outtput. For the selected triangle, the empty row/column can be kept or deleted as needed. 
+The `correltable` function creates a summary correlation table with asterisks to indicate significance. 
+Variables can be renamed as part of the function call. The full matrix or upper/lower triangle can be selected for output. For the selected triangle, the empty row/column can be kept or deleted as needed. 
 The caption provides information on the statistics included, any missing data, and the * indications. 
 For example:
 
@@ -92,13 +92,13 @@ correltable(data = psydat, vars = c("Age", "Height", "iq"),tri="lower",html=TRUE
 
 
 
-These same variables can be relabelled in the output and, for conciseness, the columns can be indicated by corresponding number rather than variable name. 
+These same variables can be relabeled in the output and, for conciseness, the columns can be indicated by corresponding number rather than variable name. 
 ```{r results="asis"}
 correltable(data = psydat, vars = c("Age", "Height", "iq"), var_names = c("Age (months)", "Height (inches)", "IQ"), tri = "upper", colnum = TRUE,html=TRUE)
 ```
 
 
-This can also be done with Spearman correlation. As well as using only complete data (listwise deletion). And, the empty row/column can be removed if desired. 
+This can also be done with Spearman correlation. As well as using only complete data (list-wise deletion). And, the empty row/column can be removed if desired. 
 ```{r results="asis"}
 correltable(data = psydat, vars = c("Age", "Height", "iq"), var_names = c("Age (months)", "Height (inches)", "IQ"), tri = "upper", method = "spearman", use = "complete", cutempty = TRUE, colnum = TRUE,html=TRUE)
 ```

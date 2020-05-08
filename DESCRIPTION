@@ -21,6 +21,8 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
 Language: en-US
 VignetteBuilder: knitr
+URL: https://github.com/dpagliaccio/scipub
+BugReports: https://github.com/dpagliaccio/scipub/issues
 Depends:
 	R (>= 3.6.3)
 Imports:

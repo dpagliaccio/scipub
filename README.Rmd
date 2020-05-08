@@ -53,7 +53,7 @@ This is a basic example:
 
 ```{r example}
 library(scipub)
-correltable(data=diamonds, vars= c("carat","depth","price"),var_names= c("Carat","Depth","Price ($)"),tri="lower", colnum=TRUE)
+correltable(data=psydat, html=TRUE)
 ```
 
 
