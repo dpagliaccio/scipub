@@ -19,10 +19,10 @@
 #' @importFrom 	stats coef
 #' @export
 #' @examples
-#' apastat(stats::cor.test(diamonds$depth, diamonds$price))
-#' apastat(stats::t.test(depth ~ cut, data = diamonds[diamonds$cut == "Ideal" | diamonds$cut == "Good", ]))
-#' apastat(stats::lm(data = diamonds[diamonds$cut == "Ideal" | diamonds$cut == "Good", ], depth ~ cut + price))
-#' apastat(stats::lm(data = diamonds[diamonds$cut == "Ideal" | diamonds$cut == "Good", ], depth ~ cut + price), var = "cut")
+#' apastat(stats::cor.test(psydat$Age, psydat$Height))
+#' apastat(stats::t.test(Height ~ Sex, data = psydat))
+#' apastat(stats::lm(data = psydat, Height ~ Age + Sex))
+#' apastat(stats::lm(data = psydat, Height ~ Age + Sex), var = "Age")
 apastat <- function(test, roundN = 2, es = TRUE, ci = TRUE, var = NULL) {
   if (class(test) == "htest") {
     # t-test

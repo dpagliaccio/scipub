@@ -50,13 +50,10 @@
 #' @import 	tidyselect
 #' @export
 #' @examples
-#' correltable(data = diamonds)
-#' correltable(data = diamonds, vars = c("carat", "depth", "price"), var_names = c("Carat", "Depth", "Price ($)"), tri = "lower", colnum = TRUE)
-#' correltable(data = diamonds, vars = c("carat", "depth", "price"), var_names = c("Carat", "Depth", "Price ($)"), vars2 = c("x", "y", "z"))
-#' correltable(
-#'   data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good") & (diamonds$color == "D" | diamonds$color == "G" | diamonds$color == "J"), ],
-#'   vars = c("cut", "carat", "depth", "color", "price", "x", "y", "z"), var_names = c("cut", "Carat", "Depth", "Color", "Price ($)", "x", "y", "z"), cutempty = TRUE, html = TRUE
-#' )
+#' correltable(data = psydat)
+#' correltable(data = psydat, vars = c("Age", "Height", "iq"),tri="lower",html=TRUE)
+#' correltable(data = psydat, vars = c("Age", "Height", "iq"), var_names = c("Age (months)", "Height (inches)", "IQ"), tri = "upper", colnum = TRUE,html=TRUE)
+#' correltable(data = psydat, vars = c("Age", "Height", "iq"), var_names = c("Age (months)", "Height (inches)", "IQ"), vars2 = c("depressT", "anxT"), var_names2 = c("Depression T", "Anxiety T"),html=TRUE)
 correltable <- function(data, vars = NULL, var_names = vars,
                         vars2 = NULL, var_names2 = vars2,
                         method = c("pearson", "spearman"), use = c("pairwise", "complete"), round_n = 2,

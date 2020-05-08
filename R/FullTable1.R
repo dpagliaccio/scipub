@@ -41,18 +41,10 @@
 #' @import 	tidyselect
 #' @export
 #' @examples
-#' FullTable1(
-#'   data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good") & (diamonds$color == "D" | diamonds$color == "J"), ],
-#'   vars = c("cut", "depth", "price"), strata = "color"
-#' )
-#' FullTable1(
-#'   data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good") & (diamonds$color == "D" | diamonds$color == "G" | diamonds$color == "J"), ],
-#'   vars = c("cut", "depth", "price"), strata = "color", stars = "name", p_col = FALSE, html = TRUE
-#' )
-#' FullTable1(
-#'   data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good"), ],
-#'   vars = c("cut", "depth", "price"), html = TRUE
-#' )
+#' FullTable1(data = psydat, vars = c("Age", "Height", "depressT"), strata = "Sex")
+#' FullTable1(data = psydat, vars = c("Age", "Height", "depressT"), strata = "Sex")
+#' FullTable1(data = psydat, vars = c("Age", "Sex","Height", "depressT"), var_names = c("Age (months)", "Sex","Height (inches)", "Depression T"), strata = "Income", stars = "name",p_col = FALSE)
+#'
 FullTable1 <- function(data, strata = NULL, vars = NULL,
                        var_names = vars, factor_vars = NULL,
                        round_n = 2, es_col = c(TRUE, FALSE), p_col = c(TRUE, FALSE),

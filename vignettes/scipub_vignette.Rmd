@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 library(knitr)
+library(ggplot2)
 ```
 
 The scipub package contains functions for summarizing data
@@ -24,7 +25,8 @@ The scipub package contains functions for summarizing data
     statistical summarizes from simple tests for in-text notation.
     The package also includes functions for Winsorizing data based
     on a Z-statistic cutoff.  
-The `ggplot2::diamonds` dataset is used for examples.  
+The sample dataset of demographic and clinical data
+ from 5,000 children is used for examples.  
 
 
 
@@ -49,29 +51,26 @@ For example:
 
 
 
-There is a significant negative correlation between diamond depth and price.
+There is a significant positive correlation between age and height. 
+95% confidence intervals are requested.
 ```{r}
-apastat(stats::cor.test(diamonds$depth, diamonds$price), ci = TRUE)
+apastat(stats::cor.test(psydat$Age, psydat$Height), ci = TRUE)
 ```
 
-Ideal cut diamonds are of significantly higher price than good cut diamonds at a small effect size.
+There is no significant sex difference in height in the sample.
 ```{r}
-apastat(stats::t.test(price ~ cut, data = diamonds[diamonds$cut == "Ideal" | diamonds$cut == "Good", ]))
+apastat(stats::t.test(Height ~ Sex, data = psydat))
 ```
 
-Ideal cut diamonds are of significantly higher price than good cut diamonds at a small effect size.
+
+A linear regression model predicting height was highly signficant, with the predictors (age and sex) accounting for about 17% of the variance in height. 
 ```{r}
-apastat(stats::t.test(price ~ cut, data = diamonds[diamonds$cut == "Ideal" | diamonds$cut == "Good", ]))
+apastat(stats::lm(data = psydat, Height ~ Age + Sex), var = "Age")
 ```
 
-The linear regression model predicting diamond price was highly signficant, with the predictors (cut, depth, and carat) accounting for a majority of variance in price. 
+In this linear regression model, age was a highly significant predictor of height, controlling for sex. 
 ```{r}
-apastat(stats::lm(data = diamonds[diamonds$cut == "Ideal" | diamonds$cut == "Good", ],  price ~ cut + depth + carat))
-```
-
-In that linear regression model, carat was a highly significant predictor of price, contrlling for cut and depth. 
-```{r}
-apastat(stats::lm(data = diamonds[diamonds$cut == "Ideal" | diamonds$cut == "Good", ], price ~ cut + depth + carat), var = "carat")
+apastat(stats::lm(data = psydat, Height ~ Age + Sex), var = "Age")
 ```
 
 
@@ -86,29 +85,29 @@ Variables can be renamed as part of the function call. The full matrix or upper/
 The caption provides information on the statistics included, any missing data, and the * indications. 
 For example:
 
-The lower triangle of inter-correlation among the carat, depth, and price variables are shown.
+The lower triangle of inter-correlation among the age, height, and iq variables are shown.
 ```{r results="asis"}
-correltable(data = diamonds, vars = c("carat", "depth", "price"),tri="lower",html=TRUE)
+correltable(data = psydat, vars = c("Age", "Height", "iq"),tri="lower",html=TRUE)
 ```
 
 
 
 These same variables can be relabelled in the output and, for conciseness, the columns can be indicated by corresponding number rather than variable name. 
 ```{r results="asis"}
-correltable(data = diamonds, vars = c("carat", "depth", "price"), var_names = c("Carat", "Depth", "Price ($)"), tri = "upper", colnum = TRUE,html=TRUE)
+correltable(data = psydat, vars = c("Age", "Height", "iq"), var_names = c("Age (months)", "Height (inches)", "IQ"), tri = "upper", colnum = TRUE,html=TRUE)
 ```
 
 
 
 The inter-correlation between two sets of variables can also be shown. 
 ```{r results="asis"}
-correltable(data = diamonds, vars = c("carat", "depth", "price"), var_names = c("Carat", "Depth", "Price ($)"), vars2 = c("x", "y", "z"),html=TRUE)
+correltable(data = psydat, vars = c("Age", "Height", "iq"), var_names = c("Age (months)", "Height (inches)", "IQ"), vars2 = c("depressT", "anxT"), var_names2 = c("Depression T", "Anxiety T"),html=TRUE)
 ```
 
 
 The simplest call just correlates all variables in a dataset. Any non-numeric variables will be tested by t-test, chi-squared, or ANOVA as appropriate.
 ```{r results="asis"}
-correltable(data = diamonds, html=TRUE)
+correltable(data = psydat, html=TRUE)
 ```
 
 
@@ -118,18 +117,49 @@ correltable(data = diamonds, html=TRUE)
 A "Table 1" can be created to summarize data, i.e. the typical first table in a paper that describes the sample characteristics.
 This can display information for a single group for the declared variables .  
 ```{r results="asis"}
-FullTable1(   data = diamonds[diamonds$cut == "Ideal" | diamonds$cut == "Good", ],   vars = c("cut", "depth", "price"),  html=TRUE)
+FullTable1(data = psydat, vars = c("Age", "Sex","Height", "depressT"),  html=TRUE)
 ```
 
 Or commonly this can be shown for two groups if interest including the tests of group difference for all variables.
 ```{r results="asis"}
-FullTable1(   data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good") & (diamonds$color == "D" | diamonds$color == "J"), ],   vars = c("cut", "depth", "price"),  strata = "color", html=TRUE)
+FullTable1(data = psydat, vars = c("Age", "Height", "depressT"), strata = "Sex", html=TRUE)
 ```
 
 
 This can also be created for more than two groups. As with `correltable` variables can be renamed in the call.
-Also the significance stars can be moved to the variable name or statistic column (or removed). The p-value column can be removed as well (same for the effect size column, but why would you want to remove that?).
+Also the significance stars can be moved to the statistic column or variable name (or removed). The p-value column can be removed as well (same for the effect size column, but why would you want to remove that?).
 ```{r results="asis"}
-FullTable1(   data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good") & (diamonds$color == "D" | diamonds$color == "E" | diamonds$color == "J"), ],   vars = c("cut", "depth", "price"), var_names = c("Cut", "Depth", "Price ($)"),  strata = "color", stars = "name",p_col = FALSE, html=TRUE)
+FullTable1(data = psydat, vars = c("Age", "Sex","Height", "depressT"), var_names = c("Age (months)", "Sex","Height (inches)", "Depression T"), strata = "Income", stars = "stat",p_col = FALSE, html=TRUE)
 ```
 
+
+All variables will be summarized if none are declared
+Shown with significance stars on variable names.
+```{r results="asis"}
+FullTable1(data = psydat, strata = "Sex",stars = "name",p_col = FALSE, html=TRUE)
+```
+
+
+
+
+***
+## Winsorizing
+
+The `winsorZ` function allows for Winsorizing outliers based on a Z-score cutoff, i.e.
+  replacing extreme values with the next most extreme outlier value.
+This is an alternative to other function, e.g. `DescTools::Winsorize` which
+  identifies outlier based on quantile limits.
+The `winsorZ` function can be used in combination with the `winsorZ_find` function,
+  which identifies the outlier values (1=outlier, 0=non-outlier).
+
+
+For example, in the example data, psydat$iq has 17 outliers that exceed a default
+|Z|>3 limit test. Here, we create a temporary data frame with the original
+iq scores, the Z-score winsorized iq values, and an indication of which scores
+were winsorized. We can see the change in mix/max iq values in the summary
+and the winsorized outliers are shown in blue in the plot.
+```{r results="asis"}
+temp <- data.frame(iq=psydat$iq, iq_winsor=winsorZ(psydat$iq), iq_outlier = winsorZ_find(psydat$iq))
+summary(temp)
+ggplot(temp[!is.na(temp$iq),], aes(x=iq, y=iq_winsor)) + geom_point(aes(color=iq_outlier),alpha=.7) + geom_line() + theme_bw()
+```
