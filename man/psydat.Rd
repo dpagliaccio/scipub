@@ -17,7 +17,7 @@ A data frame with 5000 rows and 7 variables:
 }
 }
 \usage{
-data(psydat)
+data("psydat")
 }
 \description{
 A dataset containing demographic and clinical
