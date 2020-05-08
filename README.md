@@ -7,6 +7,8 @@
 
 <!-- badges: end -->
 
+<https://dpagliaccio.github.io/scipub/>
+
 This package contains functions for summarizing data for scientific
 publication. This includes making a “Table 1” to summarize demographics
 across groups, correlation tables with significance indicated by stars,

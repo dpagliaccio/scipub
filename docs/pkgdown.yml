@@ -3,5 +3,8 @@ pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
   scipub_vignette: scipub_vignette.html
-last_built: 2020-05-08T22:32Z
+last_built: 2020-05-08T23:09Z
+urls:
+  reference: https://dpagliaccio.github.io/scipub/reference
+  article: https://dpagliaccio.github.io/scipub//articles
 
