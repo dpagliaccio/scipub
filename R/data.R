@@ -1,21 +1,16 @@
-#' Prices of over 50,000 round cut diamonds
+#' Sample demographic and clinical data for 5,000 children
 #'
-#' A dataset containing the prices and other attributes of almost 54,000
-#'  diamonds. The variables are as follows:
+#' A dataset containing demographic and clinical
+#' data for 5,000 children. The variables are as follows:
 #'
-#' @format A data frame with 53940 rows and 10 variables:
+#' @format A data frame with 5000 rows and 7 variables:
 #' \describe{
-#'   \item{price}{price in US dollars (\$326--\$18,823)}
-#'   \item{carat}{weight of the diamond (0.2--5.01)}
-#'   \item{cut}{quality of the cut (Fair, Good, Very Good, Premium, Ideal)}
-#'   \item{color}{diamond colour, from D (best) to J (worst)}
-#'   \item{clarity}{a measurement of how clear the diamond is (I1 (worst), SI2,
-#'     SI1, VS2, VS1, VVS2, VVS1, IF (best))}
-#'   \item{x}{length in mm (0--10.74)}
-#'   \item{y}{width in mm (0--58.9)}
-#'   \item{z}{depth in mm (0--31.8)}
-#'   \item{depth}{total depth percentage = z
-#'    / mean(x, y) = 2 * z / (x + y) (43--79)}
-#'   \item{table}{width of top of diamond relative to widest point (43--95)}
+#'   \item{Age}{age in months (107.2--136.4)}
+#'   \item{Sex}{biological sex, 4 missing value (M, F)}
+#'   \item{Income}{reported family income, 404 missing values (<50K, >=100K, >=50K&<100K)}
+#'   \item{Height}{height in inches, 7 missing values (36.05--84.51)}
+#'   \item{iq}{cognition test, 179 missing values (34.86--222.99)}
+#'   \item{depressT}{depression symptom severity T-score, 8 missing values (48.53--91.32)}
+#'   \item{anxT}{anxiety symptom severity T-score, 8 missing values (48.76--93,67)}
 #' }
-"diamonds"
+"psydat"

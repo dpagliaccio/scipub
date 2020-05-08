@@ -115,8 +115,8 @@ correltable <- function(data, vars = NULL, var_names = vars,
       dplyr::select_if(purrr::negate(is.numeric)) %>%
       dplyr::mutate_if(purrr::negate(is.numeric), factor, ordered = FALSE)
 
-      factortwo <- names(f %>% dplyr::select_if(function(col) dplyr::n_distinct(col) == 2))
-      factormore <- names(f %>% dplyr::select_if(function(col) dplyr::n_distinct(col) > 2))
+      factortwo <- names(f %>% dplyr::select_if(function(col) dplyr::n_distinct(col, na.rm=TRUE) == 2))
+      factormore <- names(f %>% dplyr::select_if(function(col) dplyr::n_distinct(col, na.rm=TRUE) > 2))
 
       x[, factorvars] <- 1
 
@@ -168,10 +168,10 @@ correltable <- function(data, vars = NULL, var_names = vars,
 
       # if 2 level factors - do t-test
       if (!is.null(factortwo) & !is.null(numvars)) {
-        tmpt <- mapply(function(n, f) paste0("t=", format(round(stats::t.test(get(n) ~ get(f), data = orig, na.action = na.omit)$statistic, round_n), round_n)), rep(numvars, length(factortwo)), rep(factortwo, length(numvars)))
-        tmpp <- mapply(function(n, f) stats::t.test(get(n) ~ get(f), data = orig)$p.value, rep(numvars, length(factortwo)), rep(factortwo, length(numvars)))
-        tmpt <- mapply(function(n, f) paste0("t=", format(round(t.test(get(n) ~ get(f), data = orig, na.action = na.omit)$statistic, round_n), round_n)), rep(numvars, length(factortwo)), rep(factortwo, length(numvars)))
-        tmpp <- mapply(function(n, f) t.test(get(n) ~ get(f), data = orig)$p.value, rep(numvars, length(factortwo)), rep(factortwo, length(numvars)))
+        tmpt <- mapply(function(n, f) paste0("t=", format(round(stats::t.test(get(n) ~ get(f), data = orig, na.action = na.omit)$statistic, round_n), round_n)), rep(numvars, length(factortwo)), rep(factortwo, each=length(numvars)))
+        tmpp <- mapply(function(n, f) stats::t.test(get(n) ~ get(f), data = orig)$p.value, rep(numvars, length(factortwo)), rep(factortwo, each=length(numvars)))
+        tmpt <- mapply(function(n, f) paste0("t=", format(round(t.test(get(n) ~ get(f), data = orig, na.action = na.omit)$statistic, round_n), round_n)), rep(numvars, length(factortwo)), rep(factortwo, each=length(numvars)))
+        tmpp <- mapply(function(n, f) t.test(get(n) ~ get(f), data = orig)$p.value, rep(numvars, length(factortwo)), rep(factortwo, each=length(numvars)))
         tmat <- matrix(paste(tmpt, ifelse(tmpp < .001,
           "***",
           ifelse(tmpp < .01,
@@ -195,9 +195,9 @@ correltable <- function(data, vars = NULL, var_names = vars,
 
       # if 3+ level factors - do aov
       if (!is.null(factormore) & !is.null(numvars)) {
-        fmat <- mapply(function(n, f) paste0("F=", format(round(summary(stats::aov(get(n) ~ get(f), data = orig, na.action = na.omit))[[1]]$"F value"[1], round_n), round_n)), rep(numvars, length(factormore)), rep(factormore, length(numvars)))
-        fmatp <- mapply(function(n, f) summary(stats::aov(get(n) ~ get(f), data = orig))[[1]]$"Pr(>F)"[1], rep(numvars, length(factormore)), rep(factormore, length(numvars)))
-        fmatp <- mapply(function(n, f) summary(aov(get(n) ~ get(f), data = orig))[[1]]$"Pr(>F)"[1], rep(numvars, length(factormore)), rep(factormore, length(numvars)))
+        fmat <- mapply(function(n, f) paste0("F=", format(round(summary(stats::aov(get(n) ~ get(f), data = orig, na.action = na.omit))[[1]]$"F value"[1], round_n), round_n)), rep(numvars, length(factormore)), rep(factormore, each=length(numvars)))
+        fmatp <- mapply(function(n, f) summary(stats::aov(get(n) ~ get(f), data = orig))[[1]]$"Pr(>F)"[1], rep(numvars, length(factormore)), rep(factormore, each=length(numvars)))
+        fmatp <- mapply(function(n, f) summary(aov(get(n) ~ get(f), data = orig))[[1]]$"Pr(>F)"[1], rep(numvars, length(factormore)), rep(factormore, each=length(numvars)))
         fmat <- matrix(paste(fmat, ifelse(fmatp < .001,
           "***",
           ifelse(fmatp < .01,
@@ -220,10 +220,10 @@ correltable <- function(data, vars = NULL, var_names = vars,
 
       # if more than one factor var, test chi2
       if (length(factorvars) > 1) {
-        chix <- mapply(function(n1, n2) paste0("\u03C7", "2=", format(round(stats::chisq.test(orig[[n1]], orig[[n2]])$statistic, round_n), round_n)), factorvars, rev(factorvars))
-        chip <- mapply(function(n1, n2) stats::chisq.test(orig[[n1]], orig[[n2]])$p.value, factorvars, rev(factorvars))
-        chix <- mapply(function(n1, n2) paste0("\u03C7", "2=", format(round(chisq.test(orig[[n1]], orig[[n2]])$statistic, round_n), round_n)), factorvars, rev(factorvars))
-        chip <- mapply(function(n1, n2) chisq.test(orig[[n1]], orig[[n2]])$p.value, factorvars, rev(factorvars))
+        chix <- mapply(function(n1, n2) paste0("\u03C7", "2=", format(round(stats::chisq.test(orig[[n1]], orig[[n2]])$statistic, round_n), round_n)), rep(factorvars, length(factorvars)), rep(factorvars, each=length(factorvars)))
+        chip <- mapply(function(n1, n2) stats::chisq.test(orig[[n1]], orig[[n2]])$p.value,  rep(factorvars, length(factorvars)), rep(factorvars, each=length(factorvars)))
+        chix <- mapply(function(n1, n2) paste0("\u03C7", "2=", format(round(chisq.test(orig[[n1]], orig[[n2]])$statistic, round_n), round_n)),  rep(factorvars, length(factorvars)), rep(factorvars, each=length(factorvars)))
+        chip <- mapply(function(n1, n2) chisq.test(orig[[n1]], orig[[n2]])$p.value,  rep(factorvars, length(factorvars)), rep(factorvars, each=length(factorvars)))
         chix <- matrix(paste(chix, ifelse(chip < .001,
           "***",
           ifelse(chip < .01,
@@ -241,7 +241,7 @@ correltable <- function(data, vars = NULL, var_names = vars,
         mergechi <- as.data.frame(chix, row.names = factorvars, stringsAsFactors = FALSE)
         colnames(mergechi) <- factorvars
 
-        mergemat[factorvars, rev(factorvars)] <- mergechi
+        mergemat[factorvars, factorvars] <- mergechi
       }
 
 

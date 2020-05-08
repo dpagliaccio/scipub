@@ -325,6 +325,7 @@ FullTable1 <- function(data, strata = NULL, vars = NULL,
     finaltable <- finaltable %>% dplyr::select(-c(sig))
   }
 
+
   # caption
   missing_n <- data_edit %>%
     dplyr::select(tidyselect::all_of(vars)) %>%
@@ -354,6 +355,7 @@ FullTable1 <- function(data, strata = NULL, vars = NULL,
     missingness,
     ifelse(strata == "onecol", "", "* p<.05, ** p<.01, *** p<.001")
   )
+
 
   # check if htmlTable installed
   if (html[1] == T & !requireNamespace("htmlTable", quietly = TRUE)) {
