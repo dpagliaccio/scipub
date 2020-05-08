@@ -65,16 +65,8 @@ partial eta-squared, Odds Ratio, Cramer's V depending on the test.
 Requires \code{tidyverse} and \code{stats} libraries.
 }
 \examples{
-FullTable1(
-  data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good") & (diamonds$color == "D" | diamonds$color == "J"), ],
-  vars = c("cut", "depth", "price"), strata = "color"
-)
-FullTable1(
-  data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good") & (diamonds$color == "D" | diamonds$color == "G" | diamonds$color == "J"), ],
-  vars = c("cut", "depth", "price"), strata = "color", stars = "name", p_col = FALSE, html = TRUE
-)
-FullTable1(
-  data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good"), ],
-  vars = c("cut", "depth", "price"), html = TRUE
-)
+FullTable1(data = psydat, vars = c("Age", "Height", "depressT"), strata = "Sex")
+FullTable1(data = psydat, vars = c("Age", "Height", "depressT"), strata = "Sex")
+FullTable1(data = psydat, vars = c("Age", "Sex","Height", "depressT"), var_names = c("Age (months)", "Sex","Height (inches)", "Depression T"), strata = "Income", stars = "name",p_col = FALSE)
+
 }

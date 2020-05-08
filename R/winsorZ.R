@@ -12,13 +12,13 @@
 #' @return Output Winzorized variable
 #' @export
 #' @examples
-#' winsorZ(diamonds$depth)
+#' winsorZ(psydat$iq)
 #' \dontrun{
-#' diamonds %>%
-#'   dplyr::select(c(depth, price)) %>%
+#' psydat %>%
+#'   dplyr::select(c(iq, anxT)) %>%
 #'   map(winsorZ)
-#' diamonds %>% mutate_at(c("depth", "price"), list(~ winsorZ(.)))
-#' diamonds %>% mutate_if(is.double, list(~ winsorZ(.)))
+#' psydat %>% mutate_at(c("iq", "anxT"), list(~ winsorZ(.)))
+#' psydat %>% mutate_if(is.double, list(~ winsorZ(.)))
 #' }
 #'
 winsorZ <- function(x, zbound = 3) {

@@ -24,9 +24,9 @@ The \code{winsorZ_find} function finds/identifies these
 Z-score outliers (outliers=1, non-outliers=0).
 }
 \examples{
-summary(winsorZ_find(diamonds$depth))
+summary(winsorZ_find(psydat$iq))
 \dontrun{
-diamonds \%>\% mutate_at(c("depth", "price"), list(out = ~ winsorZ_find(.)))
+psydat \%>\% mutate_at(c("iq", "anxT"), list(out = ~ winsorZ_find(.)))
 }
 
 }

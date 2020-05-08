@@ -33,6 +33,7 @@ Imports:
 	tidyr,
 	tidyselect
 Suggests:
+    ggplot2,
     htmlTable,
     knitr, 
     rmarkdown

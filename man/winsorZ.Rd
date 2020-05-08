@@ -24,13 +24,13 @@ The \code{winsorZ_find} function is an optional companion
 to flag any Z-score outliers to tally as needed.
 }
 \examples{
-winsorZ(diamonds$depth)
+winsorZ(psydat$iq)
 \dontrun{
-diamonds \%>\%
-  dplyr::select(c(depth, price)) \%>\%
+psydat \%>\%
+  dplyr::select(c(iq, anxT)) \%>\%
   map(winsorZ)
-diamonds \%>\% mutate_at(c("depth", "price"), list(~ winsorZ(.)))
-diamonds \%>\% mutate_if(is.double, list(~ winsorZ(.)))
+psydat \%>\% mutate_at(c("iq", "anxT"), list(~ winsorZ(.)))
+psydat \%>\% mutate_if(is.double, list(~ winsorZ(.)))
 }
 
 }
