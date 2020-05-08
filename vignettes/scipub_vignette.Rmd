@@ -14,6 +14,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(knitr)
 ```
 
 The scipub package contains functions for summarizing data
@@ -32,7 +33,6 @@ We'll start by loading scipub:
 
 ```{r, message = FALSE}
 library(scipub)
-library(knitr)
 ```
 
 
@@ -89,48 +89,47 @@ For example:
 The lower triangle of inter-correlation among the carat, depth, and price variables are shown.
 ```{r results="asis"}
 correltable(data = diamonds, vars = c("carat", "depth", "price"),tri="lower",html=TRUE)
-correltable(data = diamonds, vars = c("carat", "depth", "price"),tri="lower",html=FALSE)
-kable(correltable(data = diamonds, vars = c("carat", "depth", "price"),tri="lower",html=TRUE))
-kable(correltable(data = diamonds, vars = c("carat", "depth", "price"),tri="lower",html=FALSE))
-
 ```
 
 
 
 These same variables can be relabelled in the output and, for conciseness, the columns can be indicated by corresponding number rather than variable name. 
 ```{r results="asis"}
-correltable(data = diamonds, vars = c("carat", "depth", "price"), var_names = c("Carat", "Depth", "Price ($)"), tri = "upper", colnum = TRUE)
+correltable(data = diamonds, vars = c("carat", "depth", "price"), var_names = c("Carat", "Depth", "Price ($)"), tri = "upper", colnum = TRUE,html=TRUE)
 ```
 
 
 
-These inter-correlation between two sets of variables. 
+The inter-correlation between two sets of variables can also be shown. 
 ```{r results="asis"}
-correltable(data = diamonds, vars = c("carat", "depth", "price"), var_names = c("Carat", "Depth", "Price ($)"), vars2 = c("x", "y", "z"))
+correltable(data = diamonds, vars = c("carat", "depth", "price"), var_names = c("Carat", "Depth", "Price ($)"), vars2 = c("x", "y", "z"),html=TRUE)
 ```
 
 
-The simplest 
-correltable(data = diamonds)
-
-
-
-
-
-Ideal cut diamonds are of significantly higher price than good cut diamonds at a small effect size.
+The simplest call just correlates all variables in a dataset. Any non-numeric variables will be tested by t-test, chi-squared, or ANOVA as appropriate.
 ```{r results="asis"}
-FullTable1(   data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good") & (diamonds$color == "D" | diamonds$color == "J"), ],   vars = c("cut", "depth", "price"), strata = "color", html=TRUE)
-
+correltable(data = diamonds, html=TRUE)
 ```
 
-The linear regression model predicting diamond price was highly signficant, with the predictors (cut, depth, and carat) accounting for a majority of variance in price. 
-```{r}
-apastat(stats::lm(data = diamonds[diamonds$cut == "Ideal" | diamonds$cut == "Good", ],  price ~ cut + depth + carat))
+
+
+***
+## `FullTable1`
+A "Table 1" can be created to summarize data, i.e. the typical first table in a paper that describes the sample characteristics.
+This can display information for a single group for the declared variables .  
+```{r results="asis"}
+FullTable1(   data = diamonds[diamonds$cut == "Ideal" | diamonds$cut == "Good", ],   vars = c("cut", "depth", "price"),  html=TRUE)
 ```
 
-In that linear regression model, carat was a highly significant predictor of price, contrlling for cut and depth. 
-```{r}
-apastat(stats::lm(data = diamonds[diamonds$cut == "Ideal" | diamonds$cut == "Good", ], price ~ cut + depth + carat), var = "carat")
+Or commonly this can be shown for two groups if interest including the tests of group difference for all variables.
+```{r results="asis"}
+FullTable1(   data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good") & (diamonds$color == "D" | diamonds$color == "J"), ],   vars = c("cut", "depth", "price"),  strata = "color", html=TRUE)
 ```
 
+
+This can also be created for more than two groups. As with `correltable` variables can be renamed in the call.
+Also the significance stars can be moved to the variable name or statistic column (or removed). The p-value column can be removed as well (same for the effect size column, but why would you want to remove that?).
+```{r results="asis"}
+FullTable1(   data = diamonds[(diamonds$cut == "Ideal" | diamonds$cut == "Good") & (diamonds$color == "D" | diamonds$color == "E" | diamonds$color == "J"), ],   vars = c("cut", "depth", "price"), var_names = c("Cut", "Depth", "Price ($)"),  strata = "color", stars = "name",p_col = FALSE, html=TRUE)
+```
 
