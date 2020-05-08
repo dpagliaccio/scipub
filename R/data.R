@@ -6,7 +6,7 @@
 #' @docType data
 #' @name psydat
 #' @aliases psydat
-#' @usage data("psydat")
+#' @usage data(psydat)
 #'
 #' @format A data frame with 5000 rows and 7 variables:
 #' \describe{
