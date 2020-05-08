@@ -35,11 +35,11 @@ Functions:
 
 ## Installation
 
-#You can install the released version of scipub from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of scipub from [CRAN](https://CRAN.R-project.org) with:
 
-#``` r
-#install.packages("scipub")
-#```
+``` r
+install.packages("scipub")
+```
 
 You can install the development version from [GitHub](https://github.com/) with:
 
