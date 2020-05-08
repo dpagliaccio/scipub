@@ -1,3 +1,5 @@
+url: https://dpagliaccio.github.io/scipub/
+
 home:
   title: scipub - An R package for formatting data for scientific publications
   description: Create summary tables and APA statistics for psychology papers.
