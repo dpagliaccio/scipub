@@ -33,9 +33,8 @@ The sample dataset of demographic and clinical data
 ***
 We'll start by loading scipub:
 
-```{r, message = FALSE}
+```{r, message = FALSE,include = TRUE}
 library(scipub)
-data("psydat")
 ```
 
 
@@ -66,7 +65,7 @@ apastat(stats::t.test(Height ~ Sex, data = psydat))
 
 A linear regression model predicting height was highly signficant, with the predictors (age and sex) accounting for about 17% of the variance in height. 
 ```{r}
-apastat(stats::lm(data = psydat, Height ~ Age + Sex), var = "Age")
+apastat(stats::lm(data = psydat, Height ~ Age + Sex))
 ```
 
 In this linear regression model, age was a highly significant predictor of height, controlling for sex. 
@@ -98,6 +97,11 @@ These same variables can be relabelled in the output and, for conciseness, the c
 correltable(data = psydat, vars = c("Age", "Height", "iq"), var_names = c("Age (months)", "Height (inches)", "IQ"), tri = "upper", colnum = TRUE,html=TRUE)
 ```
 
+
+This can also be done with Spearman correlation. As well as using only complete data (listwise deletion). And, the empty row/column can be removed if desired. 
+```{r results="asis"}
+correltable(data = psydat, vars = c("Age", "Height", "iq"), var_names = c("Age (months)", "Height (inches)", "IQ"), tri = "upper", method = "spearman", use = "complete", cutempty = TRUE, colnum = TRUE,html=TRUE)
+```
 
 
 The inter-correlation between two sets of variables can also be shown. 
