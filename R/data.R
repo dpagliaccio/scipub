@@ -5,6 +5,8 @@
 #'
 #' @docType data
 #'
+#' @usage data(psydat)
+#'
 #' @format A data frame with 5000 rows and 7 variables:
 #' \describe{
 #'   \item{Age}{age in months (107.2--136.4)}
