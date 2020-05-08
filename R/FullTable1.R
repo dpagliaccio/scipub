@@ -160,7 +160,7 @@ FullTable1 <- function(data, strata = NULL, vars = NULL,
         dplyr::mutate(col = stringr::str_c(col, ")")))[2]))
 
       # IF 2 LEVEL
-      if (length(levels(x)) == 2) {
+      if (length(levels(x)) == 2 & groupvar != "onecol") {
         testtype <- ifelse(type == "mixed", "t=", "")
         # calcualte t-test & p-value
         tableout$Stat <- paste0(testtype, format(round(-1 * stats::t.test(y ~ x)$statistic, round_n), nsmall = round_n), sep = "") # -1* to flip so t direction is g2>g1
@@ -174,7 +174,7 @@ FullTable1 <- function(data, strata = NULL, vars = NULL,
           dplyr::summarise_all(list(mean = mean, sd = stats::sd), na.rm = TRUE) %>%
           dplyr::mutate(d = (mean[2] - mean[1]) / (sqrt((sd[2]^2 + sd[1]^2) / 2))))[[1, "d"]], round_n), nsmall = round_n))
         # IF MORE THAN 2 LEVELS
-      } else if (length(levels(x)) > 2) {
+      } else if (length(levels(x)) > 2 & groupvar != "onecol") {
         testtype <- ifelse(type == "mixed", "F=", "")
         # calcualte anova & p-value
         tableout$Stat <- paste0(testtype, format(round(summary(stats::aov(y ~ x))[[1]][[4]][1], round_n), nsmall = round_n), sep = "")
@@ -227,7 +227,7 @@ FullTable1 <- function(data, strata = NULL, vars = NULL,
 
 
         # calculate effect size - odds ratio
-        if (length(levels(x)) == 2) {
+        if (length(levels(x)) == 2 & groupvar != "onecol") {
           estype <- ifelse(type == "mixed", "OR=", "")
           tableout$es <- paste0(
             estype,
@@ -235,7 +235,7 @@ FullTable1 <- function(data, strata = NULL, vars = NULL,
               nsmall = round_n
             )
           )
-        } else if (length(levels(x)) > 2) {
+        } else if (length(levels(x)) > 2 & groupvar != "onecol") {
           # calculate effect size - cramer v
           estype <- ifelse(type == "mixed", "V=", "")
           tableout$es <- paste0(
@@ -248,6 +248,7 @@ FullTable1 <- function(data, strata = NULL, vars = NULL,
 
         # IF MORE THAN 2 LEVELS
       } else {
+        tableout$Variable <- outcome
         tableout[2:(1 + length(levels(y))), grplvl] <- datafile %>%
           tidyr::drop_na(tidyselect::all_of(outcome)) %>%
           dplyr::group_by_at(c(groupvar, outcome)) %>%
@@ -262,21 +263,25 @@ FullTable1 <- function(data, strata = NULL, vars = NULL,
           tidyr::spread(groupvar, "col") %>%
           dplyr::select(-c(tidyselect::all_of(outcome)))
 
+        tableout$Variable[2:(1 + length(levels(y)))] <- levels(y)
+
         # calculate effect size - cramer v
         estype <- ifelse(type == "mixed", "V=", "")
-        tableout$es <- paste0(
+        if (groupvar != "onecol") {
+        tableout$es[1] <- paste0(
           estype,
           format(round(sqrt((stats::chisq.test(y, x)$statistic) / (sum(stats::complete.cases(cbind(y, x))) * stats::chisq.test(y, x)$parameter)), round_n),
             nsmall = round_n
           )
         )
+        }
       }
     }
 
     # set p for all test types
     if (groupvar != "onecol") {
-      tableout$sig <- ifelse(p < .001, "***", ifelse(p < .01, "**", ifelse(p < .05, "*", "")))
-      tableout$p <- ifelse(p < .001, "<.001",
+      tableout$sig[1] <- ifelse(p < .001, "***", ifelse(p < .01, "**", ifelse(p < .05, "*", "")))
+      tableout$p[1] <- ifelse(p < .001, "<.001",
         ifelse(p < .01, sub(format(round(p, 3), nsmall = 3), pattern = "0.", replacement = "."),
           sub(format(round(p, 2), nsmall = 2), pattern = "0.", replacement = ".")
         )
