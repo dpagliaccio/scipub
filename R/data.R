@@ -5,7 +5,11 @@
 #'
 #' @docType data
 #'
+<<<<<<< HEAD
 #' @usage data("psydat")
+=======
+#' @usage data(psydat)
+>>>>>>> 8a1d7f7f7982b8cbd828d55011db480b2d17cd68
 #'
 #' @format A data frame with 5000 rows and 7 variables:
 #' \describe{
