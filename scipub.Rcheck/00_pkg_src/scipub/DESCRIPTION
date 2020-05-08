@@ -21,13 +21,14 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
 Language: en-US
 VignetteBuilder: knitr
-URL: https://github.com/dpagliaccio/scipub
+URL: https://github.com/dpagliaccio/scipub,
+https: //dpagliaccio.github.io/scipub/
 BugReports: https://github.com/dpagliaccio/scipub/issues
-Depends: R (>= 3.6.3)
+Depends: R (>= 3.6)
 Imports: dplyr, forcats, purrr, stats, stringr, tibble, tidyr,
         tidyselect
 Suggests: ggplot2, htmlTable, knitr, rmarkdown
 NeedsCompilation: no
-Packaged: 2020-05-08 22:08:48 UTC; david
+Packaged: 2020-05-08 23:32:02 UTC; david
 Author: David Pagliaccio [aut, cre] (<https://orcid.org/0000-0002-1214-1965>)
 Maintainer: David Pagliaccio <david.pagliaccio@gmail.com>
