@@ -3,6 +3,8 @@
 #' A dataset containing demographic and clinical
 #' data for 5,000 children. The variables are as follows:
 #'
+#' @docType data
+#'
 #' @format A data frame with 5000 rows and 7 variables:
 #' \describe{
 #'   \item{Age}{age in months (107.2--136.4)}
