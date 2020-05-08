@@ -8,7 +8,7 @@ Authors@R:
            email = "david.pagliaccio@gmail.com",
            comment = c(ORCID = "0000-0002-1214-1965"))
 Description: This package contains functions for summarizing data
-    for scientific publication. This includes making a "Table 1"
+    for scientific publication. This includes making a 'Table 1'
     to summarize demographics across groups, correlation tables
     with significance indicated by stars, and extracting formatted
     statistical summarizes from simple tests for in-text notation.
