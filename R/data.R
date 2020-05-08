@@ -4,7 +4,8 @@
 #' data for 5,000 children. The variables are as follows:
 #'
 #' @docType data
-#'
+#' @name psydat
+#' @aliases psydat
 #' @usage data("psydat")
 #'
 #' @format A data frame with 5000 rows and 7 variables:
