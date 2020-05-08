@@ -6,6 +6,8 @@ home:
 
 template:
   opengraph:
+    image:
+      alt: Create summary tables and APA statistics for scientific papers.
     twitter:
       creator: "@DPagliaccio"
       card: summary
