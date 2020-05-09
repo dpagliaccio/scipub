@@ -1,0 +1,6 @@
+name	user	system	elapsed
+FullTable1	0.875	0.048	0.999	
+apastat	0.031	0.002	0.033	
+correltable	0.625	0.031	0.747	
+winsorZ	0.020	0.027	0.050	
+winsorZ_find	0.013	0.000	0.013	
