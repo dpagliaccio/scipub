@@ -1,5 +1,5 @@
 Package: scipub
-Title: Summarize Data For Scientific Publication
+Title: Summarize Data for Scientific Publication
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "David",
@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "david.pagliaccio@gmail.com",
            comment = c(ORCID = "0000-0002-1214-1965"))
-Description: This package contains functions for summarizing data
+Description: Create and format tables and APA statistics for
     for scientific publication. This includes making a 'Table 1'
     to summarize demographics across groups, correlation tables
     with significance indicated by stars, and extracting formatted
@@ -21,15 +21,15 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
 Language: en-US
 VignetteBuilder: knitr
-URL: https://github.com/dpagliaccio/scipub,
-https: //dpagliaccio.github.io/scipub/
-BugReports: https://github.com/dpagliaccio/scipub/issues
+URL: <https://github.com/dpagliaccio/scipub>,
+<https: //dpagliaccio.github.io/scipub/>
+BugReports: <https://github.com/dpagliaccio/scipub/issues>
 Depends: R (>= 3.6)
 Imports: dplyr, forcats, purrr, stats, stringr, tibble, tidyr,
         tidyselect
 Suggests: ggplot2, htmlTable, knitr, rmarkdown
 NeedsCompilation: no
-Packaged: 2020-05-08 23:32:02 UTC; david
+Packaged: 2020-05-08 23:58:41 UTC; david
 Author: David Pagliaccio [aut, cre] (<https://orcid.org/0000-0002-1214-1965>)
 Maintainer: David Pagliaccio <david.pagliaccio@gmail.com>
-Built: R 4.0.0; ; 2020-05-08 23:46:59 UTC; unix
+Built: R 4.0.0; ; 2020-05-08 23:58:48 UTC; unix

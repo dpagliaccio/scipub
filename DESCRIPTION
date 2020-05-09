@@ -21,9 +21,9 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
 Language: en-US
 VignetteBuilder: knitr
-URL: www.github.com/dpagliaccio/scipub, 
-www.dpagliaccio.github.io/scipub/
-BugReports: www.github.com/dpagliaccio/scipub/issues
+URL: https://github.com/dpagliaccio/scipub, 
+https://dpagliaccio.github.io/scipub/
+BugReports: https://github.com/dpagliaccio/scipub/issues
 Depends:
 	R (>= 3.6)
 Imports:
@@ -36,6 +36,7 @@ Imports:
 	tidyr,
 	tidyselect
 Suggests:
+    spelling,
     ggplot2,
     htmlTable,
     knitr, 
