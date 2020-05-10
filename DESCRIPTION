@@ -1,6 +1,6 @@
 Package: scipub
 Title: Summarize Data for Scientific Publication
-Version: 0.0.0.9000
+Version: 1.0.0
 Authors@R: 
     person(given = "David",
            family = "Pagliaccio",
