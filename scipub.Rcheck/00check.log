@@ -4,14 +4,12 @@
 * using session charset: UTF-8
 * using option ‘--as-cran’
 * checking for file ‘scipub/DESCRIPTION’ ... OK
-* this is package ‘scipub’ version ‘0.0.0.9000’
+* this is package ‘scipub’ version ‘1.0.0’
 * package encoding: UTF-8
 * checking CRAN incoming feasibility ... NOTE
 Maintainer: ‘David Pagliaccio <david.pagliaccio@gmail.com>’
 
 New submission
-
-Version contains large components (0.0.0.9000)
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK

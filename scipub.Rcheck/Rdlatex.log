@@ -110,8 +110,8 @@ Overfull \hbox (19.57738pt too wide) in paragraph at lines 174--176
 [3] [4] [5] [6]
 No file Rd2.ind.
 [7]
-(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp2NlQ0z/Rd2pdfa7e5
-2b934ef/Rd2.aux)
+(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp311FT0/Rd2pdf2381
+1cdf2b8e/Rd2.aux)
 
 Package rerunfilecheck Warning: File `Rd2.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
@@ -126,7 +126,7 @@ fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/t
 ype1/urw/times/utmb8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/t
 imes/utmr8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmr8
 a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (7 pages, 89543 bytes).
+Output written on Rd2.pdf (7 pages, 89538 bytes).
 Transcript written on Rd2.log.
 This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex)
  restricted \write18 enabled.
@@ -192,19 +192,20 @@ Package hyperref Warning: Option `pagebackref' has already been used,
 (/usr/local/texlive/2020/texmf-dist/tex/latex/base/inputenc.sty)
 Writing index file Rd2.idx
 (/usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def)
-(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp2NlQ0z/Rd2pdfa7e5
-2b934ef/Rd2.aux) (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/t1ptm.fd)
- (/usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp311FT0/Rd2pdf2381
+1cdf2b8e/Rd2.aux) (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/t1ptm.fd
+) (/usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/hyperref/nameref.sty
 (/usr/local/texlive/2020/texmf-dist/tex/latex/refcount/refcount.sty)
 (/usr/local/texlive/2020/texmf-dist/tex/generic/gettitlestring/gettitlestring.s
 ty))
-(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp2NlQ0z/Rd2pdfa7e5
-2b934ef/Rd2.out)
-(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp2NlQ0z/Rd2pdfa7e5
-2b934ef/Rd2.out) (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ts1ptm.fd
-) (/usr/local/texlive/2020/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
+(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp311FT0/Rd2pdf2381
+1cdf2b8e/Rd2.out)
+(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp311FT0/Rd2pdf2381
+1cdf2b8e/Rd2.out)
+(/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
+(/usr/local/texlive/2020/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/t1phv.fd
 
 LaTeX Warning: Font shape declaration has incorrect series value `mc'.
@@ -227,9 +228,9 @@ LaTeX Warning: Font shape declaration has incorrect series value `mc'.
                Found on input line 46.
 
 )
-(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp2NlQ0z/Rd2pdfa7e5
-2b934ef/Rd2.toc) [1{/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/p
-dftex.map}] [2]
+(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp311FT0/Rd2pdf2381
+1cdf2b8e/Rd2.toc) [1{/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/
+pdftex.map}] [2]
 Overfull \hbox (1.21846pt too wide) in paragraph at lines 155--157
 []\T1/ptm/m/n/10 Type of cor-re-la-tion to cal-cu-late c("pearson", "spear-man"
 ), based on \T1/zi4/m/n/10 stats::cor\T1/ptm/m/n/10 ,
@@ -244,8 +245,8 @@ Overfull \hbox (19.57738pt too wide) in paragraph at lines 174--176
 [3] [4] [5] [6]
 No file Rd2.ind.
 [7]
-(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp2NlQ0z/Rd2pdfa7e5
-2b934ef/Rd2.aux) )
+(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp311FT0/Rd2pdf2381
+1cdf2b8e/Rd2.aux) )
 (see the transcript file for additional information){/usr/local/texlive/2020/te
 xmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive/2020/texmf-dist/fonts/
 enc/dvips/inconsolata/i4-t1-0.enc}</usr/local/texlive/2020/texmf-dist/fonts/typ
@@ -254,7 +255,7 @@ fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/t
 ype1/urw/times/utmb8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/t
 imes/utmr8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmr8
 a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (7 pages, 90310 bytes).
+Output written on Rd2.pdf (7 pages, 90305 bytes).
 Transcript written on Rd2.log.
 This is makeindex, version 2.15 [TeX Live 2020] (kpathsea + Thai support).
 Scanning input file Rd2.idx....done (7 entries accepted, 0 rejected).
@@ -326,19 +327,20 @@ Package hyperref Warning: Option `pagebackref' has already been used,
 (/usr/local/texlive/2020/texmf-dist/tex/latex/base/inputenc.sty)
 Writing index file Rd2.idx
 (/usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def)
-(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp2NlQ0z/Rd2pdfa7e5
-2b934ef/Rd2.aux) (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/t1ptm.fd)
- (/usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp311FT0/Rd2pdf2381
+1cdf2b8e/Rd2.aux) (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/t1ptm.fd
+) (/usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/hyperref/nameref.sty
 (/usr/local/texlive/2020/texmf-dist/tex/latex/refcount/refcount.sty)
 (/usr/local/texlive/2020/texmf-dist/tex/generic/gettitlestring/gettitlestring.s
 ty))
-(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp2NlQ0z/Rd2pdfa7e5
-2b934ef/Rd2.out)
-(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp2NlQ0z/Rd2pdfa7e5
-2b934ef/Rd2.out) (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ts1ptm.fd
-) (/usr/local/texlive/2020/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
+(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp311FT0/Rd2pdf2381
+1cdf2b8e/Rd2.out)
+(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp311FT0/Rd2pdf2381
+1cdf2b8e/Rd2.out)
+(/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
+(/usr/local/texlive/2020/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/t1phv.fd
 
 LaTeX Warning: Font shape declaration has incorrect series value `mc'.
@@ -361,9 +363,9 @@ LaTeX Warning: Font shape declaration has incorrect series value `mc'.
                Found on input line 46.
 
 )
-(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp2NlQ0z/Rd2pdfa7e5
-2b934ef/Rd2.toc) [1{/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/p
-dftex.map}] [2]
+(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp311FT0/Rd2pdf2381
+1cdf2b8e/Rd2.toc) [1{/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/
+pdftex.map}] [2]
 Overfull \hbox (1.21846pt too wide) in paragraph at lines 155--157
 []\T1/ptm/m/n/10 Type of cor-re-la-tion to cal-cu-late c("pearson", "spear-man"
 ), based on \T1/zi4/m/n/10 stats::cor\T1/ptm/m/n/10 ,
@@ -376,10 +378,10 @@ Overfull \hbox (19.57738pt too wide) in paragraph at lines 174--176
 []\T1/ptm/m/n/10 Format as html in viewer or not (de-fault=F, print in con-sole
 ), needs li-brary(htmlTable)
 [3] [4] [5] [6]
-(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp2NlQ0z/Rd2pdfa7e5
-2b934ef/Rd2.ind [7] [8])
-(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp2NlQ0z/Rd2pdfa7e5
-2b934ef/Rd2.aux)
+(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp311FT0/Rd2pdf2381
+1cdf2b8e/Rd2.ind [7] [8])
+(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp311FT0/Rd2pdf2381
+1cdf2b8e/Rd2.aux)
 
 Package rerunfilecheck Warning: File `Rd2.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
@@ -395,7 +397,7 @@ onts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/ty
 pe1/urw/times/utmb8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/ti
 mes/utmr8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmr8a
 .pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (8 pages, 98254 bytes).
+Output written on Rd2.pdf (8 pages, 98250 bytes).
 Transcript written on Rd2.log.
 This is makeindex, version 2.15 [TeX Live 2020] (kpathsea + Thai support).
 Scanning input file Rd2.idx....done (7 entries accepted, 0 rejected).
@@ -467,19 +469,20 @@ Package hyperref Warning: Option `pagebackref' has already been used,
 (/usr/local/texlive/2020/texmf-dist/tex/latex/base/inputenc.sty)
 Writing index file Rd2.idx
 (/usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def)
-(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp2NlQ0z/Rd2pdfa7e5
-2b934ef/Rd2.aux) (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/t1ptm.fd)
- (/usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp311FT0/Rd2pdf2381
+1cdf2b8e/Rd2.aux) (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/t1ptm.fd
+) (/usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/hyperref/nameref.sty
 (/usr/local/texlive/2020/texmf-dist/tex/latex/refcount/refcount.sty)
 (/usr/local/texlive/2020/texmf-dist/tex/generic/gettitlestring/gettitlestring.s
 ty))
-(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp2NlQ0z/Rd2pdfa7e5
-2b934ef/Rd2.out)
-(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp2NlQ0z/Rd2pdfa7e5
-2b934ef/Rd2.out) (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ts1ptm.fd
-) (/usr/local/texlive/2020/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
+(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp311FT0/Rd2pdf2381
+1cdf2b8e/Rd2.out)
+(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp311FT0/Rd2pdf2381
+1cdf2b8e/Rd2.out)
+(/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
+(/usr/local/texlive/2020/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/t1phv.fd
 
 LaTeX Warning: Font shape declaration has incorrect series value `mc'.
@@ -502,9 +505,9 @@ LaTeX Warning: Font shape declaration has incorrect series value `mc'.
                Found on input line 46.
 
 )
-(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp2NlQ0z/Rd2pdfa7e5
-2b934ef/Rd2.toc [1{/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pd
-ftex.map}]) [2]
+(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp311FT0/Rd2pdf2381
+1cdf2b8e/Rd2.toc [1{/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/p
+dftex.map}]) [2]
 Overfull \hbox (1.21846pt too wide) in paragraph at lines 155--157
 []\T1/ptm/m/n/10 Type of cor-re-la-tion to cal-cu-late c("pearson", "spear-man"
 ), based on \T1/zi4/m/n/10 stats::cor\T1/ptm/m/n/10 ,
@@ -517,10 +520,10 @@ Overfull \hbox (19.57738pt too wide) in paragraph at lines 174--176
 []\T1/ptm/m/n/10 Format as html in viewer or not (de-fault=F, print in con-sole
 ), needs li-brary(htmlTable)
 [3] [4] [5] [6]
-(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp2NlQ0z/Rd2pdfa7e5
-2b934ef/Rd2.ind [7] [8])
-(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp2NlQ0z/Rd2pdfa7e5
-2b934ef/Rd2.aux) )
+(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp311FT0/Rd2pdf2381
+1cdf2b8e/Rd2.ind [7] [8])
+(/private/var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T/Rtmp311FT0/Rd2pdf2381
+1cdf2b8e/Rd2.aux) )
 (see the transcript file for additional information){/usr/local/texlive/2020/te
 xmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive/2020/texmf-dist/fonts/
 enc/dvips/inconsolata/i4-t1-0.enc}</usr/local/texlive/2020/texmf-dist/fonts/typ
@@ -530,8 +533,8 @@ onts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/ty
 pe1/urw/times/utmb8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/ti
 mes/utmr8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmr8a
 .pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (8 pages, 98864 bytes).
+Output written on Rd2.pdf (8 pages, 98861 bytes).
 Transcript written on Rd2.log.
 Saving output to ‘scipub-manual.pdf’ ...
 Done
-You may want to clean up by 'rm -Rf /var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T//Rtmp2NlQ0z/Rd2pdfa7e52b934ef'
+You may want to clean up by 'rm -Rf /var/folders/72/h85n87d13z58f5bhjm734y1h0000gn/T//Rtmp311FT0/Rd2pdf23811cdf2b8e'

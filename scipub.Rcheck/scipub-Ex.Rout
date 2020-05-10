@@ -1039,7 +1039,7 @@ Note. This table presents Pearson correlation coefficients with pairwise deletio
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  2.484 0.164 2.858 0.001 0.004 
+Time elapsed:  2.873 0.176 3.56 0.002 0.004 
 > grDevices::dev.off()
 null device 
           1 
