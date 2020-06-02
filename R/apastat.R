@@ -45,7 +45,7 @@ apastat <- function(test,
             )
           )
         ),
-        ifelse(es == TRUE,
+        ifelse(es[1] == TRUE,
           paste0(", d=", format(
             round((2 * test$statistic) /
               sqrt(test$parameter), roundN),
@@ -62,7 +62,7 @@ apastat <- function(test,
         "r=", sub(x = format(round(test$estimate, roundN), roundN), "0.", "."),
         ", t(", round(test$parameter, roundN), ")=",
         format(round(test$statistic, roundN), roundN),
-        ifelse(ci == TRUE,
+        ifelse(ci[1] == TRUE,
           paste0(
             ", ",
             100 * attr(test$conf.int, "conf.level"),
@@ -184,7 +184,7 @@ apastat <- function(test,
             )
           )
         ),
-        ifelse(es == TRUE & (class(test) == "lm") &
+        ifelse(es[1] == TRUE & (class(test) == "lm") &
           length(test$xlevels[[var]]) == 2,
         paste0(
           ", d=",
