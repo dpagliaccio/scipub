@@ -96,4 +96,6 @@ SUMMARY: processing the following file failed:
 Error: Vignette re-building failed.
 Execution halted
 
-* checking PDF version of manual ...
+* checking PDF version of manual ... OK
+* DONE
+Status: 1 ERROR, 3 WARNINGs, 1 NOTE
