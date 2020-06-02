@@ -50,4 +50,50 @@ to your NAMESPACE file.
 * checking for unstated dependencies in examples ... OK
 * checking contents of ‘data’ directory ... OK
 * checking data for non-ASCII characters ... OK
-* checking data for ASCII and uncompressed saves ...
+* checking data for ASCII and uncompressed saves ... OK
+* checking files in ‘vignettes’ ... WARNING
+Files in the 'vignettes' directory but no files in 'inst/doc':
+  ‘scipub_vignette.Rmd’
+* checking examples ... ERROR
+Running examples in ‘scipub-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: FullTable1
+> ### Title: Create Table1 of group summary with stats for scientific
+> ###   publication
+> ### Aliases: FullTable1
+> 
+> ### ** Examples
+> 
+> FullTable1(
++   data = psydat,
++   vars = c("Age", "Height", "depressT"), strata = "Sex"
++ )
+Warning: N=4 missing/NA in grouping variable: Sex
+Error in `[.default`(table(x, !is.na(y)), , 2) : subscript out of bounds
+Calls: FullTable1 ... lapply -> FUN -> grouptests -> [ -> [.table -> NextMethod
+Execution halted
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... WARNING
+dir.exists(dir) is not TRUE
+Package vignette without corresponding single PDF/HTML:
+   ‘scipub_vignette.Rmd’
+
+* checking running R code from vignettes ... NONE
+  ‘scipub_vignette.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... WARNING
+Error(s) in re-building vignettes:
+  ...
+--- re-building ‘scipub_vignette.Rmd’ using rmarkdown
+Quitting from lines 152-153 (scipub_vignette.Rmd) 
+Error: processing vignette 'scipub_vignette.Rmd' failed with diagnostics:
+subscript out of bounds
+--- failed re-building ‘scipub_vignette.Rmd’
+
+SUMMARY: processing the following file failed:
+  ‘scipub_vignette.Rmd’
+
+Error: Vignette re-building failed.
+Execution halted
+
+* checking PDF version of manual ...

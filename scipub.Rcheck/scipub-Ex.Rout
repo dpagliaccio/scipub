@@ -1,0 +1,47 @@
+
+R version 4.0.0 (2020-04-24) -- "Arbor Day"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "scipub"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('scipub')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("FullTable1")
+> ### * FullTable1
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: FullTable1
+> ### Title: Create Table1 of group summary with stats for scientific
+> ###   publication
+> ### Aliases: FullTable1
+> 
+> ### ** Examples
+> 
+> FullTable1(
++   data = psydat,
++   vars = c("Age", "Height", "depressT"), strata = "Sex"
++ )
+Warning: N=4 missing/NA in grouping variable: Sex
+Error in `[.default`(table(x, !is.na(y)), , 2) : subscript out of bounds
+Calls: FullTable1 ... lapply -> FUN -> grouptests -> [ -> [.table -> NextMethod
+Execution halted
