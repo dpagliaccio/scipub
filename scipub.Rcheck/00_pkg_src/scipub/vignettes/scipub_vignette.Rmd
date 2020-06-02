@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 )
 library(knitr)
 library(ggplot2)
+library(cranlogs)
 ```
 
 The scipub package contains functions for summarizing data
@@ -116,6 +117,32 @@ correltable(data = psydat, html=TRUE)
 ```
 
 
+***
+## `partial_correltable`
+
+The `partial_correltable` function provides similar functionality to `correltable` but allows for covariates to be partialled out of all correlations. This function will allow for binary/factor covariates to be partialled out but only numeric variables can be correlated. 
+This involves residualizing all `vars` by all `partialvars` via linear regression (`lm`).
+For example:
+
+The lower triangle of partial correlations among the age, height, and iq variables are shown, residualizing for sex and income as factor variables.
+```{r results="asis"}
+partial_correltable(data = psydat, vars = c("Age", "Height", "iq"), partialvars = c("Sex", "Income"), tri = "lower", html = TRUE)
+```
+
+
+
+These same variables can be relabeled in the output and, for conciseness, the columns can be indicated by corresponding number rather than variable name and shown in the supper triangle. 
+```{r results="asis"}
+partial_correltable(data = psydat, vars = c("Age", "Height", "iq"), var_names = c("Age (months)", "Height (inches)", "IQ"), partialvars = c("Sex", "Income"),tri = "upper", colnum = TRUE, html = TRUE)
+```
+
+
+This can also be done with Spearman correlation. As well as using only complete data (list-wise deletion). And, the empty row/column can be removed if desired. 
+```{r results="asis"}
+partial_correltable(data = psydat, vars = c("Age", "Height", "iq"), var_names = c("Age (months)", "Height (inches)", "IQ"), partialvars = c("Sex", "Income"),tri = "upper", method = "spearman", use = "complete", cutempty = TRUE, colnum = TRUE, html = TRUE)
+```
+
+
 
 ***
 ## `FullTable1`
@@ -168,3 +195,8 @@ temp <- data.frame(iq=psydat$iq, iq_winsor=winsorZ(psydat$iq), iq_outlier = wins
 summary(temp)
 ggplot(temp[!is.na(temp$iq),], aes(x=iq, y=iq_winsor)) + geom_point(aes(color=iq_outlier),alpha=.7) + geom_line() + theme_bw()
 ```
+
+
+
+cranlogs_badge("scipub", summary = "grand-total")
+

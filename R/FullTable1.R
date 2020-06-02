@@ -218,7 +218,7 @@ FullTable1 <- function(data, strata = NULL, vars = NULL,
         dplyr::mutate(col = stringr::str_c(col, ")")))[2]))
 
       # IF 2 LEVEL
-      if (groupvar != "onecol" & sum(table(x,!is.na(y))[,2]>0)==2) {
+      if (groupvar != "onecol" & sum(table(x, !is.na(y))[, 2] > 0) == 2) {
         testtype <- ifelse(type == "mixed", "t=", "")
         # calcualte t-test & p-value
         tableout$Stat <- paste0(testtype,
@@ -240,13 +240,13 @@ FullTable1 <- function(data, strata = NULL, vars = NULL,
             dplyr::summarise_all(list(mean = mean, sd = stats::sd),
               na.rm = TRUE
             ) %>%
-            tidyr::drop_na()  %>%
+            tidyr::drop_na() %>%
             dplyr::mutate(d = (mean[2] - mean[1]) /
               (sqrt((sd[2]^2 + sd[1]^2) / 2))))[[1, "d"]],
           round_n
         ), nsmall = round_n))
         # IF MORE THAN 2 LEVELS
-      } else if (groupvar != "onecol" & sum(table(x,!is.na(y))[,2]>0)>2) {
+      } else if (groupvar != "onecol" & sum(table(x, !is.na(y))[, 2] > 0) > 2) {
         testtype <- ifelse(type == "mixed", "F=", "")
         # calcualte anova & p-value
         tableout$Stat <- paste0(testtype,
@@ -289,7 +289,7 @@ FullTable1 <- function(data, strata = NULL, vars = NULL,
       }
 
       # IF 2 LEVEL
-      if (sum(table(x,!is.na(y))[,2]>0)==2) {
+      if (sum(table(x, !is.na(y))[, 2] > 0) == 2) {
         lvl2 <- levels(y)[2]
         tableout$Variable <- paste0(
           var_names[which(vars == outcome)],
@@ -312,7 +312,7 @@ FullTable1 <- function(data, strata = NULL, vars = NULL,
 
 
         # calculate effect size - odds ratio
-        if (sum(table(x,!is.na(y))[,2]>0)==2 & groupvar != "onecol") {
+        if (sum(table(x, !is.na(y))[, 2] > 0) == 2 & groupvar != "onecol") {
           estype <- ifelse(type == "mixed", "OR=", "")
           tableout$es <- paste0(
             estype,
@@ -320,7 +320,7 @@ FullTable1 <- function(data, strata = NULL, vars = NULL,
               nsmall = round_n
             )
           )
-        } else if (sum(table(x,!is.na(y))[,2]>0)>2 & groupvar != "onecol") {
+        } else if (sum(table(x, !is.na(y))[, 2] > 0) > 2 & groupvar != "onecol") {
           # calculate effect size - cramer v
           estype <- ifelse(type == "mixed", "V=", "")
           tableout$es <- paste0(
@@ -430,9 +430,9 @@ FullTable1 <- function(data, strata = NULL, vars = NULL,
   }
 
 
-  #remove missing cells
+  # remove missing cells
   finaltable[is.na(finaltable)] <- "-"
-  finaltable[finaltable=="NaN (NA)"] <- "-"
+  finaltable[finaltable == "NaN (NA)"] <- "-"
 
   # caption
   missing_n <- data_edit %>%

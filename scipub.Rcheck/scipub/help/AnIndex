@@ -1,6 +1,7 @@
 apastat	apastat
 correltable	correltable
 FullTable1	FullTable1
+partial_correltable	partial_correltable
 psydat	psydat
 winsorZ	winsorZ
 winsorZ_find	winsorZ_find

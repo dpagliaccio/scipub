@@ -1,6 +1,6 @@
 Package: scipub
 Title: Summarize Data for Scientific Publication
-Version: 1.0.0
+Version: 1.1.0
 Authors@R: 
     person(given = "David",
            family = "Pagliaccio",
@@ -8,7 +8,7 @@ Authors@R:
            email = "david.pagliaccio@gmail.com",
            comment = c(ORCID = "0000-0002-1214-1965"))
 Description: Create and format tables and APA statistics for
-    for scientific publication. This includes making a 'Table 1'
+    scientific publication. This includes making a 'Table 1'
     to summarize demographics across groups, correlation tables
     with significance indicated by stars, and extracting formatted
     statistical summarizes from simple tests for in-text notation.
@@ -29,6 +29,6 @@ Imports: dplyr, forcats, purrr, stats, stringr, tibble, tidyr,
         tidyselect
 Suggests: spelling, ggplot2, htmlTable, knitr, rmarkdown
 NeedsCompilation: no
-Packaged: 2020-05-10 16:19:57 UTC; david
+Packaged: 2020-06-02 21:28:18 UTC; david
 Author: David Pagliaccio [aut, cre] (<https://orcid.org/0000-0002-1214-1965>)
 Maintainer: David Pagliaccio <david.pagliaccio@gmail.com>

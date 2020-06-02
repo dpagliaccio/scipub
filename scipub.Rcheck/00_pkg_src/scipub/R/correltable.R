@@ -428,13 +428,13 @@ correltable <- function(data, vars = NULL, var_names = vars,
     rmat[lower.tri(rmat, diag = TRUE)] <- ""
     # & !colnum[1]
     if (cutempty[1]) {
-      rmat <- rmat[, -1]
+      rmat <- rmat[-NROW(rmat), 2:ncol(rmat)]
     }
   }
   if (tri[1] == "lower") {
     rmat[upper.tri(rmat, diag = TRUE)] <- ""
     if (cutempty[1]) {
-      rmat <- rmat[-ncol(x), ]
+      rmat <- rmat[-1, -NCOL(rmat)]
     }
   }
   # if vars2 supplied - cut to cross-correl

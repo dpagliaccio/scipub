@@ -428,7 +428,7 @@ correltable <- function(data, vars = NULL, var_names = vars,
     rmat[lower.tri(rmat, diag = TRUE)] <- ""
     # & !colnum[1]
     if (cutempty[1]) {
-      rmat <- rmat[-NROW(rmat),2:ncol(rmat)]
+      rmat <- rmat[-NROW(rmat), 2:ncol(rmat)]
     }
   }
   if (tri[1] == "lower") {

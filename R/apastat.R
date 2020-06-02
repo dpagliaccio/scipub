@@ -23,7 +23,6 @@
 #' apastat(stats::t.test(Height ~ Sex, data = psydat))
 #' apastat(stats::lm(data = psydat, Height ~ Age + Sex))
 #' apastat(stats::lm(data = psydat, Height ~ Age + Sex), var = "Age")
-#'
 apastat <- function(test,
                     roundN = 2,
                     es = c(TRUE, FALSE),
