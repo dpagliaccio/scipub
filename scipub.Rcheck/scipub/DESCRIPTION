@@ -29,7 +29,7 @@ Imports: dplyr, forcats, purrr, stats, stringr, tibble, tidyr,
         tidyselect
 Suggests: spelling, ggplot2, htmlTable, knitr, rmarkdown
 NeedsCompilation: no
-Packaged: 2020-06-02 21:28:18 UTC; david
+Packaged: 2020-06-03 22:54:03 UTC; david
 Author: David Pagliaccio [aut, cre] (<https://orcid.org/0000-0002-1214-1965>)
 Maintainer: David Pagliaccio <david.pagliaccio@gmail.com>
-Built: R 4.0.0; ; 2020-06-02 21:28:44 UTC; unix
+Built: R 4.0.0; ; 2020-06-03 22:56:02 UTC; unix

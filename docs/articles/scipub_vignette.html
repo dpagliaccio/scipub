@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">scipub</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -82,13 +82,13 @@
 
       
 
-      </header><script src="scipub_vignette_files/header-attrs-2.1/header-attrs.js"></script><div class="row">
+      </header><script src="scipub_vignette_files/header-attrs-2.2/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>scipub vignette</h1>
                         <h4 class="author">David Pagliaccio</h4>
             
-            <h4 class="date">2020-05-10</h4>
+            <h4 class="date">2020-06-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/dpagliaccio/scipub/blob/master/vignettes/scipub_vignette.Rmd"><code>vignettes/scipub_vignette.Rmd</code></a></small>
       <div class="hidden name"><code>scipub_vignette.Rmd</code></div>
@@ -113,13 +113,13 @@ The sample dataset of demographic and clinical data from 5,000 children is used 
 <span class="co">#&gt; r=.41, t(4991)=32.06, 95% CI=[.39,.44], p&lt;.001</span></pre></body></html></div>
 <p>There is no significant sex difference in height in the sample.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/apastat.html">apastat</a></span>(<span class="kw pkg">stats</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span>(<span class="no">Height</span> ~ <span class="no">Sex</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">psydat</span>))
-<span class="co">#&gt; t(4855.74)=0.83, p=.41, d=0.02 t(4855.74)=0.83, p=.41</span></pre></body></html></div>
+<span class="co">#&gt; t(4855.74)=0.83, p=.41, d=0.02</span></pre></body></html></div>
 <p>A linear regression model predicting height was highly significant, with the predictors (age and sex) accounting for about 17% of the variance in height.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/apastat.html">apastat</a></span>(<span class="kw pkg">stats</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">psydat</span>, <span class="no">Height</span> ~ <span class="no">Age</span> + <span class="no">Sex</span>))
 <span class="co">#&gt; N=4991, F(2,4988)=517.49, R2=.17, adj. R2=.17, p&lt;.001</span></pre></body></html></div>
 <p>In this linear regression model, age was a highly significant predictor of height, controlling for sex.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/apastat.html">apastat</a></span>(<span class="kw pkg">stats</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">psydat</span>, <span class="no">Height</span> ~ <span class="no">Age</span> + <span class="no">Sex</span>), <span class="kw">var</span> <span class="kw">=</span> <span class="st">"Age"</span>)
-<span class="co">#&gt; N=4991, b=0.18, t(4988)=32.16, p&lt;.001 N=4991, b=0.18, t(4988)=32.16, p&lt;.001</span></pre></body></html></div>
+<span class="co">#&gt; N=4991, b=0.18, t(4988)=32.16, p&lt;.001</span></pre></body></html></div>
 <hr>
 </div>
 <div id="correltable" class="section level2">
@@ -277,24 +277,14 @@ Note. This table presents Pearson correlation coefficients with pairwise deletio
 </td>
 </tr>
 <tr>
-<td style="text-align: left;">
+<td style="border-bottom: 2px solid grey; text-align: left;">
 <ol start="2" style="list-style-type: decimal"><li>Height (inches)
 </li></ol>
 </td>
-<td style="text-align: center;">
+<td style="border-bottom: 2px solid grey; text-align: center;">
 </td>
-<td style="text-align: center;">
+<td style="border-bottom: 2px solid grey; text-align: center;">
 .04*
-</td>
-</tr>
-<tr>
-<td style="border-bottom: 2px solid grey; text-align: left;">
-<ol start="3" style="list-style-type: decimal"><li>IQ
-</li></ol>
-</td>
-<td style="border-bottom: 2px solid grey; text-align: center;">
-</td>
-<td style="border-bottom: 2px solid grey; text-align: center;">
 </td>
 </tr>
 </tbody>
@@ -551,12 +541,186 @@ Note. This table presents Pearson correlation coefficients with pairwise deletio
 </table>
 <hr>
 </div>
+<div id="partial_correltable" class="section level2">
+<h2 class="hasAnchor">
+<a href="#partial_correltable" class="anchor"></a><code>partial_correltable</code>
+</h2>
+<p>The <code>partial_correltable</code> function provides similar functionality to <code>correltable</code> but allows for covariates to be partialled out of all correlations. This function will allow for binary/factor covariates to be partialled out but only numeric variables can be correlated. This involves residualizing all <code>vars</code> by all <code>partialvars</code> via linear regression (<code>lm</code>). For example:</p>
+<p>The lower triangle of partial correlations among the age, height, and iq variables are shown, residualizing for sex and income as factor variables.</p>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="../reference/partial_correltable.html">partial_correltable</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">psydat</span>, <span class="kw">vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Age"</span>, <span class="st">"Height"</span>, <span class="st">"iq"</span>), <span class="kw">partialvars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Sex"</span>, <span class="st">"Income"</span>), <span class="kw">tri</span> <span class="kw">=</span> <span class="st">"lower"</span>, <span class="kw">html</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
+<table class="table gmisc_table">
+<thead><tr>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+Age
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+Height
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+iq
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align: left;">
+Age
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+Height
+</td>
+<td style="text-align: center;">
+.42***
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+</tr>
+<tr>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+iq
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+.09***
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+.05***
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+</td>
+</tr>
+</tbody>
+<tr>
+<td colspan="4" style="text-align: left;">
+Note. This table presents Pearson partial correlation coefficients controlling for Sex, Income with pairwise deletion. N=5 missing Height. N=165 missing iq. N=406 excluded for missing covariates to be partialled out. * p&lt;.05, ** p&lt;.01, *** p&lt;.001
+</td>
+</tr>
+</table>
+<p>These same variables can be relabeled in the output and, for conciseness, the columns can be indicated by corresponding number rather than variable name and shown in the supper triangle.</p>
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="../reference/partial_correltable.html">partial_correltable</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">psydat</span>, <span class="kw">vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Age"</span>, <span class="st">"Height"</span>, <span class="st">"iq"</span>), <span class="kw">var_names</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Age (months)"</span>, <span class="st">"Height (inches)"</span>, <span class="st">"IQ"</span>), <span class="kw">partialvars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Sex"</span>, <span class="st">"Income"</span>),<span class="kw">tri</span> <span class="kw">=</span> <span class="st">"upper"</span>, <span class="kw">colnum</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">html</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
+<table class="table gmisc_table">
+<thead><tr>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+1
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+2
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+3
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align: left;">
+<ol style="list-style-type: decimal"><li>Age
+</li></ol>
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+.42***
+</td>
+<td style="text-align: center;">
+.09***
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<ol start="2" style="list-style-type: decimal"><li>Height
+</li></ol>
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+.05***
+</td>
+</tr>
+<tr>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+<ol start="3" style="list-style-type: decimal"><li>iq
+</li></ol>
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+</td>
+</tr>
+</tbody>
+<tr>
+<td colspan="4" style="text-align: left;">
+Note. This table presents Pearson partial correlation coefficients controlling for Sex, Income with pairwise deletion. N=5 missing Height. N=165 missing iq. N=406 excluded for missing covariates to be partialled out. * p&lt;.05, ** p&lt;.01, *** p&lt;.001
+</td>
+</tr>
+</table>
+<p>This can also be done with Spearman correlation. As well as using only complete data (list-wise deletion). And, the empty row/column can be removed if desired.</p>
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="../reference/partial_correltable.html">partial_correltable</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">psydat</span>, <span class="kw">vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Age"</span>, <span class="st">"Height"</span>, <span class="st">"iq"</span>), <span class="kw">var_names</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Age (months)"</span>, <span class="st">"Height (inches)"</span>, <span class="st">"IQ"</span>), <span class="kw">partialvars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Sex"</span>, <span class="st">"Income"</span>),<span class="kw">tri</span> <span class="kw">=</span> <span class="st">"upper"</span>, <span class="kw">method</span> <span class="kw">=</span> <span class="st">"spearman"</span>, <span class="kw">use</span> <span class="kw">=</span> <span class="st">"complete"</span>, <span class="kw">cutempty</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">colnum</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">html</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
+<table class="table gmisc_table">
+<thead><tr>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+2
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+3
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align: left;">
+<ol style="list-style-type: decimal"><li>Age
+</li></ol>
+</td>
+<td style="text-align: center;">
+.43***
+</td>
+<td style="text-align: center;">
+.07***
+</td>
+</tr>
+<tr>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+<ol start="2" style="list-style-type: decimal"><li>Height
+</li></ol>
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+.05***
+</td>
+</tr>
+</tbody>
+<tr>
+<td colspan="3" style="text-align: left;">
+Note. This table presents Spearman partial correlation coefficients controlling for Sex, Income with list-wise deletion (N=4424, missing 576 cases) * p&lt;.05, ** p&lt;.01, *** p&lt;.001
+</td>
+</tr>
+</table>
+<hr>
+</div>
 <div id="fulltable1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#fulltable1" class="anchor"></a><code>FullTable1</code>
 </h2>
 <p>A “Table 1” can be created to summarize data, i.e. the typical first table in a paper that describes the sample characteristics. This can display information for a single group for the declared variables .</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="../reference/FullTable1.html">FullTable1</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">psydat</span>, <span class="kw">vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Age"</span>, <span class="st">"Sex"</span>,<span class="st">"Height"</span>, <span class="st">"depressT"</span>),  <span class="kw">html</span><span class="kw">=</span><span class="fl">TRUE</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="../reference/FullTable1.html">FullTable1</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">psydat</span>, <span class="kw">vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Age"</span>, <span class="st">"Sex"</span>,<span class="st">"Height"</span>, <span class="st">"depressT"</span>),  <span class="kw">html</span><span class="kw">=</span><span class="fl">TRUE</span>)</pre></body></html></div>
 <table class="table gmisc_table">
 <thead><tr>
 <th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
@@ -607,7 +771,7 @@ Note. N=4 missing Sex. N=7 missing Height. N=8 missing depressT.
 </tr>
 </table>
 <p>Or commonly this can be shown for two groups if interest including the tests of group difference for all variables.</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="../reference/FullTable1.html">FullTable1</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">psydat</span>, <span class="kw">vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Age"</span>, <span class="st">"Height"</span>, <span class="st">"depressT"</span>), <span class="kw">strata</span> <span class="kw">=</span> <span class="st">"Sex"</span>, <span class="kw">html</span><span class="kw">=</span><span class="fl">TRUE</span>)
+<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="../reference/FullTable1.html">FullTable1</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">psydat</span>, <span class="kw">vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Age"</span>, <span class="st">"Height"</span>, <span class="st">"depressT"</span>), <span class="kw">strata</span> <span class="kw">=</span> <span class="st">"Sex"</span>, <span class="kw">html</span><span class="kw">=</span><span class="fl">TRUE</span>)
 <span class="co">#&gt; Warning: N=4 missing/NA in grouping variable: Sex</span></pre></body></html></div>
 <table class="table gmisc_table">
 <thead><tr>
@@ -709,7 +873,7 @@ Note. N=4 excluded for missing group variable. N=5 missing Height. N=4 missing d
 </tr>
 </table>
 <p>This can also be created for more than two groups. As with <code>correltable</code> variables can be renamed in the call. Also the significance stars can be moved to the statistic column or variable name (or removed). The p-value column can be removed as well (same for the effect size column, but why would you want to remove that?).</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="../reference/FullTable1.html">FullTable1</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">psydat</span>, <span class="kw">vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Age"</span>, <span class="st">"Sex"</span>,<span class="st">"Height"</span>, <span class="st">"depressT"</span>), <span class="kw">var_names</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Age (months)"</span>, <span class="st">"Sex"</span>,<span class="st">"Height (inches)"</span>, <span class="st">"Depression T"</span>), <span class="kw">strata</span> <span class="kw">=</span> <span class="st">"Income"</span>, <span class="kw">stars</span> <span class="kw">=</span> <span class="st">"stat"</span>,<span class="kw">p_col</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">html</span><span class="kw">=</span><span class="fl">TRUE</span>)
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="../reference/FullTable1.html">FullTable1</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">psydat</span>, <span class="kw">vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Age"</span>, <span class="st">"Sex"</span>,<span class="st">"Height"</span>, <span class="st">"depressT"</span>), <span class="kw">var_names</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Age (months)"</span>, <span class="st">"Sex"</span>,<span class="st">"Height (inches)"</span>, <span class="st">"Depression T"</span>), <span class="kw">strata</span> <span class="kw">=</span> <span class="st">"Income"</span>, <span class="kw">stars</span> <span class="kw">=</span> <span class="st">"stat"</span>,<span class="kw">p_col</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">html</span><span class="kw">=</span><span class="fl">TRUE</span>)
 <span class="co">#&gt; Warning: N=404 missing/NA in grouping variable: Income</span></pre></body></html></div>
 <table class="table gmisc_table">
 <thead><tr>
@@ -821,7 +985,7 @@ Note. N=404 excluded for missing group variable. N=2 missing Sex. N=5 missing He
 </tr>
 </table>
 <p>All variables will be summarized if none are declared Shown with significance stars on variable names.</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="../reference/FullTable1.html">FullTable1</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">psydat</span>, <span class="kw">strata</span> <span class="kw">=</span> <span class="st">"Sex"</span>,<span class="kw">stars</span> <span class="kw">=</span> <span class="st">"name"</span>,<span class="kw">p_col</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">html</span><span class="kw">=</span><span class="fl">TRUE</span>)
+<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu"><a href="../reference/FullTable1.html">FullTable1</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">psydat</span>, <span class="kw">strata</span> <span class="kw">=</span> <span class="st">"Sex"</span>,<span class="kw">stars</span> <span class="kw">=</span> <span class="st">"name"</span>,<span class="kw">p_col</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">html</span><span class="kw">=</span><span class="fl">TRUE</span>)
 <span class="co">#&gt; Warning: N=4 missing/NA in grouping variable: Sex</span></pre></body></html></div>
 <table class="table gmisc_table">
 <thead><tr>
@@ -864,8 +1028,10 @@ d=0.05
 Income
 </td>
 <td style="text-align: center;">
+-
 </td>
 <td style="text-align: center;">
+-
 </td>
 <td style="text-align: center;">
 χ2=0.72
@@ -885,8 +1051,10 @@ V=0.01
 690 (28.47%)
 </td>
 <td style="text-align: center;">
+-
 </td>
 <td style="text-align: center;">
+-
 </td>
 </tr>
 <tr>
@@ -900,8 +1068,10 @@ V=0.01
 1034 (42.66%)
 </td>
 <td style="text-align: center;">
+-
 </td>
 <td style="text-align: center;">
+-
 </td>
 </tr>
 <tr>
@@ -915,8 +1085,10 @@ V=0.01
 700 (28.88%)
 </td>
 <td style="text-align: center;">
+-
 </td>
 <td style="text-align: center;">
+-
 </td>
 </tr>
 <tr>
@@ -994,6 +1166,111 @@ Note. N=4 excluded for missing group variable. N=402 missing Income. N=5 missing
 </td>
 </tr>
 </table>
+<p>You can also replace the caption with your own input and re-output to HTML.</p>
+<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">tmp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/FullTable1.html">FullTable1</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">psydat</span>,
+   <span class="kw">vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Age"</span>, <span class="st">"Height"</span>, <span class="st">"depressT"</span>), <span class="kw">strata</span> <span class="kw">=</span> <span class="st">"Sex"</span>)
+<span class="co">#&gt; Warning: N=4 missing/NA in grouping variable: Sex</span>
+   <span class="no">tmp</span>$<span class="no">caption</span> <span class="kw">&lt;-</span> <span class="st">"Write your own caption"</span>
+   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw pkg">htmlTable</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/htmlTable.html">htmlTable</a></span>(<span class="no">tmp</span>$<span class="no">table</span>, <span class="kw">useViewer</span><span class="kw">=</span><span class="no">T</span>, <span class="kw">rnames</span><span class="kw">=</span><span class="no">F</span>,<span class="kw">caption</span><span class="kw">=</span><span class="no">tmp</span>$<span class="no">caption</span>, <span class="kw">pos.caption</span><span class="kw">=</span><span class="st">"bottom"</span>))</pre></body></html></div>
+<table class="table gmisc_table">
+<thead><tr>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+Variable
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+F (N=2364)
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+M (N=2632)
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+Stat
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+p
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+sig
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+es
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align: center;">
+Age
+</td>
+<td style="text-align: center;">
+120.65 (7.5)
+</td>
+<td style="text-align: center;">
+121.05 (7.66)
+</td>
+<td style="text-align: center;">
+1.86
+</td>
+<td style="text-align: center;">
+.06
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+0.05
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+Height
+</td>
+<td style="text-align: center;">
+57.34 (3.48)
+</td>
+<td style="text-align: center;">
+57.27 (3.28)
+</td>
+<td style="text-align: center;">
+-0.83
+</td>
+<td style="text-align: center;">
+.41
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+-0.02
+</td>
+</tr>
+<tr>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+depressT
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+55.1 (5.27)
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+55.88 (6.01)
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+4.87
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+&lt;.001
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+***
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+0.14
+</td>
+</tr>
+</tbody>
+<tr>
+<td colspan="7" style="text-align: left;">
+Write your own caption
+</td>
+</tr>
+</table>
 <hr>
 </div>
 <div id="winsorizing" class="section level2">
@@ -1001,7 +1278,7 @@ Note. N=4 excluded for missing group variable. N=402 missing Income. N=5 missing
 <a href="#winsorizing" class="anchor"></a>Winsorizing</h2>
 <p>The <code>winsorZ</code> function allows for Winsorizing outliers based on a Z-score cutoff, i.e. replacing extreme values with the next most extreme outlier value. This is an alternative to other function, e.g. <code><a href="https://rdrr.io/pkg/DescTools/man/Winsorize.html">DescTools::Winsorize</a></code> which identifies outlier based on quantile limits. The <code>winsorZ</code> function can be used in combination with the <code>winsorZ_find</code> function, which identifies the outlier values (1=outlier, 0=non-outlier).</p>
 <p>For example, in the example data, psydat$iq has 17 outliers that exceed a default |Z|&gt;3 limit test. Here, we create a temporary data frame with the original iq scores, the Z-score winsorized iq values, and an indication of which scores were winsorized. We can see the change in mix/max iq values in the summary and the winsorized outliers are shown in blue in the plot.</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">temp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">iq</span><span class="kw">=</span><span class="no">psydat</span>$<span class="no">iq</span>, <span class="kw">iq_winsor</span><span class="kw">=</span><span class="fu"><a href="../reference/winsorZ.html">winsorZ</a></span>(<span class="no">psydat</span>$<span class="no">iq</span>), <span class="kw">iq_outlier</span> <span class="kw">=</span> <span class="fu"><a href="../reference/winsorZ_find.html">winsorZ_find</a></span>(<span class="no">psydat</span>$<span class="no">iq</span>))
+<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="no">temp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">iq</span><span class="kw">=</span><span class="no">psydat</span>$<span class="no">iq</span>, <span class="kw">iq_winsor</span><span class="kw">=</span><span class="fu"><a href="../reference/winsorZ.html">winsorZ</a></span>(<span class="no">psydat</span>$<span class="no">iq</span>), <span class="kw">iq_outlier</span> <span class="kw">=</span> <span class="fu"><a href="../reference/winsorZ_find.html">winsorZ_find</a></span>(<span class="no">psydat</span>$<span class="no">iq</span>))
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">temp</span>)</pre></body></html></div>
 <pre><code>   iq           iq_winsor      iq_outlier </code></pre>
 <p>Min. : 34.86 Min. : 48.74 0 :4804<br>
@@ -1011,8 +1288,8 @@ Mean :102.70 Mean :102.64<br>
 3rd Qu.:113.86 3rd Qu.:113.86<br>
 Max. :222.99 Max. :156.12<br>
 NA’s :179 NA’s :179</p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu">ggplot</span>(<span class="no">temp</span>[!<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="no">temp</span>$<span class="no">iq</span>),], <span class="fu">aes</span>(<span class="kw">x</span><span class="kw">=</span><span class="no">iq</span>, <span class="kw">y</span><span class="kw">=</span><span class="no">iq_winsor</span>)) + <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="kw">color</span><span class="kw">=</span><span class="no">iq_outlier</span>),<span class="kw">alpha</span><span class="kw">=</span><span class="fl">.7</span>) + <span class="fu">geom_line</span>() + <span class="fu">theme_bw</span>()</pre></body></html></div>
-<p><img src="scipub_vignette_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
+<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="fu">ggplot</span>(<span class="no">temp</span>[!<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="no">temp</span>$<span class="no">iq</span>),], <span class="fu">aes</span>(<span class="kw">x</span><span class="kw">=</span><span class="no">iq</span>, <span class="kw">y</span><span class="kw">=</span><span class="no">iq_winsor</span>)) + <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="kw">color</span><span class="kw">=</span><span class="no">iq_outlier</span>),<span class="kw">alpha</span><span class="kw">=</span><span class="fl">.7</span>) + <span class="fu">geom_line</span>() + <span class="fu">theme_bw</span>()</pre></body></html></div>
+<p><img src="scipub_vignette_files/figure-html/unnamed-chunk-19-1.png" width="700"></p>
 </div>
   </div>
 

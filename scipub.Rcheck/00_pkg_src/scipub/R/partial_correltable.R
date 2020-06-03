@@ -50,7 +50,7 @@
 #' @return Output Table 1
 #' @import 	dplyr
 #' @importFrom 	purrr negate
-#' @importFrom 	stats lm resid setNames
+#' @importFrom 	stats lm resid setNames as.formula
 #' @import 	stringr
 #' @importFrom 	tidyselect all_of
 #' @export
@@ -197,7 +197,7 @@ partial_correltable <- function(data, vars = NULL, var_names = vars,
   resdat[, vars] <- lapply(vars, function(a) {
     stats::resid(stats::lm(
       data = x,
-      as.formula(paste("scale(", a, ") ~",
+      stats::as.formula(paste("scale(", a, ") ~",
         paste(partialvars, collapse = "+"),
         sep = ""
       )),

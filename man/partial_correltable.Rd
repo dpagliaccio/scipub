@@ -105,5 +105,4 @@ partial_correltable(
   partialvar_names = "Anxiety",
   tri = "all", html = TRUE
 )
-
 }

@@ -2,9 +2,12 @@
 * using R version 4.0.0 (2020-04-24)
 * using platform: x86_64-apple-darwin17.0 (64-bit)
 * using session charset: UTF-8
+* using option ‘--as-cran’
 * checking for file ‘scipub/DESCRIPTION’ ... OK
 * this is package ‘scipub’ version ‘1.1.0’
 * package encoding: UTF-8
+* checking CRAN incoming feasibility ... Note_to_CRAN_maintainers
+Maintainer: ‘David Pagliaccio <david.pagliaccio@gmail.com>’
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -16,6 +19,8 @@
 * checking whether package ‘scipub’ can be installed ... OK
 * checking installed package size ... OK
 * checking package directory ... OK
+* checking for future file timestamps ... OK
+* checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
 * checking for left-over files ... OK
@@ -28,74 +33,4 @@
 * checking whether the package can be unloaded cleanly ... OK
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
-* checking dependencies in R code ... OK
-* checking S3 generic/method consistency ... OK
-* checking replacement functions ... OK
-* checking foreign function calls ... OK
-* checking R code for possible problems ... NOTE
-partial_correltable : <anonymous>: no visible global function
-  definition for ‘as.formula’
-Undefined global functions or variables:
-  as.formula
-Consider adding
-  importFrom("stats", "as.formula")
-to your NAMESPACE file.
-* checking Rd files ... OK
-* checking Rd metadata ... OK
-* checking Rd cross-references ... OK
-* checking for missing documentation entries ... OK
-* checking for code/documentation mismatches ... OK
-* checking Rd \usage sections ... OK
-* checking Rd contents ... OK
-* checking for unstated dependencies in examples ... OK
-* checking contents of ‘data’ directory ... OK
-* checking data for non-ASCII characters ... OK
-* checking data for ASCII and uncompressed saves ... OK
-* checking files in ‘vignettes’ ... WARNING
-Files in the 'vignettes' directory but no files in 'inst/doc':
-  ‘scipub_vignette.Rmd’
-* checking examples ... ERROR
-Running examples in ‘scipub-Ex.R’ failed
-The error most likely occurred in:
-
-> ### Name: FullTable1
-> ### Title: Create Table1 of group summary with stats for scientific
-> ###   publication
-> ### Aliases: FullTable1
-> 
-> ### ** Examples
-> 
-> FullTable1(
-+   data = psydat,
-+   vars = c("Age", "Height", "depressT"), strata = "Sex"
-+ )
-Warning: N=4 missing/NA in grouping variable: Sex
-Error in `[.default`(table(x, !is.na(y)), , 2) : subscript out of bounds
-Calls: FullTable1 ... lapply -> FUN -> grouptests -> [ -> [.table -> NextMethod
-Execution halted
-* checking for unstated dependencies in vignettes ... OK
-* checking package vignettes in ‘inst/doc’ ... WARNING
-dir.exists(dir) is not TRUE
-Package vignette without corresponding single PDF/HTML:
-   ‘scipub_vignette.Rmd’
-
-* checking running R code from vignettes ... NONE
-  ‘scipub_vignette.Rmd’ using ‘UTF-8’... OK
-* checking re-building of vignette outputs ... WARNING
-Error(s) in re-building vignettes:
-  ...
---- re-building ‘scipub_vignette.Rmd’ using rmarkdown
-Quitting from lines 152-153 (scipub_vignette.Rmd) 
-Error: processing vignette 'scipub_vignette.Rmd' failed with diagnostics:
-subscript out of bounds
---- failed re-building ‘scipub_vignette.Rmd’
-
-SUMMARY: processing the following file failed:
-  ‘scipub_vignette.Rmd’
-
-Error: Vignette re-building failed.
-Execution halted
-
-* checking PDF version of manual ... OK
-* DONE
-Status: 1 ERROR, 3 WARNINGs, 1 NOTE
+* checking use of S3 registration ...

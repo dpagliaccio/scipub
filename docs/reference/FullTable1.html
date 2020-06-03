@@ -85,7 +85,7 @@ Requires tidyverse and stats libraries." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">scipub</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -233,14 +233,46 @@ needs library(htmlTable) installed.</p></td>
     <pre class="examples"><div class='input'><span class='fu'>FullTable1</span>(
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>psydat</span>,
   <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Age"</span>, <span class='st'>"Height"</span>, <span class='st'>"depressT"</span>), <span class='kw'>strata</span> <span class='kw'>=</span> <span class='st'>"Sex"</span>
-)</div><div class='output co'>#&gt; <span class='warning'>Warning: N=4 missing/NA in grouping variable: Sex</span></div><div class='output co'>#&gt; <span class='error'>Error in `[.default`(table(x, !is.na(y)), , 2): subscript out of bounds</span></div><div class='input'><span class='fu'>FullTable1</span>(
+)</div><div class='output co'>#&gt; <span class='warning'>Warning: N=4 missing/NA in grouping variable: Sex</span></div><div class='output co'>#&gt; $table
+#&gt;   Variable   F (N=2364)    M (N=2632)  Stat     p sig    es
+#&gt; 1      Age 120.65 (7.5) 121.05 (7.66)  1.86   .06      0.05
+#&gt; 2   Height 57.34 (3.48)  57.27 (3.28) -0.83   .41     -0.02
+#&gt; 3 depressT  55.1 (5.27)  55.88 (6.01)  4.87 &lt;.001 ***  0.14
+#&gt; 
+#&gt; $caption
+#&gt; [1] "Note. N=4 excluded for missing group variable. N=5 missing Height. N=4 missing depressT. * p&lt;.05, ** p&lt;.01, *** p&lt;.001"
+#&gt; </div><div class='input'><span class='fu'>FullTable1</span>(
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>psydat</span>,
   <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Age"</span>, <span class='st'>"Height"</span>, <span class='st'>"depressT"</span>), <span class='kw'>strata</span> <span class='kw'>=</span> <span class='st'>"Sex"</span>
-)</div><div class='output co'>#&gt; <span class='warning'>Warning: N=4 missing/NA in grouping variable: Sex</span></div><div class='output co'>#&gt; <span class='error'>Error in `[.default`(table(x, !is.na(y)), , 2): subscript out of bounds</span></div><div class='input'><span class='fu'>FullTable1</span>(
+)</div><div class='output co'>#&gt; <span class='warning'>Warning: N=4 missing/NA in grouping variable: Sex</span></div><div class='output co'>#&gt; $table
+#&gt;   Variable   F (N=2364)    M (N=2632)  Stat     p sig    es
+#&gt; 1      Age 120.65 (7.5) 121.05 (7.66)  1.86   .06      0.05
+#&gt; 2   Height 57.34 (3.48)  57.27 (3.28) -0.83   .41     -0.02
+#&gt; 3 depressT  55.1 (5.27)  55.88 (6.01)  4.87 &lt;.001 ***  0.14
+#&gt; 
+#&gt; $caption
+#&gt; [1] "Note. N=4 excluded for missing group variable. N=5 missing Height. N=4 missing depressT. * p&lt;.05, ** p&lt;.01, *** p&lt;.001"
+#&gt; </div><div class='input'><span class='fu'>FullTable1</span>(
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>psydat</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Age"</span>, <span class='st'>"Sex"</span>, <span class='st'>"Height"</span>, <span class='st'>"depressT"</span>),
   <span class='kw'>var_names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Age (months)"</span>, <span class='st'>"Sex"</span>, <span class='st'>"Height (inches)"</span>, <span class='st'>"Depression T"</span>),
   <span class='kw'>strata</span> <span class='kw'>=</span> <span class='st'>"Income"</span>, <span class='kw'>stars</span> <span class='kw'>=</span> <span class='st'>"name"</span>, <span class='kw'>p_col</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</div><div class='output co'>#&gt; <span class='warning'>Warning: N=404 missing/NA in grouping variable: Income</span></div><div class='output co'>#&gt; <span class='error'>Error in `[.default`(table(x, !is.na(y)), , 2): subscript out of bounds</span></div></pre>
+)</div><div class='output co'>#&gt; <span class='warning'>Warning: N=404 missing/NA in grouping variable: Income</span></div><div class='output co'>#&gt; $table
+#&gt;           Variable [&lt;50K] (N=1331) [&gt;=100K] (N=1957) [&gt;=50K&amp;&lt;100K] (N=1308)
+#&gt; 1   Age (months) *   120.61 (7.53)      121.23 (7.6)          120.55 (7.56)
+#&gt; 2         Sex (M)     690 (51.88%)     1034 (52.86%)           700 (53.52%)
+#&gt; 3 Height (inches)     57.42 (3.49)      57.29 (3.25)           57.23 (3.25)
+#&gt; 4 Depression T ***     56.4 (6.56)       54.83 (4.9)           55.63 (5.72)
+#&gt;      Stat      es
+#&gt; 1  F=4.17 η2=0.00
+#&gt; 2 χ2=0.72  V=0.01
+#&gt; 3  F=1.15 η2=0.00
+#&gt; 4 F=31.18 η2=0.01
+#&gt; 
+#&gt; $caption
+#&gt; [1] "Note. N=404 excluded for missing group variable. N=2 missing Sex. N=5 missing Height (inches). N=4 missing Depression T. * p&lt;.05, ** p&lt;.01, *** p&lt;.001"
+#&gt; </div><div class='input'><span class='no'>tmp</span> <span class='kw'>&lt;-</span> <span class='fu'>FullTable1</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>psydat</span>,
+  <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Age"</span>, <span class='st'>"Height"</span>, <span class='st'>"depressT"</span>), <span class='kw'>strata</span> <span class='kw'>=</span> <span class='st'>"Sex"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: N=4 missing/NA in grouping variable: Sex</span></div><div class='input'>  <span class='no'>tmp</span>$<span class='no'>caption</span> <span class='kw'>&lt;-</span> <span class='st'>"Write your own caption"</span>
+  <span class='co'>#print(htmlTable(x$table, useViewer=T, rnames=F,caption=x$caption, pos.caption="bottom"))</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

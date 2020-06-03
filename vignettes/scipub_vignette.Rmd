@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 library(knitr)
 library(ggplot2)
-library(cranlogs)
+library(htmlTable)
 ```
 
 The scipub package contains functions for summarizing data
@@ -176,7 +176,7 @@ You can also replace the caption with your own input and re-output to HTML.
 tmp <- FullTable1(data = psydat,
    vars = c("Age", "Height", "depressT"), strata = "Sex")
    tmp$caption <- "Write your own caption"
-   print(htmlTable(x$table, useViewer=T, rnames=F,caption=x$caption, pos.caption="bottom"))
+   print(htmlTable::htmlTable(tmp$table, useViewer=T, rnames=F,caption=tmp$caption, pos.caption="bottom"))
 ```
 
 
@@ -204,5 +204,4 @@ ggplot(temp[!is.na(temp$iq),], aes(x=iq, y=iq_winsor)) + geom_point(aes(color=iq
 
 
 
-cranlogs_badge("scipub", summary = "grand-total")
 

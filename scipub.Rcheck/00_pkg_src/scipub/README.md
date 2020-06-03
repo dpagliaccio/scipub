@@ -5,6 +5,10 @@
 
 <!-- badges: start -->
 
+[![CRAN RStudio mirror
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/scipub?color=blue)](https://r-pkg.org/pkg/scipub)
+![CRAN RStudio
+version](https://www.r-pkg.org/badges/version-last-release/scipub)
 <!-- badges: end -->
 
 <https://dpagliaccio.github.io/scipub/>

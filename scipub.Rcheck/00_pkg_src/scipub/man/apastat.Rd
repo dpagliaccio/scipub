@@ -37,5 +37,4 @@ apastat(stats::cor.test(psydat$Age, psydat$Height))
 apastat(stats::t.test(Height ~ Sex, data = psydat))
 apastat(stats::lm(data = psydat, Height ~ Age + Sex))
 apastat(stats::lm(data = psydat, Height ~ Age + Sex), var = "Age")
-
 }

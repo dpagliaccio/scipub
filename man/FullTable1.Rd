@@ -80,4 +80,8 @@ FullTable1(
   var_names = c("Age (months)", "Sex", "Height (inches)", "Depression T"),
   strata = "Income", stars = "name", p_col = FALSE
 )
+tmp <- FullTable1(data = psydat,
+  vars = c("Age", "Height", "depressT"), strata = "Sex")
+  tmp$caption <- "Write your own caption"
+  #print(htmlTable(x$table, useViewer=T, rnames=F,caption=x$caption, pos.caption="bottom"))
 }
