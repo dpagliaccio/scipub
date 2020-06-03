@@ -36,4 +36,6 @@ Maintainer: ‘David Pagliaccio <david.pagliaccio@gmail.com>’
 * checking use of S3 registration ... OK
 * checking dependencies in R code ... OK
 * checking S3 generic/method consistency ... OK
-* checking replacement functions ...
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ...
