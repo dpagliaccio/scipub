@@ -214,7 +214,9 @@ FullTable1 <- function(data, strata = NULL, vars = NULL,
       tableout[, grplvl] <- as.data.frame(t((datafile %>%
         dplyr::group_by_at(groupvar) %>%
         dplyr::select_at(outcome) %>%
-        dplyr::summarise_all(list(mean = mean, sd = sd), na.rm = TRUE) %>%
+        dplyr::summarise(sd = sd(.data[[outcome]], na.rm = T),
+                         mean = mean(.data[[outcome]], na.rm = T),
+                         .groups = 'drop') %>%
         dplyr::mutate_at(c("mean", "sd"), round, round_n) %>%
         tidyr::unite("col", mean, sd, sep = " (") %>%
         dplyr::mutate(col = stringr::str_c(col, ")")))[2]))
@@ -239,8 +241,10 @@ FullTable1 <- function(data, strata = NULL, vars = NULL,
           (datafile %>%
             dplyr::group_by_at(groupvar) %>%
             dplyr::select_at(outcome) %>%
-            dplyr::summarise_all(list(mean = mean, max = max, sd = sd), na.rm = TRUE) %>%
-            tidyr::drop_na() %>%
+             dplyr::summarise(sd = sd(.data[[outcome]], na.rm = T),
+                              mean = mean(.data[[outcome]], na.rm = T),
+                              .groups = 'drop') %>%
+             tidyr::drop_na() %>%
             dplyr::mutate(d = (mean[2] - mean[1]) /
               (sqrt((sd[2]^2 + sd[1]^2) / 2))))[[1, "d"]],
           round_n

@@ -1175,7 +1175,7 @@ Note. This table presents Pearson partial correlation coefficients controlling f
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  5.284 0.261 7.476 0.003 0.007 
+Time elapsed:  3.689 0.179 3.961 0.002 0.004 
 > grDevices::dev.off()
 null device 
           1 
