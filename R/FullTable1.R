@@ -57,6 +57,11 @@
 #'   var_names = c("Age (months)", "Sex", "Height (inches)", "Depression T"),
 #'   strata = "Income", stars = "name", p_col = FALSE
 #' )
+#' tmp <- FullTable1(data = psydat,
+#'   vars = c("Age", "Height", "depressT"), strata = "Sex")
+#'   tmp$caption <- "Write your own caption"
+#'   print(htmlTable(x$table, useViewer=T, rnames=F,caption=x$caption, pos.caption="bottom"))
+
 FullTable1 <- function(data, strata = NULL, vars = NULL,
                        var_names = vars, factor_vars = NULL,
                        round_n = 2, es_col = c(TRUE, FALSE),
@@ -209,10 +214,7 @@ FullTable1 <- function(data, strata = NULL, vars = NULL,
       tableout[, grplvl] <- as.data.frame(t((datafile %>%
         dplyr::group_by_at(groupvar) %>%
         dplyr::select_at(outcome) %>%
-        dplyr::summarise_all(list(
-          mean = mean,
-          sd = stats::sd
-        ), na.rm = TRUE) %>%
+        dplyr::summarise_all(funs(sd = sd(., na.rm = T),mean = sd(., na.rm=T))) %>%
         dplyr::mutate_at(c("mean", "sd"), round, round_n) %>%
         tidyr::unite("col", mean, sd, sep = " (") %>%
         dplyr::mutate(col = stringr::str_c(col, ")")))[2]))
@@ -237,9 +239,7 @@ FullTable1 <- function(data, strata = NULL, vars = NULL,
           (datafile %>%
             dplyr::group_by_at(groupvar) %>%
             dplyr::select_at(outcome) %>%
-            dplyr::summarise_all(list(mean = mean, sd = stats::sd),
-              na.rm = TRUE
-            ) %>%
+            dplyr::summarise_all(funs(sd = sd(., na.rm = T),mean = sd(., na.rm=T))) %>%
             tidyr::drop_na() %>%
             dplyr::mutate(d = (mean[2] - mean[1]) /
               (sqrt((sd[2]^2 + sd[1]^2) / 2))))[[1, "d"]],

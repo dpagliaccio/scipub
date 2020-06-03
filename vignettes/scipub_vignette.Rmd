@@ -171,7 +171,13 @@ Shown with significance stars on variable names.
 FullTable1(data = psydat, strata = "Sex",stars = "name",p_col = FALSE, html=TRUE)
 ```
 
-
+You can also replace the caption with your own input and re-output to HTML.
+```{r results="asis"}
+tmp <- FullTable1(data = psydat,
+   vars = c("Age", "Height", "depressT"), strata = "Sex")
+   tmp$caption <- "Write your own caption"
+   print(htmlTable(x$table, useViewer=T, rnames=F,caption=x$caption, pos.caption="bottom"))
+```
 
 
 ***
