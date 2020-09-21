@@ -4,6 +4,8 @@ apastat                 Format simple statistic test results for
                         scientific publication
 correltable             Create correlation table (with stars for
                         significance) for scientific publication
+gg_groupplot            Create ggplot to display group differences
+                        (box+point+hist)
 partial_correltable     Create partial correlation table (with stars
                         for significance) for scientific publication
 psydat                  Sample demographic and clinical data for 5,000

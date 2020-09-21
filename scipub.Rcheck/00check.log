@@ -1,10 +1,10 @@
 * using log directory ‘/Users/david/Dropbox (Personal)/scipub/scipub.Rcheck’
-* using R version 4.0.0 (2020-04-24)
+* using R version 4.0.2 (2020-06-22)
 * using platform: x86_64-apple-darwin17.0 (64-bit)
 * using session charset: UTF-8
 * using option ‘--as-cran’
 * checking for file ‘scipub/DESCRIPTION’ ... OK
-* this is package ‘scipub’ version ‘1.1.0’
+* this is package ‘scipub’ version ‘1.2.0’
 * package encoding: UTF-8
 * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers
 Maintainer: ‘David Pagliaccio <david.pagliaccio@gmail.com>’
@@ -19,7 +19,8 @@ Maintainer: ‘David Pagliaccio <david.pagliaccio@gmail.com>’
 * checking whether package ‘scipub’ can be installed ... OK
 * checking installed package size ... OK
 * checking package directory ... OK
-* checking for future file timestamps ... OK
+* checking for future file timestamps ... NOTE
+unable to verify current time
 * checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
@@ -61,4 +62,4 @@ Maintainer: ‘David Pagliaccio <david.pagliaccio@gmail.com>’
 * checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
 * DONE
-Status: OK
+Status: 1 NOTE

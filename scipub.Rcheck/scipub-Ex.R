@@ -111,6 +111,26 @@ correltable(
 base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
 base::cat("correltable", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 cleanEx()
+nameEx("gg_groupplot")
+### * gg_groupplot
+
+flush(stderr()); flush(stdout())
+
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+### Name: gg_groupplot
+### Title: Create ggplot to display group differences (box+point+hist)
+### Aliases: gg_groupplot
+
+### ** Examples
+
+gg_groupplot(data = psydat, x = "Sex", y = "depressT", meanline = TRUE)
+
+
+
+
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("gg_groupplot", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+cleanEx()
 nameEx("partial_correltable")
 ### * partial_correltable
 

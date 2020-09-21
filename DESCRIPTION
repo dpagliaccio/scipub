@@ -1,6 +1,6 @@
 Package: scipub
 Title: Summarize Data for Scientific Publication
-Version: 1.1.0
+Version: 1.2.0
 Authors@R: 
     person(given = "David",
            family = "Pagliaccio",
@@ -18,7 +18,7 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Language: en-US
 VignetteBuilder: knitr
 URL: https://github.com/dpagliaccio/scipub, https://dpagliaccio.github.io/scipub/
@@ -28,6 +28,8 @@ Depends:
 Imports:
 	dplyr,
 	forcats,
+	ggplot2,
+  gghalves,
 	purrr,
 	stats,
 	stringr,
@@ -36,7 +38,6 @@ Imports:
 	tidyselect
 Suggests:
     spelling,
-    ggplot2,
     htmlTable,
     knitr, 
     rmarkdown

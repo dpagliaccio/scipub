@@ -2,6 +2,10 @@
 
 * Added a `NEWS.md` file to track changes to the package.
 
+# scipub 1.2.0
+
+* added new gg_grouplot function
+* fixed issue in correltable
 
 # scipub 1.1.0
 

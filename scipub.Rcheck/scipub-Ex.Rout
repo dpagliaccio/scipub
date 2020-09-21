@@ -1,5 +1,5 @@
 
-R version 4.0.0 (2020-04-24) -- "Arbor Day"
+R version 4.0.2 (2020-06-22) -- "Taking Off Again"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-apple-darwin17.0 (64-bit)
 
@@ -168,9 +168,9 @@ $caption
 <thead>
 <tr>
 <th style='border-bottom: 1px solid grey; border-top: 2px solid grey;'> </th>
-<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Age</th>
-<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Height</th>
-<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>iq</th>
+<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Age</th>
+<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Height</th>
+<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>iq</th>
 </tr>
 </thead>
 <tbody>
@@ -204,9 +204,9 @@ Note. This table presents Pearson correlation coefficients with pairwise deletio
 <thead>
 <tr>
 <th style='border-bottom: 1px solid grey; border-top: 2px solid grey;'> </th>
-<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>1</th>
-<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>2</th>
-<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>3</th>
+<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>1</th>
+<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>2</th>
+<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>3</th>
 </tr>
 </thead>
 <tbody>
@@ -241,8 +241,8 @@ Note. This table presents Pearson correlation coefficients with pairwise deletio
 <thead>
 <tr>
 <th style='border-bottom: 1px solid grey; border-top: 2px solid grey;'> </th>
-<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Depression T</th>
-<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Anxiety T</th>
+<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Depression T</th>
+<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Anxiety T</th>
 </tr>
 </thead>
 <tbody>
@@ -270,6 +270,26 @@ Note. This table presents Pearson correlation coefficients with pairwise deletio
 > base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
 > base::cat("correltable", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
+> nameEx("gg_groupplot")
+> ### * gg_groupplot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: gg_groupplot
+> ### Title: Create ggplot to display group differences (box+point+hist)
+> ### Aliases: gg_groupplot
+> 
+> ### ** Examples
+> 
+> gg_groupplot(data = psydat, x = "Sex", y = "depressT", meanline = TRUE)
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("gg_groupplot", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
 > nameEx("partial_correltable")
 > ### * partial_correltable
 > 
@@ -292,9 +312,9 @@ Note. This table presents Pearson correlation coefficients with pairwise deletio
 <thead>
 <tr>
 <th style='border-bottom: 1px solid grey; border-top: 2px solid grey;'> </th>
-<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Age</th>
-<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Height</th>
-<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>iq</th>
+<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Age</th>
+<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Height</th>
+<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>iq</th>
 </tr>
 </thead>
 <tbody>
@@ -330,9 +350,9 @@ Note. This table presents Pearson partial correlation coefficients controlling f
 <thead>
 <tr>
 <th style='border-bottom: 1px solid grey; border-top: 2px solid grey;'> </th>
-<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>1</th>
-<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>2</th>
-<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>3</th>
+<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>1</th>
+<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>2</th>
+<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>3</th>
 </tr>
 </thead>
 <tbody>
@@ -369,9 +389,9 @@ Note. This table presents Pearson partial correlation coefficients controlling f
 <thead>
 <tr>
 <th style='border-bottom: 1px solid grey; border-top: 2px solid grey;'> </th>
-<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Age</th>
-<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Height</th>
-<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>iq</th>
+<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Age</th>
+<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>Height</th>
+<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>iq</th>
 </tr>
 </thead>
 <tbody>
@@ -1175,7 +1195,7 @@ Note. This table presents Pearson partial correlation coefficients controlling f
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  3.689 0.179 3.961 0.002 0.004 
+Time elapsed:  4.304 0.274 4.884 0.006 0.013 
 > grDevices::dev.off()
 null device 
           1 
