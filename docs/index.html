@@ -95,23 +95,26 @@
 apastat - Format simple statistic test results for scientific publication<br>
 correltable - Create correlation table (with stars for significance) for scientific publication<br>
 FullTable1 - Create Table1 of group summary with stats for scientific publication<br>
-winsorZ_find - Identify outliers based on z-score cutoff that are Winsorized by the <code>winsorZ</code> function<br>
+gg_groupplot - Create ggplot to display group differences (box+point+hist) winsorZ_find - Identify outliers based on z-score cutoff that are Winsorized by the <code>winsorZ</code> function<br>
 winsorZ - Winsorize outliers based on z-score cutoff to next most extreme non-outlier value</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the released version of scipub from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"scipub"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"scipub"</span><span class="op">)</span></pre></div>
 <p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="co"># install.packages("devtools")</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"dpagliaccio/scipub"</span>)</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="co"># install.packages("devtools")</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"dpagliaccio/scipub"</span><span class="op">)</span></pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
 <p>This is a basic example:</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">scipub</span>)
-<span class="fu"><a href="reference/correltable.html">correltable</a></span>(<span class="kw">data</span><span class="kw">=</span><span class="no">psydat</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dpagliaccio/scipub">scipub</a></span><span class="op">)</span>
+<span class="fu"><a href="reference/correltable.html">correltable</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">psydat</span><span class="op">)</span>
 <span class="co">#&gt; Warning: Converting non-numeric columns to factor: Sex,Income</span>
 <span class="co">#&gt; $table</span>
 <span class="co">#&gt;          Age Sex     Income  Height iq          depressT   anxT      </span>
@@ -170,7 +173,7 @@ winsorZ - Winsorize outliers based on z-score cutoff to next most extreme non-ou
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Identify outliers based on z-score cutoff
-that are Winsorized by the <code>winsorZ</code> function — winsorZ_find • scipub</title>
+that are Winsorized by the winsorZ function — winsorZ_find • scipub</title>
 
 
 <!-- jquery -->
@@ -41,7 +41,7 @@ that are Winsorized by the <code>winsorZ</code> function — winsorZ_find • sc
 
 
 <meta property="og:title" content="Identify outliers based on z-score cutoff
-that are Winsorized by the <code>winsorZ</code> function — winsorZ_find" />
+that are Winsorized by the winsorZ function — winsorZ_find" />
 <meta property="og:description" content="The winsorZ_find function is an optional
 companion to the winsorZ function.
 The winsorZ function identifies Z-score outliers and
@@ -148,7 +148,7 @@ The <code>winsorZ_find</code> function finds/identifies these
 Z-score outliers (outliers=1, non-outliers=0).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>winsorZ_find</span>(<span class='no'>x</span>, <span class='kw'>zbound</span> <span class='kw'>=</span> <span class='fl'>3</span>)</pre>
+    <pre class="usage"><span class='fu'>winsorZ_find</span><span class='op'>(</span><span class='va'>x</span>, zbound <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -168,10 +168,13 @@ Z-score outliers (outliers=1, non-outliers=0).</p>
     <p>Output logical variable of Z-score outliers</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'>winsorZ_find</span>(<span class='no'>psydat</span>$<span class='no'>iq</span>))</div><div class='output co'>#&gt;    0    1 NA's 
-#&gt; 4804   17  179 </div><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>psydat</span> <span class='kw'>%&gt;%</span> <span class='fu'>mutate_at</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"iq"</span>, <span class='st'>"anxT"</span>), <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>out</span> <span class='kw'>=</span> ~ <span class='fu'>winsorZ_find</span>(<span class='no'>.</span>)))
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'>winsorZ_find</span><span class='op'>(</span><span class='va'>psydat</span><span class='op'>$</span><span class='va'>iq</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    0    1 NA's 
+#&gt; 4804   17  179 </div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>psydat</span> <span class='op'>%&gt;%</span> <span class='fu'>mutate_at</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"iq"</span>, <span class='st'>"anxT"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>out <span class='op'>=</span> <span class='op'>~</span> <span class='fu'>winsorZ_find</span><span class='op'>(</span><span class='va'>.</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -187,7 +190,7 @@ Z-score outliers (outliers=1, non-outliers=0).</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

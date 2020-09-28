@@ -36,6 +36,7 @@ Functions:
     apastat - Format simple statistic test results for scientific publication  
     correltable - Create correlation table (with stars for significance)  for scientific publication  
     FullTable1 - Create Table1 of group summary with stats for scientific publication  
+    gg_groupplot - Create ggplot to display group differences (box+point+hist)
     winsorZ_find - Identify outliers based on z-score cutoff that are Winsorized by the `winsorZ` function  
     winsorZ - Winsorize outliers based on z-score cutoff to next most extreme non-outlier value  
 

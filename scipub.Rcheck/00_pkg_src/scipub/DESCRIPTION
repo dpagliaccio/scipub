@@ -29,6 +29,6 @@ Imports: dplyr, forcats, ggplot2, gghalves, purrr, stats, stringr,
         tibble, tidyr, tidyselect
 Suggests: spelling, htmlTable, knitr, rmarkdown
 NeedsCompilation: no
-Packaged: 2020-09-21 23:25:42 UTC; david
+Packaged: 2020-09-21 23:34:57 UTC; david
 Author: David Pagliaccio [aut, cre] (<https://orcid.org/0000-0002-1214-1965>)
 Maintainer: David Pagliaccio <david.pagliaccio@gmail.com>
