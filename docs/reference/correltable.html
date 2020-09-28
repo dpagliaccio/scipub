@@ -170,20 +170,20 @@ This function will drop any non-numeric variables by default.
 Requires <code>tidyverse</code> and <code>stats</code> libraries.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>correltable</span>(
-  <span class='no'>data</span>,
-  <span class='kw'>vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>var_names</span> <span class='kw'>=</span> <span class='no'>vars</span>,
-  <span class='kw'>vars2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>var_names2</span> <span class='kw'>=</span> <span class='no'>vars2</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"pearson"</span>, <span class='st'>"spearman"</span>),
-  <span class='kw'>use</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"pairwise"</span>, <span class='st'>"complete"</span>),
-  <span class='kw'>round_n</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>tri</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"upper"</span>, <span class='st'>"lower"</span>, <span class='st'>"all"</span>),
-  <span class='kw'>cutempty</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>FALSE</span>, <span class='fl'>TRUE</span>),
-  <span class='kw'>colnum</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>FALSE</span>, <span class='fl'>TRUE</span>),
-  <span class='kw'>html</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>FALSE</span>, <span class='fl'>TRUE</span>)
-)</pre>
+    <pre class="usage"><span class='fu'>correltable</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  vars <span class='op'>=</span> <span class='cn'>NULL</span>,
+  var_names <span class='op'>=</span> <span class='va'>vars</span>,
+  vars2 <span class='op'>=</span> <span class='cn'>NULL</span>,
+  var_names2 <span class='op'>=</span> <span class='va'>vars2</span>,
+  method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pearson"</span>, <span class='st'>"spearman"</span><span class='op'>)</span>,
+  use <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pairwise"</span>, <span class='st'>"complete"</span><span class='op'>)</span>,
+  round_n <span class='op'>=</span> <span class='fl'>2</span>,
+  tri <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"upper"</span>, <span class='st'>"lower"</span>, <span class='st'>"all"</span><span class='op'>)</span>,
+  cutempty <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>FALSE</span>, <span class='cn'>TRUE</span><span class='op'>)</span>,
+  colnum <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>FALSE</span>, <span class='cn'>TRUE</span><span class='op'>)</span>,
+  html <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>FALSE</span>, <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -258,7 +258,8 @@ needs library(htmlTable) installed.</p></td>
     <p>Output Table 1</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>correltable</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>psydat</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Converting non-numeric columns to factor: Sex,Income</span></div><div class='output co'>#&gt; $table
+    <pre class="examples"><div class='input'><span class='fu'>correltable</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>psydat</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Converting non-numeric columns to factor: Sex,Income</span></div><div class='output co'>#&gt; $table
 #&gt;          Age Sex     Income  Height iq          depressT   anxT      
 #&gt; Age          t=-1.86 F=4.17* .41*** .09***      .02        -.01      
 #&gt; Sex                  χ2=0.72 t=0.83 t=1.25      t=-4.87*** t=-5.76***
@@ -270,13 +271,13 @@ needs library(htmlTable) installed.</p></td>
 #&gt; 
 #&gt; $caption
 #&gt; [1] "Note. This table presents Pearson correlation coefficients with pairwise deletion. N=4 missing Sex. N=404 missing Income. N=7 missing Height. N=179 missing iq. N=8 missing depressT. N=8 missing anxT.  Group differences for continuous and categorical\n             variables are indicated by t-statistic/ANOVA F\n             and chi-squared, respectively. * p&lt;.05, ** p&lt;.01, *** p&lt;.001"
-#&gt; </div><div class='input'><span class='fu'>correltable</span>(
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>psydat</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Age"</span>, <span class='st'>"Height"</span>, <span class='st'>"iq"</span>),
-  <span class='kw'>tri</span> <span class='kw'>=</span> <span class='st'>"lower"</span>, <span class='kw'>html</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</div><div class='output co'>#&gt; &lt;table class='gmisc_table' style='border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;' &gt;
+#&gt; </div><div class='input'><span class='fu'>correltable</span><span class='op'>(</span>
+  data <span class='op'>=</span> <span class='va'>psydat</span>, vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Age"</span>, <span class='st'>"Height"</span>, <span class='st'>"iq"</span><span class='op'>)</span>,
+  tri <span class='op'>=</span> <span class='st'>"lower"</span>, html <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;table class='gmisc_table' style='border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;' &gt;
 #&gt; &lt;thead&gt;
-#&gt; &lt;tr&gt;
-#&gt; &lt;th style='border-bottom: 1px solid grey; border-top: 2px solid grey;'&gt; &lt;/th&gt;
+#&gt; &lt;tr&gt;&lt;th style='border-bottom: 1px solid grey; border-top: 2px solid grey;'&gt;&lt;/th&gt;
 #&gt; &lt;th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'&gt;Age&lt;/th&gt;
 #&gt; &lt;th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'&gt;Height&lt;/th&gt;
 #&gt; &lt;th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'&gt;iq&lt;/th&gt;
@@ -304,14 +305,14 @@ needs library(htmlTable) installed.</p></td>
 #&gt; &lt;/tbody&gt;
 #&gt; &lt;tr&gt;&lt;td colspan='4' style='text-align: left;'&gt;
 #&gt; Note. This table presents Pearson correlation coefficients with pairwise deletion. N=7 missing Height. N=179 missing iq.  * p&lt;.05, ** p&lt;.01, *** p&lt;.001&lt;/td&gt;&lt;/tr&gt;
-#&gt; &lt;/table&gt;</div><div class='input'><span class='fu'>correltable</span>(
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>psydat</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Age"</span>, <span class='st'>"Height"</span>, <span class='st'>"iq"</span>),
-  <span class='kw'>var_names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Age (months)"</span>, <span class='st'>"Height (inches)"</span>, <span class='st'>"IQ"</span>),
-  <span class='kw'>tri</span> <span class='kw'>=</span> <span class='st'>"upper"</span>, <span class='kw'>colnum</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>html</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</div><div class='output co'>#&gt; &lt;table class='gmisc_table' style='border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;' &gt;
+#&gt; &lt;/table&gt;</div><div class='input'><span class='fu'>correltable</span><span class='op'>(</span>
+  data <span class='op'>=</span> <span class='va'>psydat</span>, vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Age"</span>, <span class='st'>"Height"</span>, <span class='st'>"iq"</span><span class='op'>)</span>,
+  var_names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Age (months)"</span>, <span class='st'>"Height (inches)"</span>, <span class='st'>"IQ"</span><span class='op'>)</span>,
+  tri <span class='op'>=</span> <span class='st'>"upper"</span>, colnum <span class='op'>=</span> <span class='cn'>TRUE</span>, html <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;table class='gmisc_table' style='border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;' &gt;
 #&gt; &lt;thead&gt;
-#&gt; &lt;tr&gt;
-#&gt; &lt;th style='border-bottom: 1px solid grey; border-top: 2px solid grey;'&gt; &lt;/th&gt;
+#&gt; &lt;tr&gt;&lt;th style='border-bottom: 1px solid grey; border-top: 2px solid grey;'&gt;&lt;/th&gt;
 #&gt; &lt;th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'&gt;1&lt;/th&gt;
 #&gt; &lt;th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'&gt;2&lt;/th&gt;
 #&gt; &lt;th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'&gt;3&lt;/th&gt;
@@ -339,15 +340,15 @@ needs library(htmlTable) installed.</p></td>
 #&gt; &lt;/tbody&gt;
 #&gt; &lt;tr&gt;&lt;td colspan='4' style='text-align: left;'&gt;
 #&gt; Note. This table presents Pearson correlation coefficients with pairwise deletion. N=7 missing Height (inches). N=179 missing IQ.  * p&lt;.05, ** p&lt;.01, *** p&lt;.001&lt;/td&gt;&lt;/tr&gt;
-#&gt; &lt;/table&gt;</div><div class='input'><span class='fu'>correltable</span>(
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>psydat</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Age"</span>, <span class='st'>"Height"</span>, <span class='st'>"iq"</span>),
-  <span class='kw'>var_names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Age (months)"</span>, <span class='st'>"Height (inches)"</span>, <span class='st'>"IQ"</span>),
-  <span class='kw'>vars2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"depressT"</span>, <span class='st'>"anxT"</span>),
-  <span class='kw'>var_names2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Depression T"</span>, <span class='st'>"Anxiety T"</span>), <span class='kw'>html</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</div><div class='output co'>#&gt; &lt;table class='gmisc_table' style='border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;' &gt;
+#&gt; &lt;/table&gt;</div><div class='input'><span class='fu'>correltable</span><span class='op'>(</span>
+  data <span class='op'>=</span> <span class='va'>psydat</span>, vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Age"</span>, <span class='st'>"Height"</span>, <span class='st'>"iq"</span><span class='op'>)</span>,
+  var_names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Age (months)"</span>, <span class='st'>"Height (inches)"</span>, <span class='st'>"IQ"</span><span class='op'>)</span>,
+  vars2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"depressT"</span>, <span class='st'>"anxT"</span><span class='op'>)</span>,
+  var_names2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Depression T"</span>, <span class='st'>"Anxiety T"</span><span class='op'>)</span>, html <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;table class='gmisc_table' style='border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;' &gt;
 #&gt; &lt;thead&gt;
-#&gt; &lt;tr&gt;
-#&gt; &lt;th style='border-bottom: 1px solid grey; border-top: 2px solid grey;'&gt; &lt;/th&gt;
+#&gt; &lt;tr&gt;&lt;th style='border-bottom: 1px solid grey; border-top: 2px solid grey;'&gt;&lt;/th&gt;
 #&gt; &lt;th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'&gt;Depression T&lt;/th&gt;
 #&gt; &lt;th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'&gt;Anxiety T&lt;/th&gt;
 #&gt; &lt;/tr&gt;
@@ -387,7 +388,7 @@ needs library(htmlTable) installed.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

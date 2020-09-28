@@ -27,8 +27,9 @@ correltable - Create correlation table (with stars for significance) for
 scientific publication  
 FullTable1 - Create Table1 of group summary with stats for scientific
 publication  
-winsorZ\_find - Identify outliers based on z-score cutoff that are
-Winsorized by the `winsorZ` function  
+gg\_groupplot - Create ggplot to display group differences
+(box+point+hist) winsorZ\_find - Identify outliers based on z-score
+cutoff that are Winsorized by the `winsorZ` function  
 winsorZ - Winsorize outliers based on z-score cutoff to next most
 extreme non-outlier value
 
