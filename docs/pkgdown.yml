@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   scipub_vignette: scipub_vignette.html
-last_built: 2020-09-28T22:33Z
+last_built: 2020-09-28T22:35Z
 urls:
   reference: https://dpagliaccio.github.io/scipub//reference
   article: https://dpagliaccio.github.io/scipub//articles
