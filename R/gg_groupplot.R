@@ -26,26 +26,25 @@
 #' @import gghalves
 #' @export
 #' @examples
-#' gg_groupplot(data = psydat, x = "Sex", y = "depressT", meanline = TRUE)
+#' gg_groupplot(data = psydat, x = Sex, y = depressT, meanline = TRUE)
 #'
 
-gg_groupplot <- function(data, x = NULL, y = NULL,
-            meanline = c(TRUE, FALSE)) {
+gg_groupplot <- function(data, x = NULL, y = NULL, meanline = TRUE) {
 
-
- if (is.null(x)) {
+if (missing(x)) {
   stop("please declare x variable", call. = FALSE)
  }
- if (is.null(y)) {
+if (missing(y)) {
   stop("please declare y variable", call. = FALSE)
  }
 
- data[, x] <- as.factor(data[, x])
- data[, y] <- as.numeric(as.character((data[, y])))
+ data <- data %>%
+  filter(., !is.na({{x}}) & !is.na({{y}})) %>%
+  mutate(., x = as.factor({{x}})) %>%
+  mutate(., y = as.numeric(as.character({{y}})))
 
- g <- ggplot(data = data[!is.na(data[, x]) & !is.na(data[, y]), ],
-       aes(x = get(x), y = get(y),
-           color = get(x), fill = get(x), shape = get(x))) +
+ g <- ggplot(data,
+  aes(x = x, y = y, color = x, fill = x, shape = x)) +
   geom_half_violin(position = position_nudge(x = .3, y = 0),
            alpha = .8, width = .5, side = "r", color = NA) +
   geom_point(position = position_jitterdodge(jitter.width = .5),
@@ -59,7 +58,7 @@ gg_groupplot <- function(data, x = NULL, y = NULL,
      axis.title.y = element_text(face = "bold")) +
   scale_shape(solid = FALSE)
 
- if (meanline[1]) {
+ if (meanline) {
  g <- g + stat_summary(fun = mean, geom = "line",
                        color = "darkgray", size = 1, aes(group = 1)) +
   stat_summary(fun = mean, geom = "point",
